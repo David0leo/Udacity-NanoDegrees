@@ -40,6 +40,12 @@ These are images the GAN produced after increasing numbers of training iteration
 ![](https://github.com/David0leo/Udacity-NanoDegrees/blob/master/dlnd/project-5-face-generation-gan/celeba_samples/celeba_chart.png?raw=true)
 
 
+## More Work
+Some more work could surely be done on this network to improve performance just a bit. Some of these are from a Udacity Reviewer.
+- Dropout on the discriminator
+- Possibly custom weight initialization such as Xavier
+- Lots of experimenting with parameters
+
 
 ## Resources
 Lots of awesome resources were given by Udacity and Reviewers for Udacity:
