@@ -31,5 +31,3 @@ ___
   
 
 ___
-
-Here <EOS> is a token the network uses to learn when sentences should end. 
