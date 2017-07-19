@@ -1,6 +1,8 @@
 # Project 3 - Generate TV Scripts
 Project 3 covered building a recurrent neural network to generate new tv scripts. The RNN was trained on parts of a Kaggle dataset containing 27 seasons of scripts from The Simpsons. The parts of the dataset where those contianing scenes from Moe's Tavern. The network was not very successful at creating coherent dialogue. However, it did show a decent ability to construct sentences with a semblence of proper grammar and general structure.
 
+View the [dlnd_tv_script_generation%252B%2525282%252529.ipynb](https://github.com/David0leo/Udacity-NanoDegrees/blob/master/dlnd/project-3-generate-tv-scripts/dlnd_tv_script_generation%252B%2525282%252529.ipynb) file for implementation details. 
+
 ## Example
 Below is an example of text generate with the word 'moe_szyslak' as a priming word:
 
