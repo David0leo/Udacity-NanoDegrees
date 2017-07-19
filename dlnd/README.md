@@ -18,4 +18,5 @@ The network was not very successful at creating coherent dialogue. However, it d
 Project 4 involved building and training a sequence to sequence model on English and corresponding French sentences. 
 The network was fairly sucessful at translating sentences containing the 227 words used during training. Sentences with words outside of that range showed worse results, but that is to be expected. Training on a larger corpus with the same network could produce some promising results.
 
-# Project files inc.
+## Project 5 - Face Generation GAN
+Project 5 involved building a GAN similar to the DCGAN architechture. The GAN used data from the CelebA dataset of celebrity faces to generate new faces. For testing, the MNIST hand-written letters dataset was also used. The network was able to generate new numbers and faces with a moderate level of success. As is usual with GANs, there was some level of distortion to many of the generated images. 
