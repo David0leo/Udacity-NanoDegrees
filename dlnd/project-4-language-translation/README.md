@@ -13,14 +13,8 @@ As you can see in the project [notebook](https://github.com/David0leo/Udacity-Na
 The graphed training loss and training/validation accuracy graphs show the results of training on text with only 227 unique words. 
 ![Graphs](https://github.com/David0leo/Udacity-NanoDegrees/blob/master/dlnd/project-4-language-translation/translate_graphs.png?raw=true)
 
-Sample text with words all from the 227 word vocab is shown below with the translation prediction from the network:
-
-Input
-  Word Ids:      [171, 22, 210, 113, 34, 116, 205]
-  English Words: ['he', 'saw', 'a', 'old', 'yellow', 'truck', '.']
-
-Prediction
-  Word Ids:      [141, 257, 264, 275, 142, 56, 61, 1]
-  French Words: il a un vieux camion jaune . <EOS>
-  
+Sample text with w 
 Here '<EOS>' is a token the network uses to learn when sentences should end. 
+
+__ **
+Input
