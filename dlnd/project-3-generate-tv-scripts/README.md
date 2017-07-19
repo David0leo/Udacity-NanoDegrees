@@ -4,24 +4,24 @@ Project 3 covered building a recurrent neural network to generate new tv scripts
 ## Example
 Below is an example of text generate with the word 'moe_szyslak' as a priming word:
 
-- *moe_szyslak*: here, homer. have a big frosty mug of fuhgetaboutit.
+- **moe_szyslak**: here, homer. have a big frosty mug of fuhgetaboutit.
 
-- *homer_simpson*:(not moe) do you go.
+- **homer_simpson**:(not moe) do you go.
 
-- *moe_szyslak*: i mean, uh, sure simpson!
+- **moe_szyslak**: i mean, uh, sure simpson!
 
 
-- *moe_szyslak*:(beat) maybe you do you take?
+- **moe_szyslak**:(beat) maybe you do you take?
 
-- *homer_simpson*:(tough)" that's pretty boy) so god, wiggum. are you know, i want to nice, but i was the little-- i'm our more noises by the first! why just the rebuttal!
+- **homer_simpson**:(tough)" that's pretty boy) so god, wiggum. are you know, i want to nice, but i was the little-- i'm our more noises by the first! why just the rebuttal!
 
-- *carl_carlson*: guys, i need your advice.
+- **carl_carlson**: guys, i need your advice.
 
-- *homer_simpson*:(disappointed) when it might got.... moe, for a big guy.
+- **homer_simpson**:(disappointed) when it might got.... moe, for a big guy.
 
-- *moe_szyslak*: hey, that's okay. that's the best time i could play be homer or the day you guys, only all your kind." means(too accent, friendly) well, okay, i always seen this town by my drink, the kids. hey, god, i love! knew well, i'm sorry to send a world about so.
+- **moe_szyslak**: hey, that's okay. that's the best time i could play be homer or the day you guys, only all your kind." means(too accent, friendly) well, okay, i always seen this town by my drink, the kids. hey, god, i love! knew well, i'm sorry to send a world about so.
 
-- *stillwater*: my barbara wasn't? not you doin' me,
+- **stillwater**: my barbara wasn't? not you doin' me,
 
 ## More Info
 As you can see from reading the example above, the text is fairly incoherent. The main take-away from this is that the network learned some more general structure of sentences. Things like punctuation work, and starting lines with character names. 
