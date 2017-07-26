@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
-import sortBy from "sort-by"
 import * as BooksAPI from './utils/BooksAPI.js'
 import './BooksApp.css'
 import MainPage from './MainPage.js'
 import SearchBooks from './SearchBooks.js'
+import sortBooksAlphabeticallyByTitle from './utils/SortBooks.js'
 
 class BooksApp extends Component {
     state = {
@@ -24,15 +24,10 @@ class BooksApp extends Component {
         return groupedBooks
     }
 
-    // Lets sort the books in the shelves alphabetically for ease of finding books!
-    sortBooksAlphabeticallyByTitle(books) {
-        return books.sort(sortBy("title"))
-    }
-
     componentDidMount() {
         BooksAPI.getAll().then(books => {
             this.setState({ 
-                books: this.groupBooksByShelf(this.sortBooksAlphabeticallyByTitle(books)) 
+                books: this.groupBooksByShelf(sortBooksAlphabeticallyByTitle(books)) 
             })
         })
     }
