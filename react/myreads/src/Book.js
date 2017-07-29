@@ -4,7 +4,7 @@ import './BooksApp.css'
 class Book extends Component {
 
     render() {
-        const { bookDetails } = this.props
+        const { bookDetails, onUpdateBook } = this.props
 
         return (
             <div className="book">
@@ -19,10 +19,13 @@ class Book extends Component {
                             }
                         }
                     ></div>
-                    <BookShelfChanger></BookShelfChanger>
+                    <BookShelfChanger bookData={bookDetails} onUpdateBook={onUpdateBook}></BookShelfChanger>
                 </div>
                 <div className="book-title">{bookDetails.title}</div>
-                <div className="book-authors">{bookDetails.authors.join(', ')}</div>
+                 <div className="book-authors">{
+                    //bookDetails.authors.join(', ')
+                }
+                </div> 
             </div>
         )
 
@@ -62,14 +65,23 @@ class BookShelfChanger extends Component {
         
     
     render(){
+        const { bookData, onUpdateBook } = this.props
+
         return (
             <div className="book-shelf-changer">
-                <select>
+                <select 
+                    defaultValue={bookData.shelf}
+                    onChange={(event) => {
+                        console.log("changing")
+                        onUpdateBook(bookData, event.target.value)
+                    }}
+                >
                     {this.state.options.map((option, index) =>
                     <option 
                         key={index} 
                         value={option.value} 
-                        disabled={option.disabled}>
+                        disabled={option.disabled}
+                    >
                     {option.text}
                     </option>
                     )}

@@ -6,7 +6,7 @@ import BookShelf from "./BookShelf.js"
 
 class MainPage extends Component {
     render() {
-        const { books } = this.props
+        const { books, onUpdateBook } = this.props
 
         const bookTitles = {
             currentlyReading: "Currently Reading",
@@ -20,11 +20,12 @@ class MainPage extends Component {
                     <h1>MyReads</h1>
                 </div>
                 <div className="list-books-content">
-                    {Object.keys(books).map(bookshelf =>
+                    {Object.keys(books).map((bookshelf) =>
                         <BookShelf 
                             key={bookshelf}
                             title={bookTitles[bookshelf]}
                             books={books[bookshelf]}
+                            onUpdateBook={onUpdateBook}
                         />
                     )}
                 </div>

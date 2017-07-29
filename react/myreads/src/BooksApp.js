@@ -16,9 +16,10 @@ class BooksApp extends Component {
         let groupedBooks = {}
         for (const book of books) {
             if (book.shelf in groupedBooks) {
-                groupedBooks[book.shelf].push(book)
+                groupedBooks[book.shelf][book.id] = book
             } else {
-                groupedBooks[book.shelf] = [book]
+                groupedBooks[book.shelf] = {}
+                groupedBooks[book.shelf][book.id] = book
             }
         }
         return groupedBooks
@@ -32,6 +33,22 @@ class BooksApp extends Component {
         })
     }
 
+    updateBookState = (bookToUpdate, shelf) => {
+        this.setState( state => {
+            state.books[shelf][bookToUpdate.id] = bookToUpdate
+            delete state.books[bookToUpdate.shelf][bookToUpdate.id]
+            books: state.books[shelf][bookToUpdate.id].shelf = shelf
+        })
+    }
+
+    updateBook = (bookToUpdate, shelf) => {
+        BooksAPI.update(bookToUpdate, shelf).then((res) => {
+            console.log(bookToUpdate.id)
+            console.log(shelf)
+            this.updateBookState(bookToUpdate, shelf)
+        })
+    }
+
     render() {
         return (
             <div>
@@ -41,6 +58,7 @@ class BooksApp extends Component {
                     render={() =>
                         <MainPage
                             books={this.state.books}
+                            onUpdateBook={this.updateBook}
                         />
                     }
                 />
