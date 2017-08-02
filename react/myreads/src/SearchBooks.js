@@ -12,8 +12,8 @@ class SearchBooks extends Component {
     }
 
     searchBooks(query=this.state.query, max_results=50) {
-        if (query == "") {
-            console.log("empty query")
+        if (query === "") {
+            //console.log("empty query")
             this.setState({
                 searchedBooks: []
             })
@@ -24,12 +24,25 @@ class SearchBooks extends Component {
                         searchedBooks: []
                     })
                 } else{
+                    books = this.processSearchedBooks(books)
                     this.setState({
                         searchedBooks: books
                     })
                 }
             })
         }
+    }
+
+    processSearchedBooks(books) {
+        for (let book of books) {
+            if (!('authors' in book)) {
+                book['authors'] = ['']
+            }
+            if (!('imageLinks' in book)) {
+                book['imageLinks'] = {'thumbnail':'', 'smallThumbnail':''}
+            }
+        }
+        return sortBooksAlphabeticallyByTitle(books)
     }
 
     updateQuery = (query) => {
@@ -53,6 +66,7 @@ class SearchBooks extends Component {
 
     render() {
         const {searchedBooks, query} = this.state
+        const {onUpdateBook} = this.props
 
         
 
@@ -75,7 +89,10 @@ class SearchBooks extends Component {
                     <ol className="books-grid">
                     {searchedBooks.map((book, index) =>
                     <li key={index}>
-                        <Book bookDetails={book}>
+                        <Book 
+                            bookDetails={book}
+                            onUpdateBook={onUpdateBook}
+                        >
                         </Book> 
                     </li>
                     )}
