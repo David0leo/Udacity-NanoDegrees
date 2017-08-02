@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import './BooksApp.css'
 import BookShelf from "./BookShelf.js"
 
-const MainPage = ({books, onUpdateBook}) => {
+const MainPage = ({books, shelves, onUpdateBook}) => {
     const bookShelfTitles = {
             currentlyReading: "Currently Reading",
             wantToRead: "Want to Read",
@@ -16,7 +16,7 @@ const MainPage = ({books, onUpdateBook}) => {
                 <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
-                {Object.keys(books).map((bookshelf) =>
+                {shelves.map((bookshelf) =>
                     <BookShelf 
                         key={bookshelf}
                         title={bookShelfTitles[bookshelf]}

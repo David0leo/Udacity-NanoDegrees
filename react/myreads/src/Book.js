@@ -56,7 +56,7 @@ const BookShelfChanger = ({bookData, onUpdateBook}) => {
     return (
         <div className="book-shelf-changer">
             <select 
-                defaultValue={bookData.shelf}
+                value={bookData.shelf}
                 onChange={(event) => {
                     console.log("changing")
                     onUpdateBook(bookData, event.target.value)

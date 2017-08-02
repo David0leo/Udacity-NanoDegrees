@@ -24,17 +24,30 @@ class SearchBooks extends Component {
                         searchedBooks: []
                     })
                 } else{
-                    books = this.processSearchedBooks(books)
-                    this.setState({
-                        searchedBooks: books
-                    })
+                    const searchedBooks = this.processSearchedBooks(books)
+                    this.setState({searchedBooks})
                 }
             })
         }
     }
 
     processSearchedBooks(books) {
+        // consult books on main page for shelves
+        const mainBooks = this.props.books
         for (let book of books) {
+            let inMain = false
+            for (let mainShelf of Object.keys(mainBooks)) {
+                if (book['id'] in mainBooks[mainShelf]){
+                    inMain = true
+                    book = mainBooks[mainShelf][book['id']]
+                }
+            }
+            if (!inMain) {
+                // set default shelf to 'none'
+                book['shelf'] = 'none'
+            }
+
+            // some data retrieved is incomplete, patch it up
             if (!('authors' in book)) {
                 book['authors'] = ['']
             }

@@ -8,7 +8,8 @@ import sortBooksAlphabeticallyByTitle from './utils/SortBooks.js'
 
 class BooksApp extends Component {
     state = {
-        books: []
+        books: {},
+        shelves: []
     }
 
     groupBooksByShelf(books) {
@@ -25,24 +26,41 @@ class BooksApp extends Component {
         return groupedBooks
     }
 
+    getSortedShelves(books) {
+        let shelves = new Set()
+        for (const book of books) {
+            if (!(shelves.has(book.shelf))) {
+                shelves.add(book.shelf)
+            }
+        }
+        return [...shelves].sort()
+    }
     componentDidMount() {
         BooksAPI.getAll().then(books => {
             this.setState({ 
-                books: this.groupBooksByShelf(sortBooksAlphabeticallyByTitle(books)) 
+                books: this.groupBooksByShelf(sortBooksAlphabeticallyByTitle(books)),
+                shelves: this.getSortedShelves(books)
             })
         })
     }
 
     updateBookState = (bookToUpdate, shelf) => {
-        this.setState( state => {
-            if (shelf in state.books) {    
-                state.books[shelf][bookToUpdate.id] = bookToUpdate
-                state.books[shelf][bookToUpdate.id].shelf = shelf
-            }
-            delete state.books[bookToUpdate.shelf][bookToUpdate.id]
-              
-            books: state.books
-        })
+        let books = this.state.books
+        // if the old shelf is one of the shelves being displayed
+        if (bookToUpdate.shelf in books) {
+            // remove book from old shelf
+            delete books[bookToUpdate.shelf][bookToUpdate.id]
+        }
+        // if the shelf being moved to is not 'None', or not in use
+        if (shelf in books) {    
+            // add book to new shelf
+            books[shelf][bookToUpdate.id] = bookToUpdate
+            // change book's shelf value to the new shelf
+            books[shelf][bookToUpdate.id].shelf = shelf
+        }
+        //delete books[bookToUpdate.shelf][bookToUpdate.id]
+
+        this.setState({books})
     }
 
     updateBook = (bookToUpdate, shelf) => {
@@ -62,6 +80,7 @@ class BooksApp extends Component {
                     render={() =>
                         <MainPage
                             books={this.state.books}
+                            shelves={this.state.shelves}
                             onUpdateBook={this.updateBook}
                         />
                     }
@@ -69,7 +88,17 @@ class BooksApp extends Component {
                 <Route
                     path="/search"
                     render={({ history }) =>
-                        <SearchBooks onUpdateBook={this.updateBook}/>
+                        <SearchBooks 
+                            books={this.state.books}
+                            onUpdateBook={(book, shelf) => {
+                                // not really necessary structure, but if we want
+                                // to navigate back after changing a book's shelf
+                                // we want this code
+                                this.updateBook(book, shelf)
+                                // go back to main page if you want uncomment line below
+                                // history.push("/")
+                            }}
+                        />
                     }
                 />
             </div>
