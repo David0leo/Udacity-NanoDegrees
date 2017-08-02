@@ -35,9 +35,13 @@ class BooksApp extends Component {
 
     updateBookState = (bookToUpdate, shelf) => {
         this.setState( state => {
-            state.books[shelf][bookToUpdate.id] = bookToUpdate
+            if (shelf in state.books) {    
+                state.books[shelf][bookToUpdate.id] = bookToUpdate
+            }
             delete state.books[bookToUpdate.shelf][bookToUpdate.id]
-            books: state.books[shelf][bookToUpdate.id].shelf = shelf
+            if (shelf in state.books) {
+                books: state.books[shelf][bookToUpdate.id].shelf = shelf
+            }    
         })
     }
 
