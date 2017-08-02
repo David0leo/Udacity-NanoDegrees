@@ -33,6 +33,8 @@ class BooksApp extends Component {
                 shelves.add(book.shelf)
             }
         }
+        // maybe might want a different order, but alphabetical
+        // makes it easy to find things
         return [...shelves].sort()
     }
     componentDidMount() {
@@ -65,8 +67,8 @@ class BooksApp extends Component {
 
     updateBook = (bookToUpdate, shelf) => {
         BooksAPI.update(bookToUpdate, shelf).then((res) => {
-            console.log(bookToUpdate.id)
-            console.log(shelf)
+            // console.log(bookToUpdate.id)
+            // console.log(shelf)
             this.updateBookState(bookToUpdate, shelf)
         })
     }

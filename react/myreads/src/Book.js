@@ -58,7 +58,6 @@ const BookShelfChanger = ({bookData, onUpdateBook}) => {
             <select 
                 value={bookData.shelf}
                 onChange={(event) => {
-                    console.log("changing")
                     onUpdateBook(bookData, event.target.value)
                 }}
             >
