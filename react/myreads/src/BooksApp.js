@@ -40,10 +40,24 @@ class BooksApp extends Component {
     componentDidMount() {
         BooksAPI.getAll().then(books => {
             this.setState({ 
-                books: this.groupBooksByShelf(sortBooksAlphabeticallyByTitle(books)),
+                books: this.groupBooksByShelf(this.processBooks(books)),
                 shelves: this.getSortedShelves(books)
             })
         })
+    }
+
+    processBooks(books) {
+        // start by patching up holes in the data
+        for (let book of books) {
+            if (!('authors' in book)) {
+                book['authors'] = ['']
+            }
+            if (!('imageLinks' in book)) {
+                book['imageLinks'] = {'thumbnail':'', 'smallThumbnail':''}
+            }
+        }
+        // sort the books as part of processing
+        return sortBooksAlphabeticallyByTitle(books)
     }
 
     updateBookState = (bookToUpdate, shelf) => {

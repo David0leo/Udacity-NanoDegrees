@@ -18,8 +18,7 @@ const Book = ({bookDetails, onUpdateBook}) => {
                 <BookShelfChanger bookData={bookDetails} onUpdateBook={onUpdateBook}></BookShelfChanger>
             </div>
             <div className="book-title">{bookDetails.title}</div>
-                <div className="book-authors">{bookDetails.authors.join(', ')}
-            </div> 
+            <div className="book-authors">{bookDetails.authors.join(', ')}</div> 
         </div>
     )
 }
