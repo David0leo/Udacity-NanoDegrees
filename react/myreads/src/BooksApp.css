@@ -72,11 +72,11 @@ body, .app {
 .list-books-content .bookshelf:nth-child(3) {animation-duration:1.5s;}
 
 
-@media (min-width: 600px) {
-  .bookshelf {
-    /* padding: 0 20px 40px; */
-  }
-}
+/* @media (min-width: 600px) {
+   .bookshelf {
+     padding: 0 20px 40px; 
+  } 
+} */
 
 .bookshelf-title {
   border-radius: 10px 10px 0 0;
