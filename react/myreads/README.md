@@ -5,4 +5,6 @@ You can install the application and run locally by cloning the repo or downloadi
 
 # ...
 
-This application was created as part of the Udacity React Developer Nanodegree. 
+This application was created as part of the Udacity React Developer Nanodegree.
+
+You can view the application online [here](https://myreads-76b38.firebaseapp.com/). 
