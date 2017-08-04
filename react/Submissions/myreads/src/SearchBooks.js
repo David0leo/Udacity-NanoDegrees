@@ -39,8 +39,7 @@ class SearchBooks extends Component {
             for (let mainShelf of Object.keys(mainBooks)) {
                 if (book['id'] in mainBooks[mainShelf]){
                     inMain = true
-                    book.shelf = mainShelf
-                    //book = mainBooks[mainShelf][book['id']]
+                    book = mainBooks[mainShelf][book['id']]
                 }
             }
             if (!inMain) {
