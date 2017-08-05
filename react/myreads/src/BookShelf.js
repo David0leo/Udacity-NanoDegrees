@@ -9,7 +9,7 @@ const BookShelf = ({title, books, onUpdateBook}) => {
             <div className="bookshelf-books">
                 <div className="books-grid">
                     {Object.keys(books).map((bookID) => 
-                    <li key={bookID}>
+                    <li key={bookID + '-' + books[bookID].title + '-' + books[bookID].shelf}>
                         <Book 
                             bookDetails={books[bookID]}
                             onUpdateBook={onUpdateBook}
