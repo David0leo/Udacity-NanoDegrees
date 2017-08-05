@@ -224,6 +224,9 @@ body, .app {
   background: #eee;
   background-size: cover;
   transition: box-shadow 0.5s ease;
+
+  width: 128;
+  height: 193;
 }
 
 .book-top:hover .book-cover {

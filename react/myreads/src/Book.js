@@ -9,8 +9,6 @@ const Book = ({bookDetails, onUpdateBook}) => {
                     className="book-cover" 
                     style={
                         {   
-                            width: 128, 
-                            height: 193, 
                             backgroundImage: `url(${bookDetails.imageLinks.thumbnail})`
                         }
                     }
