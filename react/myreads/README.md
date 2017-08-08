@@ -1,3 +1,5 @@
+![Main Page](https://github.com/David0leo/Udacity-NanoDegrees/blob/master/react/myreads/example_images/Screen%20Shot%202017-08-07%20at%207.00.40%20PM.png?raw=true) ![SearchPage](https://github.com/David0leo/Udacity-NanoDegrees/blob/master/react/myreads/example_images/Screen%20Shot%202017-08-07%20at%207.01.27%20PM.png?raw=true)
+
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 # Installation
