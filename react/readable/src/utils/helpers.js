@@ -14,7 +14,6 @@ export const postUnixTimeToSimplifiedTimeElapsedString = (currentTime, postTime)
   const years = days * 365
 
   const millisecondsElapsed = currentTime - postTime
-  console.log(millisecondsElapsed)
 
   const secondsElapsed = millisecondsElapsed / seconds
 
