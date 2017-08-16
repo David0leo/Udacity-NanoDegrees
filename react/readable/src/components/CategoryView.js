@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import Modal from 'react-modal'
+import React from 'react'
+//import Modal from 'react-modal'
 import PostCard from './post-card/PostCard'
 
 const CategoryView = ({posts}) => {
@@ -16,4 +15,4 @@ const CategoryView = ({posts}) => {
   )
 }
 
-export default CateoryView
+export default CategoryView

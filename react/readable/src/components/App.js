@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import './App.css';
 import * as API from '../utils/ReadableApi';
-import PostCard from '../components/post-card/PostCard'
+import CategoryView from '../components/CategoryView'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <PostCard></PostCard>
-        <PostCard></PostCard>
-        <PostCard></PostCard>
+        <CategoryView posts={[{id:1}, {id:2}]}></CategoryView>
       </div>
     );
   }
