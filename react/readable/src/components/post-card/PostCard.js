@@ -1,7 +1,7 @@
 import React from 'react'
 import { MdThumbUp, MdThumbDown } from 'react-icons/lib/md'
 import './PostCard.css'
-import postUnixTimeToSimplifiedTimeElapsedString from '../../utils/helpers'
+import { postUnixTimeToSimplifiedTimeElapsedString } from '../../utils/helpers'
 
 const PostCard = ({ post }) => {
   const defaultPost = {

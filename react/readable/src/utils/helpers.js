@@ -53,5 +53,3 @@ export const postUnixTimeToSimplifiedTimeElapsedString = (currentTime, postTime)
   return `Ok somehow you posted more than 40 years ago. wtf.`
   
 }
-
-export default postUnixTimeToSimplifiedTimeElapsedString;
