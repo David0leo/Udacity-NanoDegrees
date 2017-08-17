@@ -6,6 +6,8 @@
 
 
 .post-card {
+  max-width: 100%;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto auto auto;
@@ -37,7 +39,6 @@
 }
 
 .post-category {
-
   grid-area: category;
   font-size: 1em;
 
@@ -46,12 +47,13 @@
 
 .post-body-preview {
   grid-area: preview;
+  font-size: 1em;
   padding-left: 5px;
   padding-right: 5px;
   text-align: left;
-  text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .post-time {
@@ -118,10 +120,11 @@
 }
 
 
-@media only screen and (max-width: 780px) {
+/* @media only screen and (max-width: 800px) {
   .post-card {
+    white-space: normal;
     grid-template-columns: 1fr;
-    grid-template-rows: auto;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     grid-template-areas: 
       "category"
       "title"
@@ -136,6 +139,56 @@
 
   .post-body-preview {
     text-align: center;
+  }
+
+  .post-time {
+    text-align: center;
+  }
+
+  .post-vote-buttons-container {
+    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+      "positiveButton voteCount negativeButton";
+  }
+
+  .post-positive-button:hover {
+    box-shadow: inset -5px 5px 20px 0 rgba(150, 150, 150, 0.2);
+    border-radius: 0 5px 0 5px;
+  }
+
+  .post-negative-button:hover {
+    box-shadow: inset 5px 5px 20px 0 rgba(150, 150, 150, 0.3);
+    border-radius: 5px 0 5px 0;
+  }
+  
+} */
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) { 
+  .post-card {
+    display: grid;
+    width: auto;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: 
+      "category"
+      "title"
+      "preview"
+      "time"
+      "vote";
+    align-items: center;
+  }
+
+  .post-title {
+    text-align: center;
+  }
+
+  .post-body-preview {
+    text-align: center;
+    align-self: center;
+    max-width: 84vw;
   }
 
   .post-time {
