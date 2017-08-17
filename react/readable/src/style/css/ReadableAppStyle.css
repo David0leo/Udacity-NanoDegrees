@@ -1,0 +1,170 @@
+.voter-buttons-container, .voter-buttons-container-horizontal, .voter-buttons-container-vertical, .post-vote-buttons-container {
+  display: grid;
+  align-content: center; }
+
+.voter-buttons-container-horizontal {
+  grid-template-columns: 2fr 1fr 2fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "positiveButton voteCount negativeButton"; }
+
+.voter-buttons-container-vertical, .post-vote-buttons-container {
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 0.5fr 1fr;
+  grid-template-areas: "positiveButton" "voteCount" "negativeButton";
+  border-right: 1px solid #eeeeee; }
+
+.voter-button, .voter-positive-button, .voter-positive-button-horizontal, .voter-positive-button-vertical, .post-positive-button, .voter-negative-button, .voter-negative-button-horizontal, .voter-negative-button-vertical, .post-negative-button, .post-button {
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 5px;
+  transition: all 0.2s; }
+
+.voter-positive-button, .voter-positive-button-horizontal, .voter-positive-button-vertical, .post-positive-button {
+  grid-area: positiveButton; }
+
+.voter-positive-button:hover, .voter-positive-button-horizontal:hover, .voter-positive-button-vertical:hover, .post-positive-button:hover {
+  color: #2196f3; }
+
+.voter-positive-button-horizontal {
+  border-radius: 5px 0 0 5px; }
+
+.voter-positive-button-vertical, .post-positive-button {
+  border-bottom: 1px solid #eeeeee;
+  border-radius: 5px 5px 0 0; }
+
+.voter-negative-button, .voter-negative-button-horizontal, .voter-negative-button-vertical, .post-negative-button {
+  grid-area: negativeButton; }
+
+.voter-negative-button:hover, .voter-negative-button-horizontal:hover, .voter-negative-button-vertical:hover, .post-negative-button:hover {
+  color: #f44336; }
+
+.voter-negative-button-horizontal {
+  border-radius: 0 5px 5px 0; }
+
+.voter-negative-button-vertical, .post-negative-button {
+  border-top: 1px solid #eeeeee;
+  border-radius: 0 0 5px 5px; }
+
+.voter-counter, .post-vote-count {
+  grid-area: voteCount;
+  align-self: center; }
+
+* {
+  box-sizing: border-box; }
+
+.post-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: "vote title title category" "vote preview preview preview" "vote time time time";
+  grid-column-gap: 5px;
+  align-items: center;
+  border: 1px solid #eeeeee;
+  border-radius: 5px;
+  margin: 20px 20px 0px 20px;
+  box-shadow: 7px 7px 10px 0px #bdbdbd; }
+
+.post-title {
+  font-size: 1.5em;
+  grid-area: title;
+  text-align: left;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; }
+
+.post-category {
+  grid-area: category;
+  font-size: 1em;
+  text-align: center; }
+
+.post-body-preview {
+  grid-area: preview;
+  font-size: 1em;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis; }
+
+.post-time {
+  color: rgba(150, 150, 150, 0.8);
+  font-size: 1em;
+  grid-area: time;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: left; }
+
+.post-vote-buttons-container {
+  grid-area: vote;
+  align-self: normal; }
+
+.post-button:active {
+  background: rgba(150, 150, 150, 0.2); }
+
+/* @media only screen and (max-width: 800px) {
+  .post-card {
+    white-space: normal;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: 
+      "category"
+      "title"
+      "preview"
+      "time"
+      "vote";
+  }
+
+  .post-title {
+    text-align: center;
+  }
+
+  .post-body-preview {
+    text-align: center;
+  }
+
+  .post-time {
+    text-align: center;
+  }
+
+  .post-vote-buttons-container {
+    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+      "positiveButton voteCount negativeButton";
+  }
+
+  .post-positive-button:hover {
+    box-shadow: inset -5px 5px 20px 0 rgba(150, 150, 150, 0.2);
+    border-radius: 0 5px 0 5px;
+  }
+
+  .post-negative-button:hover {
+    box-shadow: inset 5px 5px 20px 0 rgba(150, 150, 150, 0.3);
+    border-radius: 5px 0 5px 0;
+  }
+  
+} */
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+  .post-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: "category" "title" "preview" "time" "vote";
+    align-items: center; }
+
+  .post-title {
+    text-align: center; }
+
+  .post-body-preview {
+    text-align: center;
+    align-self: center;
+    max-width: 84vw; }
+
+  .post-time {
+    text-align: center; } }
+
+/*# sourceMappingURL=ReadableAppStyle.css.map */

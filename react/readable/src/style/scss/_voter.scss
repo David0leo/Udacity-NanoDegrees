@@ -1,0 +1,90 @@
+// Material Design Color Palette
+@import 'color/_md-color.scss';
+
+// Button colors for the voting component
+// come from 'color/_md-color.scss'
+$positive-color: $md-blue-500;
+$negative-color: $md-red-500;
+$border-color: $md-grey-200;
+
+$button-border-radius: 5px;
+$voter-button-background: transparent;
+$voter-button-padding: 5px;
+$transition-timing: 0.2s;
+
+.voter-buttons-container {
+  display: grid;
+  align-content: center;
+}
+
+.voter-buttons-container-horizontal {
+  @extend .voter-buttons-container;
+  grid-template-columns: 2fr 1fr 2fr;
+  grid-template-rows: 1fr;
+  grid-template-areas:
+    "positiveButton voteCount negativeButton";
+}
+
+.voter-buttons-container-vertical {
+  @extend .voter-buttons-container;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 0.5fr 1fr;
+  grid-template-areas: 
+    "positiveButton"
+    "voteCount"
+    "negativeButton";
+  border-right: 1px solid $border-color;
+}
+
+.voter-button {
+  background: $voter-button-background;
+  border: none;
+  outline: none;
+  padding: $voter-button-padding;
+  transition: all $transition-timing;
+}
+
+.voter-positive-button {
+  @extend .voter-button;
+  grid-area: positiveButton;
+}
+
+.voter-positive-button:hover {
+  color: $positive-color;
+}
+
+.voter-positive-button-horizontal {
+  @extend .voter-positive-button;
+  border-radius: $button-border-radius 0 0 $button-border-radius;
+}
+
+.voter-positive-button-vertical {
+  @extend .voter-positive-button;
+  border-bottom: 1px solid $border-color;
+  border-radius: $button-border-radius $button-border-radius 0 0;
+}
+
+.voter-negative-button {
+  @extend .voter-button;
+  grid-area: negativeButton;
+}
+
+.voter-negative-button:hover {
+  color: $negative-color;
+}
+
+.voter-negative-button-horizontal {
+  @extend .voter-negative-button;
+  border-radius: 0 $button-border-radius $button-border-radius 0;
+}
+
+.voter-negative-button-vertical {
+  @extend .voter-negative-button;
+  border-top: 1px solid $border-color;
+  border-radius: 0 0 $button-border-radius $button-border-radius;
+}
+
+.voter-counter {
+  grid-area: voteCount;
+  align-self: center;
+}

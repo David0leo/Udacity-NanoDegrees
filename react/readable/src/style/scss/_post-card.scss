@@ -1,0 +1,206 @@
+// Voter style
+@import './_voter.scss';
+@import './color/_md-color.scss';
+
+//Some colors from 'color/_md-color.scss'
+$border-color: $md-grey-200;
+$box-shadow-color: $md-grey-400;
+
+$font-size-xs: 0.25em;
+$font-size-s: 0.5em;
+$font-size-m: 1em;
+$font-size-l: 1.5em;
+$font-size-xl: 2em;
+
+* {
+  box-sizing: border-box;
+}
+
+.post-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto auto auto;
+  grid-template-areas: 
+    "vote title title category"
+    "vote preview preview preview"
+    "vote time time time";
+  grid-column-gap: 5px;
+  align-items: center;
+  border: 1px solid $border-color;
+  border-radius: 5px;
+  margin: 20px 20px 0px 20px;
+  box-shadow: 7px 7px 10px 0px $box-shadow-color;
+}
+
+.post-title {
+  font-size: $font-size-l;
+  grid-area: title;
+  text-align: left;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.post-category {
+  grid-area: category;
+  font-size: $font-size-m;
+  text-align: center;
+}
+
+.post-body-preview {
+  grid-area: preview;
+  font-size: $font-size-m;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: left;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.post-time {
+  color: rgba(150, 150, 150, 0.8);
+  font-size: $font-size-m;
+  grid-area: time;
+  padding-left: 5px;
+  padding-right: 5px;
+  text-align: left;
+}
+.post-vote-buttons-container {
+  @extend .voter-buttons-container-vertical;
+  grid-area: vote;
+  align-self: normal;
+}
+
+.post-button {
+  @extend .voter-button; 
+}
+
+.post-button:active {
+  background: rgba(150, 150, 150, 0.2);
+}
+
+.post-positive-button {
+  @extend .voter-positive-button-vertical;
+}
+
+// .post-positive-button:hover {
+//   color: blue;
+//   box-shadow: inset 0 0 20px 0 rgba(150, 150, 150, 0.3);
+//   border-radius: 5px 0 5px 0;
+// }
+
+.post-negative-button {
+  @extend .voter-negative-button-vertical;
+}
+
+// .post-negative-button:hover {
+//   color: red;
+//   box-shadow: inset 0 0 20px 0 rgba(150, 150, 150, 0.3);
+//   border-radius: 0 5px 0 5px;
+// }
+
+.post-vote-count {
+  @extend .voter-counter;
+}
+
+
+/* @media only screen and (max-width: 800px) {
+  .post-card {
+    white-space: normal;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-areas: 
+      "category"
+      "title"
+      "preview"
+      "time"
+      "vote";
+  }
+
+  .post-title {
+    text-align: center;
+  }
+
+  .post-body-preview {
+    text-align: center;
+  }
+
+  .post-time {
+    text-align: center;
+  }
+
+  .post-vote-buttons-container {
+    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-rows: 1fr;
+    grid-template-areas:
+      "positiveButton voteCount negativeButton";
+  }
+
+  .post-positive-button:hover {
+    box-shadow: inset -5px 5px 20px 0 rgba(150, 150, 150, 0.2);
+    border-radius: 0 5px 0 5px;
+  }
+
+  .post-negative-button:hover {
+    box-shadow: inset 5px 5px 20px 0 rgba(150, 150, 150, 0.3);
+    border-radius: 5px 0 5px 0;
+  }
+  
+} */
+
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) { 
+  .post-card {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    grid-template-areas: 
+      "category"
+      "title"
+      "preview"
+      "time"
+      "vote";
+    align-items: center;
+  }
+
+  .post-title {
+    text-align: center;
+  }
+
+  .post-body-preview {
+    text-align: center;
+    align-self: center;
+    max-width: 84vw;
+  }
+
+  .post-time {
+    text-align: center;
+  }
+
+  .post-vote-buttons-container {
+    //@extend voter-buttons-container-horizontal;
+  }
+
+  .post-positive-button {
+    //@extend .voter-positive-button-horizontal;
+  }
+
+  .post-negative-button {
+    //@extend .voter-negative-button-horizontal;
+  }
+
+  // .post-positive-button:hover {
+  //   box-shadow: inset -5px 5px 20px 0 rgba(150, 150, 150, 0.2);
+  //   border-radius: 0 5px 0 5px;
+  // }
+
+  // .post-negative-button:hover {
+  //   box-shadow: inset 5px 5px 20px 0 rgba(150, 150, 150, 0.3);
+  //   border-radius: 5px 0 5px 0;
+  // }
+  
+}
