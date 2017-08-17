@@ -7,7 +7,7 @@ const CategoryView = ({posts}) => {
     <div>
       {posts.map((post) =>
       <PostCard 
-        key={post.id}
+        key={`post_${post.id}`}
         post={post}
       />  
       )}
