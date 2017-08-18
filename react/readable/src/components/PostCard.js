@@ -1,7 +1,7 @@
 import React from 'react'
-import { MdThumbUp, MdThumbDown } from 'react-icons/lib/md'
-import '../../style/css/ReadableAppStyle.css'
-import { postUnixTimeToSimplifiedTimeElapsedString } from '../../utils/helpers'
+import '../style/css/ReadableAppStyle.css'
+import { postUnixTimeToSimplifiedTimeElapsedString } from '../utils/helpers'
+import ThumbVoter from './ThumbVoter'
 
 const PostCard = ({ post }) => {
   const defaultPost = {
@@ -34,17 +34,10 @@ const PostCard = ({ post }) => {
       <p className="post-time">
         Posted {postUnixTimeToSimplifiedTimeElapsedString(Date.now(), post.timestamp)} by {post.author}
       </p>
-      <div className="post-vote-buttons-container">
-        <button className="post-button post-positive-button">
-          <MdThumbUp size={30}></MdThumbUp>
-        </button>
-        <span className="post-vote-count">
-          {post.voteScore}
-        </span>
-        <button className="post-button post-negative-button">
-          <MdThumbDown size={30}></MdThumbDown>
-        </button>
-      </div>
+      <ThumbVoter 
+        voteScore={post.voteScore}
+      >
+      </ThumbVoter>
     </div>
   )
 }

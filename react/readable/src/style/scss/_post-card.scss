@@ -5,6 +5,7 @@
 //Some colors from 'color/_md-color.scss'
 $border-color: $md-grey-200;
 $box-shadow-color: $md-grey-400;
+$light-text-grey: $md-grey-400;
 
 $font-size-xs: 0.25em;
 $font-size-s: 0.5em;
@@ -13,7 +14,7 @@ $font-size-l: 1.5em;
 $font-size-xl: 2em;
 
 $base-border-radius: 5px;
-$base-padding: 5px;
+$base-padding: 10px;
 
 * {
   box-sizing: border-box;
@@ -22,12 +23,11 @@ $base-padding: 5px;
 .post-card {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-template-rows: auto auto auto;
+  grid-template-rows: 1fr 0.5fr 1fr;
   grid-template-areas: 
     "vote title title category"
     "vote preview preview preview"
     "vote time time time";
-  grid-column-gap: 5px;
   align-items: center;
   border: 1px solid $border-color;
   border-radius: $base-border-radius;
@@ -64,7 +64,7 @@ $base-padding: 5px;
 }
 
 .post-time {
-  color: rgba(150, 150, 150, 0.8);
+  color: $light-text-grey;;
   font-size: $font-size-m;
   grid-area: time;
   padding-left: $base-padding;

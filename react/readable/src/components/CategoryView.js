@@ -1,6 +1,6 @@
 import React from 'react'
 //import Modal from 'react-modal'
-import PostCard from './post-card/PostCard'
+import PostCard from './PostCard'
 
 const CategoryView = ({posts}) => {
   return (
