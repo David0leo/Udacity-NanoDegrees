@@ -18,7 +18,7 @@
   border: none;
   outline: none;
   padding: 5px;
-  transition: all 0.2s; }
+  transition: color 0.2s, background 0.2s; }
 
 .voter-positive-button, .voter-positive-button-horizontal, .voter-positive-button-vertical, .post-positive-button {
   grid-area: positiveButton; }
@@ -105,49 +105,6 @@
 .post-button:active {
   background: rgba(150, 150, 150, 0.2); }
 
-/* @media only screen and (max-width: 800px) {
-  .post-card {
-    white-space: normal;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-areas: 
-      "category"
-      "title"
-      "preview"
-      "time"
-      "vote";
-  }
-
-  .post-title {
-    text-align: center;
-  }
-
-  .post-body-preview {
-    text-align: center;
-  }
-
-  .post-time {
-    text-align: center;
-  }
-
-  .post-vote-buttons-container {
-    grid-template-columns: 2fr 1fr 2fr;
-    grid-template-rows: 1fr;
-    grid-template-areas:
-      "positiveButton voteCount negativeButton";
-  }
-
-  .post-positive-button:hover {
-    box-shadow: inset -5px 5px 20px 0 rgba(150, 150, 150, 0.2);
-    border-radius: 0 5px 0 5px;
-  }
-
-  .post-negative-button:hover {
-    box-shadow: inset 5px 5px 20px 0 rgba(150, 150, 150, 0.3);
-    border-radius: 5px 0 5px 0;
-  }
-  
-} */
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
   .post-card {
     display: grid;

@@ -41,7 +41,7 @@ $transition-timing: 0.2s;
   border: none;
   outline: none;
   padding: $voter-button-padding;
-  transition: all $transition-timing;
+  transition: color $transition-timing, background $transition-timing;
 }
 
 .voter-positive-button {
