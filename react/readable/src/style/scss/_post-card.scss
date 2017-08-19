@@ -3,7 +3,7 @@
 @import './color/_md-color.scss';
 
 //Some colors from 'color/_md-color.scss'
-$border-color: $md-grey-200;
+$border-color: $md-grey-400;
 $box-shadow-color: $md-grey-400;
 $light-text-grey: $md-grey-400;
 
@@ -22,7 +22,7 @@ $base-padding: 10px;
 
 .post-card {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: .5fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 0.5fr 1fr;
   grid-template-areas: 
     "vote title title category"
