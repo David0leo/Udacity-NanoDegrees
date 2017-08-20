@@ -6,26 +6,140 @@ $nav-pane-background: $md-blue-grey-500;
 }
 
 .readable-main-view {
-  display: grid;
-  grid-template-columns: auto;
-  grid-template-rows: auto;    
-  grid-template-areas:
-    "title title"
-    "category-nav-pane category-view";
-  align-content: center;
+  // display: flex;
+  // min-height: 100vh;
+  // flex-direction: column;
+  // height: 100%;
+  background: $title-background;
 }
 
+//to keep some height because we have some floating elements
+// .readable-main-view:after {
+//   content: "";
+//   display: block;
+//   height: 0;
+//   clear: both;
+// }
 
+.body-container {
+  // display: flex;
+  // height: 100%;
+  background: white;
+}
+
+.body-container:after {
+  content: "";
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+.nav-container {
+  // height: 100vh;
+  float: left;
+  width: 25%;
+  height: 100%;
+}
+
+.category-view-container {
+  // width: 75vw;
+  // height: 100vh;
+  width: 75%;
+  height: 100%;
+  float: right;
+  margin-bottom: 20px;
+}
 
 .readable-main-title {
-  grid-area: title;
+  // grid-area: title;
+  // height: 1%;
+}
+
+.readable-main-footer {
+  background: $title-background;
+  height: 100px;
+  width: 100vw;
+  // position: absolute;
+  // bottom: 0;
 }
 
 .readable-category-nav-pane {
-  grid-area: category-nav-pane;
-  align-self: start;
+  
+  // grid-area: category-nav-pane;
+  // align-self: start;
+  position: fixed;
 }
 
 .readable-category-view {
-  grid-area: category-view;
+  // grid-area: category-view;
+  
+}
+
+.readable-main-title {
+  background: $title-background;
+  box-shadow:  $base-box-shadow;
+  color: white;
+
+  padding: 20px;
+  text-align: left;
+}
+
+.app-title {
+  display: inline;
+  margin-right: 10px;
+  font-size: $font-size-xxl;
+  text-shadow: 2px 2px 1px black;
+}
+
+.app-category {
+  display: inline;
+  font-size: $font-size-xl;
+  text-shadow: 2px 2px 1px black;
+}
+
+.readable-category-nav-pane {
+  background: $nav-pane-background;
+  border-radius: $base-border-radius;
+  box-shadow: $base-box-shadow;
+  color: white;
+  text-align: center;
+  margin: 2.5%;
+  width: 20%;
+  padding: 40px;
+  //height: 100vh;
+  text-shadow: 1px 1px 1px black;
+  
+}
+
+.nav-pane-button {
+
+}
+
+.nav-pane-header {
+  margin: 40px 0 40px 0;
+}
+
+.nav-pane-ordered-list {
+  list-style: none;
+  padding: 0;
+}
+
+.nav-pane-option {
+  // margin-top: 10px;
+  text-align: left;
+  padding: 10px;
+  border-radius: $base-border-radius;
+}
+
+.nav-pane-option:before {
+  content: '\2215';
+  margin: 0 0.5em;
+}
+
+.nav-pane-option:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.readable-category-view {
+  // width: 75%;
 }

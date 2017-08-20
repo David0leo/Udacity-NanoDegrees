@@ -5,7 +5,7 @@ const ReadableMainTitle = ({ category='all' }) => {
   return (
     <div className="readable-main-title">
       <h1 className="app-title">Readable</h1>
-      <h2 className="post-category">/{category}</h2>
+      <h2 className="app-category">/{category}</h2>
     </div>
   )
 }
