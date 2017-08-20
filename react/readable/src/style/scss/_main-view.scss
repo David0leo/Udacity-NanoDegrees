@@ -1,0 +1,31 @@
+$title-background: $md-blue-grey-700;
+$nav-pane-background: $md-blue-grey-500;
+
+* {
+  // border: 1px solid red;
+}
+
+.readable-main-view {
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;    
+  grid-template-areas:
+    "title title"
+    "category-nav-pane category-view";
+  align-content: center;
+}
+
+
+
+.readable-main-title {
+  grid-area: title;
+}
+
+.readable-category-nav-pane {
+  grid-area: category-nav-pane;
+  align-self: start;
+}
+
+.readable-category-view {
+  grid-area: category-view;
+}

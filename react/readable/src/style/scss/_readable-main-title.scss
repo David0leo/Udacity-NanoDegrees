@@ -1,0 +1,17 @@
+.readable-main-title {
+  background: $title-background;
+  box-shadow:  $base-box-shadow;
+  color: white;
+
+  padding: 20px;
+  text-align: left;
+}
+
+.app-title {
+  display: inline;
+  margin-right: 10px;
+}
+
+.post-category {
+  display: inline;
+}

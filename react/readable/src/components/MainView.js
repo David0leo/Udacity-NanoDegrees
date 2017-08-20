@@ -2,12 +2,14 @@ import React from 'react'
 import '../style/css/ReadableAppStyle.css'
 import ReadableMainTitle from './ReadableMainTitle'
 import ReadableCategoryNavPane from './ReadableCategoryNavPane'
-import CategoryView from './CategoryView'
+import ReadableCategoryView from './ReadableCategoryView'
 
 const MainView = ({  }) => {
   return (
-    <div>
-      MainView
+    <div className="readable-main-view">
+      <ReadableMainTitle></ReadableMainTitle>
+      <ReadableCategoryNavPane categories={['test', 'testing', 'testy']}></ReadableCategoryNavPane>
+      <ReadableCategoryView posts={[{id:1}, {id:2}, {id:3}]}></ReadableCategoryView>
     </div>
   )
 }

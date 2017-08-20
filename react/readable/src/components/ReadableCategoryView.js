@@ -2,9 +2,9 @@ import React from 'react'
 //import Modal from 'react-modal'
 import PostCard from './PostCard'
 
-const CategoryView = ({posts}) => {
+const ReadableCategoryView = ({posts}) => {
   return (
-    <div>
+    <div className="readable-caegory-view">
       {posts.map((post) =>
       <PostCard 
         key={`post_${post.id}`}
@@ -15,4 +15,4 @@ const CategoryView = ({posts}) => {
   )
 }
 
-export default CategoryView
+export default ReadableCategoryView
