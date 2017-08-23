@@ -235,7 +235,7 @@
 .readable-main-footer {
   background: #455a64;
   height: 100px;
-  width: 100vw; }
+  width: 100%; }
 
 .readable-category-nav-pane {
   position: fixed; }
@@ -266,8 +266,7 @@
   text-align: center;
   margin: 2.5%;
   width: 20%;
-  padding: 40px;
-  text-shadow: 1px 1px 1px black; }
+  text-shadow: 2px 2px 1px black; }
 
 .nav-pane-header {
   margin: 40px 0 40px 0; }
@@ -279,13 +278,33 @@
 .nav-pane-option {
   text-align: left;
   padding: 10px;
-  border-radius: 5px; }
+  width: 100%; }
 
 .nav-pane-option:before {
   content: '\2215';
   margin: 0 0.5em; }
 
 .nav-pane-option:hover {
-  background: rgba(0, 0, 0, 0.2); }
+  background: #455a64; }
+
+.nav-pane-option:active {
+  opacity: .9; }
+
+.new-post-button {
+  background: #607d8b;
+  border-radius: 5px;
+  color: white;
+  border: none;
+  outline: none;
+  transition: color 0.2s, background 0.2s; }
+
+.new-post-button:hover {
+  color: #ffeb3b; }
+
+.new-post-button:active {
+  color: #fbc02d; }
+
+.post-icon {
+  vertical-align: middle; }
 
 /*# sourceMappingURL=ReadableAppStyle.css.map */
