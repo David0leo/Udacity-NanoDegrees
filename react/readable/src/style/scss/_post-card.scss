@@ -79,6 +79,7 @@ $base-padding: 10px;
 
 .post-button {
   @extend .voter-button; 
+  cursor: pointer;
 }
 
 .post-button:active {

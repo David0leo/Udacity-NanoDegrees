@@ -101,6 +101,9 @@
   grid-area: vote;
   align-self: normal; }
 
+.post-button {
+  cursor: pointer; }
+
 .post-button:active {
   background: rgba(150, 150, 150, 0.2); }
 
@@ -296,7 +299,8 @@
   color: white;
   border: none;
   outline: none;
-  transition: color 0.2s, background 0.2s; }
+  transition: color 0.2s, background 0.2s;
+  cursor: pointer; }
 
 .new-post-button:hover {
   color: #ffeb3b; }

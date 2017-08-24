@@ -156,6 +156,7 @@ $nav-pane-background: $md-blue-grey-500;
   border: none;
   outline: none;
   transition: color $transition-timing, background $transition-timing;
+  cursor: pointer;
 }
 
 .new-post-button:hover {
