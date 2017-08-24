@@ -1,6 +1,6 @@
 @import '../color/_md-color.scss';
 
-//------ Global colors and variables ------//
+//----------- Global colors and variables ----------//
 $primary-color: $md-blue-grey-700;
 $secondary-color: $md-blue-grey-500;
 // border
@@ -20,7 +20,7 @@ $font-size-l: 1.1em;
 $font-size-xl: 1.5em;
 $font-size-xxl: 2em;
 
-//------ Voter -----//
+//---------- Voter ----------//
 $positive-button-color: $md-blue-500;
 $negative-button-color: $md-red-500;
 $voter-button-background: transparent;
@@ -28,11 +28,11 @@ $voter-button-padding: 5px;
 
 
 
-//------ Post -----//
+//---------- Post ----------//
 $post-border-color: $md-grey-400;
 
 
 
-//----- Comment -----//
+//---------- Comment ----------//
 $comment-card-background: $md-grey-50;
 $comment-border-color: $md-grey-400;
