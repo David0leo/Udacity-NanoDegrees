@@ -1,8 +1,8 @@
 import React from 'react'
-import '../style/css/ReadableAppStyle.css'
-import ReadableMainTitle from './ReadableMainTitle'
-import ReadableCategoryNavPane from './ReadableCategoryNavPane'
-import ReadableCategoryView from './ReadableCategoryView'
+import '../../style/css/ReadableAppStyle.css'
+import ReadableMainTitle from '../ReadableMainTitle'
+import ReadableCategoryNavPane from '../ReadableCategoryNavPane'
+import ReadableCategoryView from '../ReadableCategoryView'
 
 const MainView = ({  }) => {
   return (
@@ -22,3 +22,14 @@ const MainView = ({  }) => {
 }
 
 export default MainView
+
+// const MainView = ({}) => {
+//   return (
+//     <ReadablePrimaryHeader></ReadablePrimaryHeader>
+//     <MainSecondaryHeader></MainSecondaryHeader>
+//     <div className="main-body-container">
+//       <MainCategoryNavPane></MainCategoryNavPane>
+//       <ReadablePostsByCategoryList></ReadablePostsByCategoryList>
+//     </div>
+//   )
+// }
