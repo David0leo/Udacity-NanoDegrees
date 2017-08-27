@@ -34,3 +34,5 @@ class SortOrderButton extends React.Component {
     )
   }
 }
+
+export default SortOrderButton
