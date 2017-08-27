@@ -1,11 +1,24 @@
 import React from 'react'
+import NavToggleButton from '../NavToggleButton'
+import SortSelector from '../SortSelector'
 
-export default MainSecondaryHeader = ({ navPaneIsOpen, addPostCallback, sortCallback, toggleNavPaneCallback}) => {
+
+const MainSecondaryHeader = (
+  { 
+    size=50,
+    navPaneIsOpen=true, 
+    addPostCallback=function(){}, 
+    sortCallback=function(){}, 
+    toggleNavPaneCallback=function(){}
+  }
+) => {
   return (
     <div>
-      <button></button>
-      <SortSelector></SortSelector>
-      <NewPostButton></NewPostButton>
+      <NavToggleButton size={size}></NavToggleButton>
+      <SortSelector options={[]} size={size} sortCallback={sortCallback}></SortSelector>
+      <ReadableNewPostButton size={size}></ReadableNewPostButton>
     </div>
   )
 }
+
+export default MainSecondaryHeader

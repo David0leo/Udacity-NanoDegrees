@@ -3,7 +3,7 @@ import { MdSort } from 'react-icons/lib/md'
 import SortOrderButton from './SortOrderButton'
 //TODO: stylesheet
 
-const SortSelector = ({ options=[], size }) => {
+const SortSelector = ({ options=[], size=50, sortCallback=function(){} }) => {
   return (
     <div>
       <MdSort size={size}></MdSort>
@@ -12,7 +12,7 @@ const SortSelector = ({ options=[], size }) => {
         <option value={option}>{option}</option>
         )}
       </select>
-      <SortOrderButton></SortOrderButton>
+      <SortOrderButton size={size} sortCallback={sortCallback}></SortOrderButton>
     </div>
   )
 }
