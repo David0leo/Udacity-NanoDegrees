@@ -1,10 +1,12 @@
 import React from 'react'
 import { MdArrowDropDown, MdArrowDropUp, MdSort, MdAddCircle } from 'react-icons/lib/md'
 import '../style/css/ReadableAppStyle.css'
+import ReadableIcon from './ReadableIcon'
 
 const ReadableMainTitle = ({ category='all' }) => {
   return (
     <div className="readable-main-title">
+      <ReadableIcon size={100} primaryColor={"white"} secondaryColor={"currentColor"}></ReadableIcon>
       <h1 className="app-title">Readable</h1>
       <h2 className="app-category">/{category}</h2>
       <SortSelector options={['Votes', 'Time']}></SortSelector>
