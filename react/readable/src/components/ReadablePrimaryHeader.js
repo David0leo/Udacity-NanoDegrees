@@ -1,5 +1,4 @@
 import React from 'react'
-import '../style/css/ReadableAppStyle.css'
 import ReadableIcon from './ReadableIcon'
 
 export default ReadablePrimaryHeader = ({ category='all' }) => {
