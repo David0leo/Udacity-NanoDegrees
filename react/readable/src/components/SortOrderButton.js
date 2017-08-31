@@ -8,7 +8,7 @@ class SortOrderButton extends React.Component {
 
   defaultProps = {
     size: 30,
-    sortCallback: function(){}
+    sortOrderToggleCallback: function(){}
   }
 
   render() {
@@ -24,15 +24,18 @@ class SortOrderButton extends React.Component {
       </button>
     )
   }
+  
 
-  handleClick = () => {
+  handleClick = () =>  {
+    const oldIsDescending = this.state.isDescending
     this.setState(
-      (prevState) => {
-        isDescending: !prevState.isDescending
+      function(prevState, props) {
+        return {isDescending: !prevState.isDescending}
       }, 
-      this.props.sortCallback
+      this.props.sortOrderToggleCallback(!oldIsDescending)
     )
   }
+
 }
 
 export default SortOrderButton

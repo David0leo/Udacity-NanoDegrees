@@ -16,7 +16,7 @@ const MainSecondaryHeader = (
   return (
     <div className="MainSecondaryHeader">
       <NavToggleButton size={size} toggleNavCallback={toggleNavPaneCallback}></NavToggleButton>
-      <SortSelector options={[]} size={size} sortCallback={sortCallback}></SortSelector>
+      <SortSelector options={["this", "that"]} size={size} sortCallback={sortCallback}></SortSelector>
       <ReadableNewPostButton size={size} newPostCallback={newPostCallback}></ReadableNewPostButton>
     </div>
   )

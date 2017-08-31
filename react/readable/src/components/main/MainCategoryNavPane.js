@@ -2,7 +2,7 @@ import React from 'react'
 
 const MainCategoryNavPane = ({}) => {
   return (
-    <div>MainCategoryNavPane</div>
+    <span>MainCategoryNavPane</span>
   )
 }
 

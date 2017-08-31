@@ -2,7 +2,7 @@ import React from 'react'
 
 const ReadablePostsByCategoryList = ({ }) => {
   return (
-    <div>ReadablePostsByCategroyList</div>
+    <span>ReadablePostsByCategroyList</span>
   )
 }
 

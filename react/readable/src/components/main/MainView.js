@@ -27,11 +27,20 @@ import ReadablePostsByCategoryList from '../ReadablePostsByCategoryList'
 // }
 
 class MainView extends React.Component {
+  state = {
+    
+  }
+
   render() {
     return (
-      <div className="readable-main-view">
+      <div className="main-view">
         <ReadablePrimaryHeader></ReadablePrimaryHeader>
-        <MainSecondaryHeader ></MainSecondaryHeader>
+        <MainSecondaryHeader 
+          size={50}
+          newPostCallback={this.addNewPost}
+          sortCallback={this.sortPosts}
+          toggleNavPaneCallback={this.handleNavPaneToggle}
+        ></MainSecondaryHeader>
         <div className="main-body-container">
           <MainCategoryNavPane></MainCategoryNavPane>
           <ReadablePostsByCategoryList></ReadablePostsByCategoryList>
@@ -39,6 +48,21 @@ class MainView extends React.Component {
       </div>
     )
   }
+
+  addNewPost() {
+    console.log("Adding new post")
+  }
+
+  sortPosts(sortKey, sortOrderIsDescending) {
+    console.log(`Sorting with key ${sortKey} and it is ${sortOrderIsDescending} that it is descending`)
+  }
+
+  handleNavPaneToggle() {
+    console.log("Nav pane toggled")
+  }
+
+
+
 }
 
 export default MainView
