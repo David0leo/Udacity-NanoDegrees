@@ -49,6 +49,8 @@ class MainView extends React.Component {
     )
   }
 
+  // for these functions, change to arrow notation if want access to this.
+
   addNewPost() {
     console.log("Adding new post")
   }
