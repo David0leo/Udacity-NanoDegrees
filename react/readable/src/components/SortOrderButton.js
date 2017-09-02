@@ -8,7 +8,7 @@ class SortOrderButton extends React.Component {
 
   defaultProps = {
     size: 30,
-    sortOrderToggleCallback: function(){}
+    sortOrderToggleCallback: function(b){}
   }
 
   render() {

@@ -43,7 +43,7 @@ class MainView extends React.Component {
         ></MainSecondaryHeader>
         <div className="main-body-container">
           <MainCategoryNavPane></MainCategoryNavPane>
-          <ReadablePostsByCategoryList></ReadablePostsByCategoryList>
+          <ReadablePostsByCategoryList posts={[{id:0}, {id:1}]}></ReadablePostsByCategoryList>
         </div>
       </div>
     )

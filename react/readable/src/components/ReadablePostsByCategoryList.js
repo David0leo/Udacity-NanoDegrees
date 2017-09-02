@@ -1,8 +1,13 @@
 import React from 'react'
+import PostCard from './PostCard'
 
-const ReadablePostsByCategoryList = ({ }) => {
+const ReadablePostsByCategoryList = ({ posts=[] }) => {
   return (
-    <span>ReadablePostsByCategroyList</span>
+    <span className="readable-posts-by-category-list">
+      {posts.map((post) => 
+      <PostCard post={post}></PostCard>
+      )}
+    </span>
   )
 }
 
