@@ -29,11 +29,12 @@
     outline: none;
     color: white;
     cursor: pointer;
-    width: 25%; }
+    width: 25%;
+    filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.6)); }
   .main-secondary-header .nav-toggle-button:hover {
-    color: black; }
+    filter: drop-shadow(3px 3px 2px black); }
   .main-secondary-header .nav-toggle-button:active {
-    color: rgba(0, 0, 0, 0.4); }
+    color: rgba(200, 200, 200, 0.4); }
   .main-secondary-header .sort-selector {
     display: inline-block;
     color: white;
@@ -43,37 +44,42 @@
       height: 5em;
       background: transparent; }
     .main-secondary-header .sort-selector svg {
-      display: inline; }
+      display: inline;
+      filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.6)); }
     .main-secondary-header .sort-selector select {
       width: 5em;
       font-size: 1em;
       border: none;
       color: white;
       cursor: pointer;
-      outline: none; }
+      outline: none;
+      text-shadow: 5px 5px 3px rgba(0, 0, 0, 0.6); }
     .main-secondary-header .sort-selector select:hover {
-      color: black; }
+      text-shadow: 3px 3px 2px black; }
     .main-secondary-header .sort-selector .sort-order-button {
       border: none;
       outline: none;
       cursor: pointer;
-      color: white; }
+      color: white;
+      filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.6)); }
     .main-secondary-header .sort-selector .sort-order-button:hover {
-      color: black; }
+      filter: drop-shadow(3px 3px 2px black); }
     .main-secondary-header .sort-selector .sort-order-button:active {
-      color: rgba(0, 0, 0, 0.4); }
+      color: rgba(200, 200, 200, 0.4); }
   .main-secondary-header .readable-new-post-button {
     border: none;
     outline: none;
     cursor: pointer;
     color: white;
     width: 25%; }
-    .main-secondary-header .readable-new-post-button * {
+    .main-secondary-header .readable-new-post-button > * {
       display: inline; }
-  .main-secondary-header .readable-new-post-button:hover {
-    color: black; }
+    .main-secondary-header .readable-new-post-button * {
+      filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.6)); }
+  .main-secondary-header .readable-new-post-button:hover * {
+    filter: drop-shadow(3px 3px 2px black); }
   .main-secondary-header .readable-new-post-button:active {
-    color: rgba(0, 0, 0, 0.4); }
+    color: rgba(200, 200, 200, 0.4); }
 
 .voter-buttons-container, .voter-buttons-container-horizontal, .voter-buttons-container-vertical, .post-vote-buttons-container {
   display: grid;

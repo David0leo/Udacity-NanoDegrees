@@ -9,6 +9,7 @@
     vertical-align: middle;
     background: transparent;
     text-align: center;
+    
   }
 
   .nav-toggle-button {
@@ -17,17 +18,65 @@
     color: white;
     cursor: pointer;
     width: 25%;
+    filter: $base-drop-shadow-filter;
   }
 
   .nav-toggle-button:hover {
-    color: black;
+    // color: black;
+    filter: $base-drop-shadow-hovered-filter;
   }
 
   .nav-toggle-button:active {
     color: $active-button-color;
   }
   
-  @import '../SortSelector.scss';
+  .sort-selector {
+    display: inline-block;
+    color: white;
+    width: 50%;
+  
+    > * {
+      vertical-align: middle;
+      height: 5em;
+      background: transparent;
+    }
+  
+    svg {
+      display: inline;
+      filter: $base-drop-shadow-filter;
+    }
+  
+    select {
+      width: 5em;
+      font-size: 1em;
+      border: none;
+      color: white;
+      cursor: pointer;
+      outline: none;
+      text-shadow: 5px 5px 3px rgba(0, 0, 0, 0.6);
+    }
+  
+    select:hover {
+      text-shadow: 3px 3px 2px black;
+    }
+  
+    .sort-order-button {
+      border: none;
+      outline: none;
+      cursor: pointer;
+      color: white;
+      filter: $base-drop-shadow-filter;
+    }
+  
+    .sort-order-button:hover {
+      filter: $base-drop-shadow-hovered-filter;
+    }
+  
+    .sort-order-button:active {
+      color: $active-button-color;
+    }
+  
+  }
   
   .readable-new-post-button {
     border: none;
@@ -35,14 +84,25 @@
     cursor: pointer;
     color: white;
     width: 25%;
+    
 
-    * {
+    > * {
       display: inline;
+
+      
     }
+    * {
+      filter: $base-drop-shadow-filter;
+    }
+    
   }
 
   .readable-new-post-button:hover {
-    color: black;
+    // color: black;
+    * {
+      filter: $base-drop-shadow-hovered-filter;
+    }
+    
   }
 
   .readable-new-post-button:active {

@@ -4,7 +4,7 @@
 $primary-color: $md-blue-grey-700;
 $secondary-color: $md-blue-grey-500;
 
-$active-button-color: rgba(0, 0, 0, 0.4);
+$active-button-color: rgba(200, 200, 200, 0.4);
 
 
 // border
@@ -15,6 +15,9 @@ $base-padding: 10px;
 $base-box-shadow-color: rgba(0, 0, 0, 0.4);
 $base-box-shadow: 0 5px 10px $base-box-shadow-color;
 $base-card-box-shadow: 7px 7px 10px $base-box-shadow-color;
+
+$base-drop-shadow-filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.6));
+$base-drop-shadow-hovered-filter: drop-shadow(3px 3px 2px black);
 // transition
 $base-transition-timing: 0.2s;
 // fonts
