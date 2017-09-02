@@ -36,6 +36,7 @@ const PostCard = ({ post }) => {
       </p>
       <ThumbVoter 
         voteScore={post.voteScore}
+        voteChangeCallback={function(newVoteScore){console.log("voteIncremented in PostCard")}}
       >
       </ThumbVoter>
     </div>

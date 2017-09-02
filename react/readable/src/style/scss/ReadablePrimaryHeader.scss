@@ -1,0 +1,29 @@
+.readable-primary-header {
+  background: $primary-color;
+  box-shadow: $base-box-shadow;
+  color: white;
+
+  padding: 20px;
+  text-align: left;
+  position: relative;
+  display: block;
+
+  > * {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .readable-icon {
+    
+  }
+
+  .app-title {
+    margin-left: 20px;
+
+  }
+
+  .app-category {
+    margin-left: 20px;
+  }
+
+}

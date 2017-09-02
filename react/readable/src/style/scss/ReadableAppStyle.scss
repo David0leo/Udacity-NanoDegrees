@@ -1,3 +1,11 @@
+// @import './_post-card.scss';
+// @import './_comment-card.scss';
+// @import './_main-view.scss';
+
+
+@import './utils/_variables.scss';
+
+@import './ReadablePrimaryHeader.scss';
+@import './main/MainSecondaryHeader.scss';
+
 @import './_post-card.scss';
-@import './_comment-card.scss';
-@import './_main-view.scss';

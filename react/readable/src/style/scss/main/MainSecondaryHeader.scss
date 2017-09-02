@@ -1,0 +1,51 @@
+.main-secondary-header {
+  background: $secondary-color;
+  padding: 10px;
+  display: block;
+
+  > * {
+    box-sizing: border-box;
+    display: inline;
+    vertical-align: middle;
+    background: transparent;
+    text-align: center;
+  }
+
+  .nav-toggle-button {
+    border: none;
+    outline: none;
+    color: white;
+    cursor: pointer;
+    width: 25%;
+  }
+
+  .nav-toggle-button:hover {
+    color: black;
+  }
+
+  .nav-toggle-button:active {
+    color: $active-button-color;
+  }
+  
+  @import '../SortSelector.scss';
+  
+  .readable-new-post-button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: white;
+    width: 25%;
+
+    * {
+      display: inline;
+    }
+  }
+
+  .readable-new-post-button:hover {
+    color: black;
+  }
+
+  .readable-new-post-button:active {
+    color: $active-button-color;
+  }
+}

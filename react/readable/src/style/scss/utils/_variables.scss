@@ -3,12 +3,17 @@
 //----------- Global colors and variables ----------//
 $primary-color: $md-blue-grey-700;
 $secondary-color: $md-blue-grey-500;
+
+$active-button-color: rgba(0, 0, 0, 0.4);
+
+
 // border
 $base-border-radius: 5px;
 // spacing
 $base-padding: 10px;
 // box-shadow
-$base-box-shadow-color: $md-grey-400;
+$base-box-shadow-color: rgba(0, 0, 0, 0.4);
+$base-box-shadow: 0 5px 10px $base-box-shadow-color;
 $base-card-box-shadow: 7px 7px 10px $base-box-shadow-color;
 // transition
 $base-transition-timing: 0.2s;

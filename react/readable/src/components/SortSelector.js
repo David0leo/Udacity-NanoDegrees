@@ -19,7 +19,7 @@ class SortSelector extends React.Component {
     const { options, size, sortCallback} = this.props
 
     return (
-      <span className="sort-selector">
+      <div className="sort-selector">
         <MdSort size={size}></MdSort>
         <select 
           onChange={(event) => {
@@ -34,7 +34,7 @@ class SortSelector extends React.Component {
           size={size} 
           sortOrderToggleCallback={this.handleSortOrderToggle}
         ></SortOrderButton>
-      </span>
+      </div>
     )
   }
 

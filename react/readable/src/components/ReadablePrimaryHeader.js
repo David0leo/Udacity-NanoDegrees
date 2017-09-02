@@ -3,7 +3,7 @@ import ReadableIcon from './ReadableIcon'
 
 const ReadablePrimaryHeader = ({ category='all' }) => {
   return (
-    <div className="readable-main-title">
+    <div className="readable-primary-header">
     {/* TODO: Wrap up in a link and route to the main page if clicked icon or
               if clicked the Readable Title
      */}

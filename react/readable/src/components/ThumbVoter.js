@@ -86,8 +86,8 @@ class ThumbVoter extends React.Component {
     this.setState(
       function(prevState, props) {
         return {voteScore: newVoteScore}
-      }
-      
+      },
+      this.props.voteChangeCallback(newVoteScore)
     )
   }
 }

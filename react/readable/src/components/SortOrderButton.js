@@ -15,7 +15,7 @@ class SortOrderButton extends React.Component {
     const arrowSize = this.props.size
 
     return (
-      <button onClick={this.handleClick}>
+      <button className="sort-order-button" onClick={this.handleClick}>
         {
           this.state.isDescending
           ? <MdArrowDropDown size={arrowSize}></MdArrowDropDown>
