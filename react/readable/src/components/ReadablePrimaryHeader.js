@@ -8,7 +8,7 @@ const ReadablePrimaryHeader = ({ category='all' }) => {
               if clicked the Readable Title
      */}
       <ReadableIcon 
-        size={100} 
+        size={50} 
         primaryColor={"white"} 
         secondaryColor={"currentColor"}>
       </ReadableIcon>

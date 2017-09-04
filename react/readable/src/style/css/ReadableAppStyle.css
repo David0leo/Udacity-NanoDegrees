@@ -1,8 +1,7 @@
 .readable-primary-header {
-  background: #455a64;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+  background: #0d47a1;
   color: white;
-  padding: 20px;
+  padding-left: 15px;
   text-align: left;
   position: relative;
   display: block; }
@@ -15,8 +14,7 @@
     margin-left: 20px; }
 
 .main-secondary-header {
-  background: #607d8b;
-  padding: 10px;
+  background: #1976d2;
   display: block; }
   .main-secondary-header > * {
     box-sizing: border-box;
@@ -29,16 +27,16 @@
     outline: none;
     color: white;
     cursor: pointer;
-    width: 25%;
+    width: 20%;
     filter: drop-shadow(5px 5px 3px rgba(0, 0, 0, 0.6)); }
   .main-secondary-header .nav-toggle-button:hover {
     filter: drop-shadow(3px 3px 2px black); }
   .main-secondary-header .nav-toggle-button:active {
-    color: rgba(200, 200, 200, 0.4); }
+    color: #e6e6e6; }
   .main-secondary-header .sort-selector {
     display: inline-block;
     color: white;
-    width: 50%; }
+    width: 60%; }
     .main-secondary-header .sort-selector > * {
       vertical-align: middle;
       height: 5em;
@@ -65,13 +63,13 @@
     .main-secondary-header .sort-selector .sort-order-button:hover {
       filter: drop-shadow(3px 3px 2px black); }
     .main-secondary-header .sort-selector .sort-order-button:active {
-      color: rgba(200, 200, 200, 0.4); }
+      color: #e6e6e6; }
   .main-secondary-header .readable-new-post-button {
     border: none;
     outline: none;
     cursor: pointer;
     color: white;
-    width: 25%; }
+    width: 20%; }
     .main-secondary-header .readable-new-post-button > * {
       display: inline; }
     .main-secondary-header .readable-new-post-button * {
@@ -79,7 +77,7 @@
   .main-secondary-header .readable-new-post-button:hover * {
     filter: drop-shadow(3px 3px 2px black); }
   .main-secondary-header .readable-new-post-button:active {
-    color: rgba(200, 200, 200, 0.4); }
+    color: #e6e6e6; }
 
 .voter-buttons-container, .voter-buttons-container-horizontal, .voter-buttons-container-vertical, .post-vote-buttons-container {
   display: grid;
@@ -208,5 +206,36 @@
 
   .post-time {
     text-align: center; } }
+.main-body-container {
+  display: table;
+  padding: 10px; }
+  .main-body-container > * {
+    display: table-cell;
+    box-sizing: border-box; }
+  .main-body-container .main-category-nav-pane {
+    width: 20%; }
+  .main-body-container .readable-posts-by-category-list {
+    width: 80%; }
+
+.main-category-nav-pane {
+  background: #1976d2;
+  border-radius: 5px;
+  box-shadow: 7px 7px 10px rgba(0, 0, 0, 0.4);
+  color: white;
+  text-align: center; }
+  .main-category-nav-pane .nav-pane-categories-list {
+    list-style: none;
+    padding: 0; }
+    .main-category-nav-pane .nav-pane-categories-list .nav-pane-category-list-item {
+      text-align: center;
+      padding: 10px;
+      width: 100%; }
+    .main-category-nav-pane .nav-pane-categories-list .nav-pane-category-list-item:before {
+      content: '\2215'; }
+    .main-category-nav-pane .nav-pane-categories-list .nav-pane-category-list-item:hover {
+      background: rgba(0, 0, 0, 0.3); }
+    .main-category-nav-pane .nav-pane-categories-list .nav-pane-category-list-item:active {
+      background: #e6e6e6;
+      color: black; }
 
 /*# sourceMappingURL=ReadableAppStyle.css.map */

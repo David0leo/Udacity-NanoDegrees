@@ -36,7 +36,7 @@ class MainView extends React.Component {
       <div className="main-view">
         <ReadablePrimaryHeader></ReadablePrimaryHeader>
         <MainSecondaryHeader 
-          size={50}
+          size={40}
           newPostCallback={this.addNewPost}
           sortCallback={this.sortPosts}
           toggleNavPaneCallback={this.handleNavPaneToggle}

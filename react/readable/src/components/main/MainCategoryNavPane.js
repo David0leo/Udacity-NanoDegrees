@@ -1,6 +1,6 @@
 import React from 'react'
 
-const MainCategoryNavPane = ({ categories=[] }) => {
+const MainCategoryNavPane = ({ categories=["all"] }) => {
   return (
     <div className="main-category-nav-pane">
       <h3>Categories</h3>

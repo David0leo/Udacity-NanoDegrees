@@ -1,0 +1,18 @@
+.main-body-container {
+  display: table;
+  padding:10px;
+
+  > * {
+    display: table-cell;
+    box-sizing: border-box;
+  }
+
+
+  .main-category-nav-pane {
+    width: 20%;
+  }
+
+  .readable-posts-by-category-list {
+    width: 80%;
+  }
+}

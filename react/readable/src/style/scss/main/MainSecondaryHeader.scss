@@ -1,7 +1,10 @@
 .main-secondary-header {
   background: $secondary-color;
-  padding: 10px;
+  // padding: 10px;
   display: block;
+  // margin: 10px;
+  // border-radius: $base-border-radius;
+  // box-shadow: $base-box-shadow;
 
   > * {
     box-sizing: border-box;
@@ -17,7 +20,7 @@
     outline: none;
     color: white;
     cursor: pointer;
-    width: 25%;
+    width: 20%;
     filter: $base-drop-shadow-filter;
   }
 
@@ -33,7 +36,7 @@
   .sort-selector {
     display: inline-block;
     color: white;
-    width: 50%;
+    width: 60%;
   
     > * {
       vertical-align: middle;
@@ -83,7 +86,7 @@
     outline: none;
     cursor: pointer;
     color: white;
-    width: 25%;
+    width: 20%;
     
 
     > * {
