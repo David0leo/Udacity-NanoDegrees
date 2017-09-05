@@ -4,7 +4,8 @@
 $primary-color: $md-blue-900;
 $secondary-color: $md-blue-700;
 
-$active-button-color: rgba(230, 230, 230, 1);
+$active-button-color: $primary-color;
+$base-shadow-color: rgba(0, 0, 0, 0.4);
 
 
 // border

@@ -9,24 +9,30 @@
     list-style: none;
     padding: 0;
 
-    .nav-pane-category-list-item {
+    .nav-pane-category-list-item, .nav-pane-category-list-item-hover {
       text-align: center;
       padding: 10px;
       width: 100%;
     }
+
+    .nav-pane-category-list-item-hover, .nav-pane-category-list-item:hover {
+      background: $primary-color;
+    }
     
-    .nav-pane-category-list-item:before {
+    .nav-pane-category-list-item:before, .nav-pane-category-list-item-hover:before {
       content: '\2215'; // backslash
       // margin: 0 0.5em;
     }
 
-    .nav-pane-category-list-item:hover {
-      background: rgba(0, 0, 0, 0.3);
+    .nav-pane-category-list-item:active, .nav-pane-category-list-item-hover:active {
+      box-shadow: inset 0 0 20px $base-shadow-color;
     }
 
-    .nav-pane-category-list-item:active {
-      background: $active-button-color;
-      color: black;
-    }
+    
+
+    // .nav-pane-category-list-item:active {
+    //   background: $active-button-color;
+    //   color: black;
+    // }
   }
 }

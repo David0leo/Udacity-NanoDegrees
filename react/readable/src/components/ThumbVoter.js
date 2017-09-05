@@ -4,7 +4,7 @@ import "../style/css/ReadableAppStyle.css"
 
 class ThumbVoter extends React.Component {
   state = {
-    voteScore: this.props.voteScore,
+    voteScore: this.props.voteScore || 0,
     positivePressed: false,
     negativePressed: false
   }
@@ -52,9 +52,9 @@ class ThumbVoter extends React.Component {
     this.setState(
       function(prevState, props) {
         return newState
-      }
+      },
+      this.updateVoteScore(newVoteScore)
     )
-    this.updateVoteScore(newVoteScore)
   }
 
   decrementVoteScore = () => {
@@ -77,9 +77,9 @@ class ThumbVoter extends React.Component {
     this.setState(
       function(prevState, props) {
         return newState
-      }
+      },
+      this.updateVoteScore(newVoteScore)
     )
-    this.updateVoteScore(newVoteScore)
   }
 
   updateVoteScore = (newVoteScore) => {

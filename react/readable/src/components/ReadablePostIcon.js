@@ -13,7 +13,12 @@ const ReadablePostIcon = (
     preserveAspectRatio="xMidYMid meet" 
     viewBox="0 0 50 25"
     width={size*2} height={size}
-    style={{verticalAlign: 'middle'}}
+    style={
+      {
+        verticalAlign: 'middle',
+        padding: '4px'
+      }
+    }
     >
       <defs>
         <mask id="post-icon-mask">

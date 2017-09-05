@@ -1,18 +1,20 @@
 .main-body-container {
-  display: table;
+  display: flex;
   padding:10px;
 
   > * {
-    display: table-cell;
     box-sizing: border-box;
+    transition: width 0.5s ease, opacity 1s ease;
   }
 
 
   .main-category-nav-pane {
     width: 20%;
+    overflow: hidden;
   }
 
   .readable-posts-by-category-list {
     width: 80%;
+    transform: translateY(-20px);
   }
 }

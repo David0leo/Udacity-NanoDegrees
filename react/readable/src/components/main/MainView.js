@@ -28,13 +28,16 @@ import ReadablePostsByCategoryList from '../ReadablePostsByCategoryList'
 
 class MainView extends React.Component {
   state = {
-    
+    navPaneIsOpen: true,
+    currentCategory: 'all'
   }
 
   render() {
     return (
       <div className="main-view">
-        <ReadablePrimaryHeader></ReadablePrimaryHeader>
+        <ReadablePrimaryHeader 
+          currentCategory={this.state.currentCategory}
+        ></ReadablePrimaryHeader>
         <MainSecondaryHeader 
           size={40}
           newPostCallback={this.addNewPost}
@@ -42,8 +45,14 @@ class MainView extends React.Component {
           toggleNavPaneCallback={this.handleNavPaneToggle}
         ></MainSecondaryHeader>
         <div className="main-body-container">
-          <MainCategoryNavPane></MainCategoryNavPane>
-          <ReadablePostsByCategoryList posts={[{id:0}, {id:1}]}></ReadablePostsByCategoryList>
+          <MainCategoryNavPane 
+            navPaneIsOpen={this.state.navPaneIsOpen}
+            updateCurrentCategoryCallback={this.updateCurrentCategory}
+          ></MainCategoryNavPane>
+          <ReadablePostsByCategoryList 
+            posts={[{id:0}, {id:1}]}
+            navPaneIsOpen={this.state.navPaneIsOpen}
+          ></ReadablePostsByCategoryList>
         </div>
       </div>
     )
@@ -59,8 +68,22 @@ class MainView extends React.Component {
     console.log(`Sorting with key ${sortKey} and it is ${sortOrderIsDescending} that it is descending`)
   }
 
-  handleNavPaneToggle() {
-    console.log("Nav pane toggled")
+  handleNavPaneToggle = () => {
+    console.log('toggling nav pane')
+    this.setState(
+      function(prevState, props) {
+        return {navPaneIsOpen: !prevState.navPaneIsOpen}
+      }
+    )
+    console.log(this.state.navPaneIsOpen)
+  }
+
+  updateCurrentCategory = (newCategory) => {
+    this.setState(
+      function(prevState, props) {
+        return {currentCategory: newCategory}
+      }
+    )
   }
 
 

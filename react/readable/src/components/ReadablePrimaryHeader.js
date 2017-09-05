@@ -1,7 +1,7 @@
 import React from 'react'
 import ReadableIcon from './ReadableIcon'
 
-const ReadablePrimaryHeader = ({ category='all' }) => {
+const ReadablePrimaryHeader = ({ currentCategory='all' }) => {
   return (
     <div className="readable-primary-header">
     {/* TODO: Wrap up in a link and route to the main page if clicked icon or
@@ -14,7 +14,7 @@ const ReadablePrimaryHeader = ({ category='all' }) => {
       </ReadableIcon>
       <h1 className="app-title">Readable</h1>
       {/* TODO: Wrap category in link, to refresh that category view */}
-      <h2 className="app-category">/{category}</h2>
+      <h2 className="app-category">/{currentCategory}</h2>
     </div>
   )
 }

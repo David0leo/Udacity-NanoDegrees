@@ -1,13 +1,22 @@
 import React from 'react'
 import PostCard from './PostCard'
 
-const ReadablePostsByCategoryList = ({ posts=[] }) => {
+const ReadablePostsByCategoryList = ({ posts=[], navPaneIsOpen=true }) => {
   return (
-    <span className="readable-posts-by-category-list">
+    <div 
+      className="readable-posts-by-category-list"
+      style={
+        navPaneIsOpen
+        ?{width: "80%"}
+        :{width: "100%"}
+      }>
       {posts.map((post) => 
-      <PostCard post={post}></PostCard>
+      <PostCard 
+        post={post}
+        key={`_post_${post.id}`}
+      ></PostCard>
       )}
-    </span>
+    </div>
   )
 }
 

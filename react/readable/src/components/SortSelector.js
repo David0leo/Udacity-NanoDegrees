@@ -27,7 +27,12 @@ class SortSelector extends React.Component {
           }}
         >
           {options.map((option) =>
-          <option value={option}>{option}</option>
+          <option 
+            value={option} 
+            key={`_option_${option}`}
+          >
+          {option}
+          </option>
           )}
         </select>
         <SortOrderButton 

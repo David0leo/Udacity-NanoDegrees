@@ -7,7 +7,7 @@ import ReadableNewPostButton from '../ReadableNewPostButton'
 const MainSecondaryHeader = (
   { 
     size=50,
-    navPaneIsOpen=true, 
+    navPaneIsOpen=false, 
     newPostCallback=function(){}, 
     sortCallback=function(){}, 
     toggleNavPaneCallback=function(){}
@@ -15,9 +15,28 @@ const MainSecondaryHeader = (
 ) => {
   return (
     <div className="main-secondary-header">
-      <NavToggleButton size={size} toggleNavCallback={toggleNavPaneCallback}></NavToggleButton>
-      <SortSelector options={["this", "that"]} size={size} sortCallback={sortCallback}></SortSelector>
-      <ReadableNewPostButton size={size} newPostCallback={newPostCallback}></ReadableNewPostButton>
+      <div className="nav-toggle-button-container">
+        <NavToggleButton 
+          size={size} 
+          toggleNavCallback={toggleNavPaneCallback}
+        >
+        </NavToggleButton>
+      </div>
+      <div className="nav-sort-selector-container">
+        <SortSelector 
+          options={["this", "that"]} 
+          size={size} 
+          sortCallback={sortCallback}
+        >
+        </SortSelector>
+      </div>
+      <div className="nav-readable-new-post-button-container">
+        <ReadableNewPostButton 
+          size={size} 
+          newPostCallback={newPostCallback}
+        >
+        </ReadableNewPostButton>
+      </div>
     </div>
   )
 }
