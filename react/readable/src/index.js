@@ -4,11 +4,12 @@ import './index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore } from 'redux';
-import rootReducer from './reducers/RootReducer';
+import reducer from './reducers';
 import { Provider } from 'react-redux';
 
 const store = createStore(
-  rootReducer
+  reducer, /* preloadedState, */
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
 ReactDOM.render(

@@ -1,11 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { updateCurrentCategory } from '../../actions'
 
 class MainCategoryNavPane extends React.Component {
-  state = {
-    currentCategory: this.props.currentCategory || 'all',
-    navPaneIsOpen: this.props.navPaneIsOpen
-  }
-
   render() {
     return (
       <div 
@@ -21,7 +18,7 @@ class MainCategoryNavPane extends React.Component {
           {this.props.categories.map((category) => 
           <li 
             className={
-              this.state.currentCategory === category 
+              this.props.currentCategory === category 
               ? 'nav-pane-category-list-item-hover'
               : 'nav-pane-category-list-item'
             }
@@ -37,18 +34,24 @@ class MainCategoryNavPane extends React.Component {
   }
 
   updateCurrentCategory = (newCurrentCategory, event) => {
-    this.setState(function(prevState, props) {
-      return {currentCategory: newCurrentCategory}
-    }, 
-      this.props.updateCurrentCategoryCallback(newCurrentCategory)
-    )
+    this.props.updateCurrentCategory({currentCategory: newCurrentCategory})
   }
 }
 
-MainCategoryNavPane.defaultProps = {
-  categories: ['all', 'test'],
-  currentCategory: 'all',
-  updateCurrentCategoryCallback: function(newCurrentCategory){}
+// Get the main state so you know if the nav pane is open,
+// and so you know what the current category is
+function mapStateToProps ({ main }){
+  return {
+    currentCategory: main.currentCategory,
+    categoryNavIsOpen: main.categoryNavIsOpen,
+    categories: main.categories
+  }
 }
 
-export default MainCategoryNavPane
+function mapDispatchToProps (dispatch) {
+  return {
+    updateCurrentCategory: (data) => dispatch(updateCurrentCategory(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainCategoryNavPane)

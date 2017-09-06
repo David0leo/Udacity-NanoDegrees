@@ -24,7 +24,7 @@ const MainSecondaryHeader = (
       </div>
       <div className="nav-sort-selector-container">
         <SortSelector 
-          options={["this", "that"]} 
+          options={["Vote Score", "Time Posted"]} 
           size={size} 
           sortCallback={sortCallback}
         >

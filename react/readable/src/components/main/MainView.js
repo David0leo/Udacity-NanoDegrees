@@ -9,6 +9,16 @@ import MainSecondaryHeader from './MainSecondaryHeader'
 import MainCategoryNavPane from './MainCategoryNavPane'
 import ReadablePostsByCategoryList from '../ReadablePostsByCategoryList'
 
+import { connect } from 'react-redux'
+import { 
+  toggleCategoryNav, 
+  updateSortBy, 
+  updateSortOrder, 
+  updateCurrentCategory, 
+  addPost 
+} from '../../actions'
+
+
 // const MainView = ({  }) => {
 //   return (
 //     <div className="readable-main-view">
@@ -27,16 +37,13 @@ import ReadablePostsByCategoryList from '../ReadablePostsByCategoryList'
 // }
 
 class MainView extends React.Component {
-  state = {
-    navPaneIsOpen: true,
-    currentCategory: 'all'
-  }
-
   render() {
+    const {main, toggleCategoryNav, updateSortBy, updateSortOrder, updateCurrentCategory, addPost} = this.props
+
     return (
       <div className="main-view">
         <ReadablePrimaryHeader 
-          currentCategory={this.state.currentCategory}
+          currentCategory={main.currentCategory}
         ></ReadablePrimaryHeader>
         <MainSecondaryHeader 
           size={40}
@@ -46,12 +53,12 @@ class MainView extends React.Component {
         ></MainSecondaryHeader>
         <div className="main-body-container">
           <MainCategoryNavPane 
-            navPaneIsOpen={this.state.navPaneIsOpen}
+            navPaneIsOpen={main.categoryNavIsOpen}
             updateCurrentCategoryCallback={this.updateCurrentCategory}
           ></MainCategoryNavPane>
           <ReadablePostsByCategoryList 
             posts={[{id:0}, {id:1}]}
-            navPaneIsOpen={this.state.navPaneIsOpen}
+            navPaneIsOpen={main.categoryNavIsOpen}
           ></ReadablePostsByCategoryList>
         </div>
       </div>
@@ -69,25 +76,24 @@ class MainView extends React.Component {
   }
 
   handleNavPaneToggle = () => {
-    console.log('toggling nav pane')
-    this.setState(
-      function(prevState, props) {
-        return {navPaneIsOpen: !prevState.navPaneIsOpen}
-      }
-    )
-    console.log(this.state.navPaneIsOpen)
+    this.props.toggleCategoryNav()
   }
-
-  updateCurrentCategory = (newCategory) => {
-    this.setState(
-      function(prevState, props) {
-        return {currentCategory: newCategory}
-      }
-    )
-  }
-
-
-
 }
 
-export default MainView
+function mapStateToProps ({ main }) {
+  return {
+    main
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    toggleCategoryNav: (data) => dispatch(toggleCategoryNav(data)),
+    updateSortBy: (data) => dispatch(updateSortBy(data)),
+    updateSortOrder: (data) => dispatch(updateSortOrder(data)),
+    updateCurrentCategory: (data) => dispatch(updateCurrentCategory(data)),
+    addPost: (data) => dispatch(addPost(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainView)
