@@ -1,6 +1,6 @@
 export const TOGGLE_CATEGORY_NAV = 'TOGGLE_CATEGORY_NAV'
 export const UPDATE_SORT_BY = 'UPDATE_SORT_BY'
-export const UPDATE_SORT_ORDER = 'UPDATE_SORT_ORDER'
+export const TOGGLE_SORT_ORDER_IS_DESCENDING = 'UPDATE_SORT_ORDER'
 export const UPDATE_CURRENT_CATEGORY = 'UPDATE_CURRENT_CATEGORY'
 export const ADD_POST = 'ADD_POST'
 
@@ -17,10 +17,9 @@ export function updateSortBy({sortBy}) {
   }
 }
 
-export function updateSortOrder({sortOrderIsDescending}) {
+export function toggleSortOrderIsDescending({sortOrderIsDescending}) {
   return {
-    type: UPDATE_SORT_ORDER,
-    sortOrderIsDescending
+    type: TOGGLE_SORT_ORDER_IS_DESCENDING
   }
 }
 

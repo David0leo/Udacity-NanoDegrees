@@ -11,6 +11,4 @@ const ReadableNewPostButton = ({ size=30, newPostCallback=function(){} }) => {
   )
 }
 
-
-
 export default ReadableNewPostButton

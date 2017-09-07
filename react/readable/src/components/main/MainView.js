@@ -13,7 +13,7 @@ import { connect } from 'react-redux'
 import { 
   toggleCategoryNav, 
   updateSortBy, 
-  updateSortOrder, 
+  toggleSortOrderIsDescending, 
   updateCurrentCategory, 
   addPost 
 } from '../../actions'
@@ -67,8 +67,9 @@ class MainView extends React.Component {
 
   // for these functions, change to arrow notation if want access to this.
 
-  addNewPost() {
+  addNewPost = () => {
     console.log("Adding new post")
+    this.props.addPost({post: [1]})
   }
 
   sortPosts(sortKey, sortOrderIsDescending) {
@@ -90,7 +91,7 @@ function mapDispatchToProps (dispatch) {
   return {
     toggleCategoryNav: (data) => dispatch(toggleCategoryNav(data)),
     updateSortBy: (data) => dispatch(updateSortBy(data)),
-    updateSortOrder: (data) => dispatch(updateSortOrder(data)),
+    toggleSortOrderIsDescending: (data) => dispatch(toggleSortOrderIsDescending(data)),
     updateCurrentCategory: (data) => dispatch(updateCurrentCategory(data)),
     addPost: (data) => dispatch(addPost(data))
   }

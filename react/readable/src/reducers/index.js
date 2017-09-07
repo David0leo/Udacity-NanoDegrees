@@ -5,7 +5,7 @@ import { combineReducers } from 'redux'
 import {
   TOGGLE_CATEGORY_NAV,
   UPDATE_SORT_BY,
-  UPDATE_SORT_ORDER,
+  TOGGLE_SORT_ORDER_IS_DESCENDING,
   UPDATE_CURRENT_CATEGORY,
   //maybe update post vote
   ADD_POST
@@ -20,7 +20,7 @@ const initialMainState = {
   sortOrderIsDescending: true,
   currentCategory: 'all',
   categories: ['all', 'test'],
-  posts: {}
+  posts: []
 }
 
 function main(state=initialMainState, action) {
@@ -42,10 +42,10 @@ function main(state=initialMainState, action) {
         ...state,
         ['sortBy']: sortBy
       }
-    case UPDATE_SORT_ORDER:
+    case TOGGLE_SORT_ORDER_IS_DESCENDING:
       return {
         ...state,
-        ['sortOrderIsDescending']: sortOrderIsDescending
+        ['sortOrderIsDescending']: !state.sortOrderIsDescending
       }
     case UPDATE_CURRENT_CATEGORY:
       return {
