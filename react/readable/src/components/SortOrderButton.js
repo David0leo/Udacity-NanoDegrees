@@ -1,41 +1,24 @@
 import React from 'react'
 import { MdArrowDropDown, MdArrowDropUp } from 'react-icons/lib/md'
 
-class SortOrderButton extends React.Component {
-  state = {
-    isDescending: true
+const SortOrderButton = (
+  { 
+    size=30, 
+    sortOrderIsDescending=true,
+    sortOrderButtonOnClickCallback=function(){} 
   }
-
-  defaultProps = {
-    size: 30,
-    sortOrderToggleCallback: function(b){}
-  }
-
-  render() {
-    const arrowSize = this.props.size
-
-    return (
-      <button className="sort-order-button" onClick={this.handleClick}>
-        {
-          this.state.isDescending
-          ? <MdArrowDropDown size={arrowSize}></MdArrowDropDown>
-          : <MdArrowDropUp size={arrowSize}></MdArrowDropUp>
-        }
-      </button>
-    )
-  }
-  
-
-  handleClick = () =>  {
-    const oldIsDescending = this.state.isDescending
-    this.setState(
-      function(prevState, props) {
-        return {isDescending: !prevState.isDescending}
-      }, 
-      this.props.sortOrderToggleCallback(!oldIsDescending)
-    )
-  }
-
+) => {
+  return (
+    <button 
+      className="sort-order-button" 
+      onClick={sortOrderButtonOnClickCallback}>
+      {
+        sortOrderIsDescending
+        ? <MdArrowDropDown size={size}></MdArrowDropDown>
+        : <MdArrowDropUp size={size}></MdArrowDropUp>
+      }
+    </button>
+  )
 }
 
 export default SortOrderButton

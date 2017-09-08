@@ -89,9 +89,9 @@ function mapStateToProps ({ main }) {
 
 function mapDispatchToProps (dispatch) {
   return {
-    toggleCategoryNav: (data) => dispatch(toggleCategoryNav(data)),
+    toggleCategoryNav: () => dispatch(toggleCategoryNav()),
     updateSortBy: (data) => dispatch(updateSortBy(data)),
-    toggleSortOrderIsDescending: (data) => dispatch(toggleSortOrderIsDescending(data)),
+    toggleSortOrderIsDescending: () => dispatch(toggleSortOrderIsDescending()),
     updateCurrentCategory: (data) => dispatch(updateCurrentCategory(data)),
     addPost: (data) => dispatch(addPost(data))
   }

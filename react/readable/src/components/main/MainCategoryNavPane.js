@@ -40,7 +40,7 @@ class MainCategoryNavPane extends React.Component {
 
 // Get the main state so you know if the nav pane is open,
 // and so you know what the current category is
-function mapStateToProps ({ main }){
+function mapStateToProps ({ main }) {
   return {
     currentCategory: main.currentCategory,
     categoryNavIsOpen: main.categoryNavIsOpen,

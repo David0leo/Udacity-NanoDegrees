@@ -1,22 +1,20 @@
 import React from 'react'
 import { MdSort } from 'react-icons/lib/md'
 import SortOrderButton from './SortOrderButton'
-//TODO: stylesheet maybe
+import { connect } from 'react-redux'
+import { updateSortBy, toggleSortOrderIsDescending } from '../actions'
 
 class SortSelector extends React.Component {
-  state = {
-    selectedValue: this.props.options[0] || null,
-    sortOrderIsDescending: true
-  }
-
-  defaultProps = {
-    options: [],
-    size: 50,
-    sortCallback: function(a, b){}
-  }
 
   render() {
-    const { options, size, sortCallback} = this.props
+    const { 
+      options, 
+      size, 
+      sortBy, 
+      sortOrderIsDescending, 
+      updateSortBy, 
+      toggleSortOrderIsDescending
+    } = this.props
 
     return (
       <div className="sort-selector">
@@ -37,30 +35,40 @@ class SortSelector extends React.Component {
         </select>
         <SortOrderButton 
           size={size} 
-          sortOrderToggleCallback={this.handleSortOrderToggle}
+          sortOrderIsDescending={sortOrderIsDescending}
+          sortOrderButtonOnClickCallback={this.handleSortOrderToggle}
         ></SortOrderButton>
       </div>
     )
   }
 
   handleSelectOnChange = (value) => {
-    console.log(value)
-    this.setState(
-      function(prevState, props){
-        return {selectedValue: value}
-      },
-      this.props.sortCallback(value, this.state.sortOrderIsDescending)
-    )
+    this.props.updateSortBy({sortBy: value})
   }
 
-  handleSortOrderToggle = (sortOrderIsDescending) => {
-    this.setState(
-      function(prevState, props){
-        return {sortOrderIsDescending: !prevState.sortOrderIsDescending}
-      }, 
-      this.props.sortCallback(this.state.selectedValue, sortOrderIsDescending)
-    )
+  handleSortOrderToggle = () => {
+    this.props.toggleSortOrderIsDescending()
   }
 }
 
-export default SortSelector
+// defaultProps = {
+//   options: [],
+//   size: 50,
+//   sortCallback: function(a, b){}
+// }
+
+function mapStateToProps({ main }) {
+  return {
+    sortBy: main.sortBy,
+    sortOrderIsDescending: main.sortOrderIsDescending
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    updateSortBy: (data) => dispatch(updateSortBy(data)),
+    toggleSortOrderIsDescending: (data) => dispatch(toggleSortOrderIsDescending(data))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SortSelector)

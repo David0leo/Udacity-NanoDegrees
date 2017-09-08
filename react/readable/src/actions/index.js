@@ -17,7 +17,7 @@ export function updateSortBy({sortBy}) {
   }
 }
 
-export function toggleSortOrderIsDescending({sortOrderIsDescending}) {
+export function toggleSortOrderIsDescending() {
   return {
     type: TOGGLE_SORT_ORDER_IS_DESCENDING
   }
