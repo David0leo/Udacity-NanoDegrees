@@ -1,0 +1,54 @@
+.readable-new-post-card {
+  border: 1px solid $border-color;
+  border-radius: $base-border-radius;
+  margin: 20px 20px 0px 20px;
+  box-shadow: 7px 7px 10px 0px $box-shadow-color;
+}
+
+.readable-new-post-form {
+  display: grid;
+  grid-template-columns: .5fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 0.5fr 1fr;
+  grid-template-areas: 
+    "vote title title category"
+    "vote preview preview preview"
+    "vote time time time";
+  align-items: center;
+  border: 1px solid $border-color;
+  border-radius: $base-border-radius;
+  margin: 20px 20px 0px 20px;
+  box-shadow: 7px 7px 10px 0px $box-shadow-color;
+}
+
+.readable-new-post-title {
+  font-size: $font-size-m;
+  grid-area: title;
+  text-align: left;
+  padding-left: $base-padding;
+  padding-right: $base-padding;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.readable-new-post-category {
+  grid-area: category;
+  font-size: $font-size-m;
+  text-align: center;
+}
+
+.readable-new-post-body {
+  grid-area: preview;
+  font-size: $font-size-m;
+  padding-left: $base-padding;
+  padding-right: $base-padding;
+}
+
+.readable-new-post-name {
+  color: $light-text-grey;;
+  font-size: $font-size-m;
+  grid-area: time;
+  padding-left: $base-padding;
+  padding-right: $base-padding;
+  text-align: left;
+}

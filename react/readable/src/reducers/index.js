@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import { reducer as reduxFormReducer } from 'redux-form'
 
 // import actions
 
@@ -72,5 +73,6 @@ function main(state=initialMainState, action) {
 }
 
 export default combineReducers({
-  main
+  main,
+  form: reduxFormReducer
 })

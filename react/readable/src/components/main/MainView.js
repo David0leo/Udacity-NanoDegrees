@@ -9,6 +9,8 @@ import MainSecondaryHeader from './MainSecondaryHeader'
 import MainCategoryNavPane from './MainCategoryNavPane'
 import ReadablePostsByCategoryList from '../ReadablePostsByCategoryList'
 
+import ReadableNewPostCard from '../ReadableNewPostCard'
+
 import { connect } from 'react-redux'
 import { 
   toggleCategoryNav, 
@@ -56,6 +58,7 @@ class MainView extends React.Component {
             navPaneIsOpen={main.categoryNavIsOpen}
             updateCurrentCategoryCallback={this.updateCurrentCategory}
           ></MainCategoryNavPane>
+          <ReadableNewPostCard></ReadableNewPostCard>
           <ReadablePostsByCategoryList 
             posts={[{id:0}, {id:1}]}
             navPaneIsOpen={main.categoryNavIsOpen}

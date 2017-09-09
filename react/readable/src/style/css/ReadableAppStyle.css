@@ -246,4 +246,50 @@
     .main-category-nav-pane .nav-pane-categories-list .nav-pane-category-list-item:active, .main-category-nav-pane .nav-pane-categories-list .nav-pane-category-list-item-hover:active {
       box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4); }
 
+.readable-new-post-card {
+  border: 1px solid #bdbdbd;
+  border-radius: 5px;
+  margin: 20px 20px 0px 20px;
+  box-shadow: 7px 7px 10px 0px #bdbdbd; }
+
+.readable-new-post-form {
+  display: grid;
+  grid-template-columns: .5fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 0.5fr 1fr;
+  grid-template-areas: "vote title title category" "vote preview preview preview" "vote time time time";
+  align-items: center;
+  border: 1px solid #bdbdbd;
+  border-radius: 5px;
+  margin: 20px 20px 0px 20px;
+  box-shadow: 7px 7px 10px 0px #bdbdbd; }
+
+.readable-new-post-title {
+  font-size: 1em;
+  grid-area: title;
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; }
+
+.readable-new-post-category {
+  grid-area: category;
+  font-size: 1em;
+  text-align: center; }
+
+.readable-new-post-body {
+  grid-area: preview;
+  font-size: 1em;
+  padding-left: 10px;
+  padding-right: 10px; }
+
+.readable-new-post-name {
+  color: #bdbdbd;
+  font-size: 1em;
+  grid-area: time;
+  padding-left: 10px;
+  padding-right: 10px;
+  text-align: left; }
+
 /*# sourceMappingURL=ReadableAppStyle.css.map */
