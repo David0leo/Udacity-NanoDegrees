@@ -10,6 +10,8 @@ import MainCategoryNavPane from './MainCategoryNavPane'
 import ReadablePostsByCategoryList from '../ReadablePostsByCategoryList'
 
 import ReadableNewPostCard from '../ReadableNewPostCard'
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import { connect } from 'react-redux'
 import { 
@@ -53,17 +55,20 @@ class MainView extends React.Component {
           sortCallback={this.sortPosts}
           toggleNavPaneCallback={this.handleNavPaneToggle}
         ></MainSecondaryHeader>
+        
         <div className="main-body-container">
           <MainCategoryNavPane 
             navPaneIsOpen={main.categoryNavIsOpen}
             updateCurrentCategoryCallback={this.updateCurrentCategory}
           ></MainCategoryNavPane>
-          <ReadableNewPostCard></ReadableNewPostCard>
           <ReadablePostsByCategoryList 
             posts={[{id:0}, {id:1}]}
             navPaneIsOpen={main.categoryNavIsOpen}
           ></ReadablePostsByCategoryList>
         </div>
+        <MuiThemeProvider muiTheme={getMuiTheme()}>
+          <ReadableNewPostCard categories={main.categories}></ReadableNewPostCard>
+        </MuiThemeProvider>
       </div>
     )
   }
