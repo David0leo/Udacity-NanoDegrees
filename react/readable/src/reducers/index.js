@@ -8,6 +8,7 @@ import {
   UPDATE_SORT_BY,
   TOGGLE_SORT_ORDER_IS_DESCENDING,
   UPDATE_CURRENT_CATEGORY,
+  TOGGLE_NEW_POST_MODAL_IS_OPEN,
   //maybe update post vote
   ADD_POST
 
@@ -21,6 +22,7 @@ const initialMainState = {
   sortOrderIsDescending: true,
   currentCategory: 'all',
   categories: ['all', 'test'],
+  newPostModalIsOpen: false,
   posts: []
 }
 
@@ -52,6 +54,11 @@ function main(state=initialMainState, action) {
       return {
         ...state,
         ['currentCategory']: currentCategory
+      }
+    case TOGGLE_NEW_POST_MODAL_IS_OPEN:
+      return {
+        ...state,
+        ['toggleNewPostModalIsOpen']: !state.newPostModalIsOpen
       }
     case ADD_POST:
       return {

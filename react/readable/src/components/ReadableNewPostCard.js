@@ -9,7 +9,7 @@ import MenuItem from "material-ui/MenuItem";
 import RaisedButton from 'material-ui/RaisedButton';
 import CheckCircle from 'material-ui/svg-icons/action/check-circle';
 import HighlightOff from 'material-ui/svg-icons/action/highlight-off';
-import {orange500, blue500} from 'material-ui/styles/colors';
+import {orange500, blue500, red500} from 'material-ui/styles/colors';
 import validate from "../validate";
 
 // Using some code from the redux-form site
@@ -23,9 +23,8 @@ const styles = {
     color: blue500
   },
   raisedButton: {
-    margin: 12
+    margin: 12,
   },
-
 }
 
 const renderTextField = ({
@@ -128,7 +127,8 @@ let ReadableNewPostCard = props => {
           type="submit"
           label="Submit"
           labelPosition="before"
-          primary={true}
+          backgroundColor={blue500}
+          labelColor={"white"}
           icon={<CheckCircle />}
           style={styles.raisedButton}
           disabled={pristine ||submitting}
@@ -136,8 +136,9 @@ let ReadableNewPostCard = props => {
           <RaisedButton
           type="submit"
           label="Clear"
-          labelPosition="before"
-          secondary={true}
+          labelPosition="after"
+          backgroundColor={orange500}
+          labelColor={"white"}
           icon={<HighlightOff />}
           style={styles.raisedButton}
           disabled={pristine ||submitting}
