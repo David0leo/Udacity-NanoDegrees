@@ -9,8 +9,8 @@ class MainCategoryNavPane extends React.Component {
         className="main-category-nav-pane"
         style={
         this.props.navPaneIsOpen
-        ?{width: "20%", opacity: "1"}
-        :{width: "0", opacity: "0"}
+        ?{flex: "1", opacity: "1"}
+        :{flex: "0", transform: "translateX(-120%)", opacity: "0"}
         }
       >
         <h3>Categories</h3>

@@ -1,6 +1,6 @@
 import React from "react";
 import ThumbVoter from "./ThumbVoter";
-import { addPost } from "../actions";
+import { toggleNewPostModalIsOpen } from "../actions";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import TextField from "material-ui/TextField";
@@ -11,6 +11,8 @@ import CheckCircle from 'material-ui/svg-icons/action/check-circle';
 import HighlightOff from 'material-ui/svg-icons/action/highlight-off';
 import {orange500, blue500, red500} from 'material-ui/styles/colors';
 import validate from "../validate";
+
+import Dialog from 'material-ui/Dialog';
 
 // Using some code from the redux-form site
 // http://redux-form.com/6.6.3/examples/material-ui/
@@ -61,15 +63,54 @@ const renderSelectField = ({
   />;
 
 let ReadableNewPostCard = props => {
-  const { handleSubmit, pristine, reset, submitting, categories } = props;
+  const { handleSubmit, 
+          pristine, 
+          reset, 
+          submitting, 
+          categories, 
+          newPostModalIsOpen, 
+          toggleNewPostModalIsOpen 
+  } = props;
+
+  const actions = [
+    <RaisedButton
+    type="submit"
+    label="Submit"
+    labelPosition="before"
+    backgroundColor={blue500}
+    labelColor={"#fff"}
+    icon={<CheckCircle />}
+    style={styles.raisedButton}
+    disabled={pristine ||submitting}
+    onClick={handleSubmit}
+    />,
+    <RaisedButton
+    type="submit"
+    label="Clear"
+    labelPosition="after"
+    backgroundColor={orange500}
+    labelColor={"#fff"}
+    icon={<HighlightOff />}
+    style={styles.raisedButton}
+    disabled={pristine ||submitting}
+    onClick={reset}
+    />
+  ]
+
 
   return (
-    <div className="readable-new-post-card">
+    <Dialog
+      title="Add Post"
+      actions={actions}
+      modal={false}
+      open={newPostModalIsOpen}
+      onRequestClose={toggleNewPostModalIsOpen}
+    >
       <div className="readable-new-post-inner-card">
       <form onSubmit={handleSubmit} className="readable-new-post-form">
         <div className="readable-new-post-title">
           <Field
-            name="postTitle"
+            name="title"
             component={renderTextField}
             hintText="Post Title"
             floatingLabelText="Post Title - Maximum 50 characters"
@@ -81,7 +122,7 @@ let ReadableNewPostCard = props => {
         </div>
         <div className="readable-new-post-category">
           <Field
-            name="postCategory"
+            name="category"
             component={renderSelectField}
             label="Post Category"
           >
@@ -96,7 +137,7 @@ let ReadableNewPostCard = props => {
         </div>
         <div className="readable-new-post-body">
           <Field
-            name="postBody"
+            name="body"
             component={renderTextField}
             hintText="Post Body"
             floatingLabelText="Post Body - Maximum 500 Characters"
@@ -108,7 +149,7 @@ let ReadableNewPostCard = props => {
         </div>
         <div className="readable-new-post-name">
           <Field
-            name="postName"
+            name="author"
             component={renderTextField}
             hintText="Name"
             floatingLabelText="Name - Maximum 50 Characters"
@@ -121,46 +162,16 @@ let ReadableNewPostCard = props => {
       </form>
       <ThumbVoter voteScore={0} disabled={true} />
       </div>
-      
-      <div>
-        <RaisedButton
-          type="submit"
-          label="Submit"
-          labelPosition="before"
-          backgroundColor={blue500}
-          labelColor={"white"}
-          icon={<CheckCircle />}
-          style={styles.raisedButton}
-          disabled={pristine ||submitting}
-          />
-          <RaisedButton
-          type="submit"
-          label="Clear"
-          labelPosition="after"
-          backgroundColor={orange500}
-          labelColor={"white"}
-          icon={<HighlightOff />}
-          style={styles.raisedButton}
-          disabled={pristine ||submitting}
-          onClick={reset}
-          />
-        {/* <button type="submit" disabled={pristine || submitting}>
-          Submit
-        </button> */}
-        {/* <button type="button" disabled={pristine || submitting} onClick={reset}>
-          Clear Values
-        </button> */}
-      </div>
-    </div>
+    </Dialog>
   );
 };
 
 function mapStateToProps({ main }) {
-  return { categories: main.categories };
+  return { categories: main.categories, newPostModalIsOpen: main.newPostModalIsOpen };
 }
 
 function mapDispatchToProps(dispatch) {
-  return { addPost: data => dispatch(addPost(data)) };
+  return { toggleNewPostModalIsOpen: () => dispatch(toggleNewPostModalIsOpen()) };
 }
 
 ReadableNewPostCard = connect(mapStateToProps, mapDispatchToProps)(

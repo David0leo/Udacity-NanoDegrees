@@ -7,8 +7,8 @@ const ReadablePostsByCategoryList = ({ posts=[], navPaneIsOpen=true }) => {
       className="readable-posts-by-category-list"
       style={
         navPaneIsOpen
-        ?{width: "80%"}
-        :{width: "100%"}
+        ?{flex: "4"}
+        :{flex: "4"}
       }>
       {posts.map((post) => 
       <PostCard 

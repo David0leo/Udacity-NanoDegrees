@@ -9,6 +9,8 @@ import MainSecondaryHeader from './MainSecondaryHeader'
 import MainCategoryNavPane from './MainCategoryNavPane'
 import ReadablePostsByCategoryList from '../ReadablePostsByCategoryList'
 
+
+
 import ReadableNewPostCard from '../ReadableNewPostCard'
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -19,6 +21,8 @@ import {
   updateSortBy, 
   toggleSortOrderIsDescending, 
   updateCurrentCategory, 
+  toggleNewPostModalIsOpen,
+  incrementNextPostId,
   addPost 
 } from '../../actions'
 
@@ -51,7 +55,7 @@ class MainView extends React.Component {
         ></ReadablePrimaryHeader>
         <MainSecondaryHeader 
           size={40}
-          newPostCallback={this.addNewPost}
+          newPostCallback={this.handleNewPostModalOpen}
           sortCallback={this.sortPosts}
           toggleNavPaneCallback={this.handleNavPaneToggle}
         ></MainSecondaryHeader>
@@ -61,14 +65,19 @@ class MainView extends React.Component {
             navPaneIsOpen={main.categoryNavIsOpen}
             updateCurrentCategoryCallback={this.updateCurrentCategory}
           ></MainCategoryNavPane>
+          
           <ReadablePostsByCategoryList 
-            posts={[{id:0}, {id:1}]}
+            posts={main.posts}
             navPaneIsOpen={main.categoryNavIsOpen}
-          ></ReadablePostsByCategoryList>
+          >
+          </ReadablePostsByCategoryList>
         </div>
         <MuiThemeProvider muiTheme={getMuiTheme()}>
-          <ReadableNewPostCard categories={main.categories}></ReadableNewPostCard>
-        </MuiThemeProvider>
+            <ReadableNewPostCard 
+              categories={main.categories}
+              handleSubmit={this.addNewPost}
+            />
+          </MuiThemeProvider>
       </div>
     )
   }
@@ -76,8 +85,12 @@ class MainView extends React.Component {
   // for these functions, change to arrow notation if want access to this.
 
   addNewPost = () => {
-    console.log("Adding new post")
-    this.props.addPost({post: [1]})
+    let newPost = this.props.form.readableNewPostCard.values
+    newPost.id = this.props.main.nextPostId
+    this.props.addPost({post: newPost})
+    this.props.incrementNextPostId()
+
+    this.handleNewPostModalClose()
   }
 
   sortPosts(sortKey, sortOrderIsDescending) {
@@ -87,11 +100,21 @@ class MainView extends React.Component {
   handleNavPaneToggle = () => {
     this.props.toggleCategoryNav()
   }
+
+  handleNewPostModalOpen = () => {
+    //Open and close is the same because just toggling
+    this.props.toggleNewPostModalIsOpen()
+  }
+
+  handleNewPostModalClose = () => {
+    this.props.toggleNewPostModalIsOpen()
+  }
 }
 
-function mapStateToProps ({ main }) {
+function mapStateToProps ({ main, form }) {
   return {
-    main
+    main,
+    form
   }
 }
 
@@ -101,6 +124,8 @@ function mapDispatchToProps (dispatch) {
     updateSortBy: (data) => dispatch(updateSortBy(data)),
     toggleSortOrderIsDescending: () => dispatch(toggleSortOrderIsDescending()),
     updateCurrentCategory: (data) => dispatch(updateCurrentCategory(data)),
+    toggleNewPostModalIsOpen: () => dispatch(toggleNewPostModalIsOpen()),
+    incrementNextPostId: () => dispatch(incrementNextPostId()),
     addPost: (data) => dispatch(addPost(data))
   }
 }

@@ -9,6 +9,7 @@ import {
   TOGGLE_SORT_ORDER_IS_DESCENDING,
   UPDATE_CURRENT_CATEGORY,
   TOGGLE_NEW_POST_MODAL_IS_OPEN,
+  INCREMENT_NEXT_POST_ID,
   //maybe update post vote
   ADD_POST
 
@@ -23,6 +24,7 @@ const initialMainState = {
   currentCategory: 'all',
   categories: ['all', 'test'],
   newPostModalIsOpen: false,
+  nextPostId: 0,
   posts: []
 }
 
@@ -58,12 +60,17 @@ function main(state=initialMainState, action) {
     case TOGGLE_NEW_POST_MODAL_IS_OPEN:
       return {
         ...state,
-        ['toggleNewPostModalIsOpen']: !state.newPostModalIsOpen
+        ['newPostModalIsOpen']: !state.newPostModalIsOpen
+      }
+    case INCREMENT_NEXT_POST_ID:
+      return {
+        ...state,
+        ['nextPostId']: state.nextPostId += 1
       }
     case ADD_POST:
       return {
         ...state,
-        ['posts']: state.posts.concat(post)
+        ['posts']: [...state.posts, post]
       }
     // case EDIT_POST:
     //   return {
