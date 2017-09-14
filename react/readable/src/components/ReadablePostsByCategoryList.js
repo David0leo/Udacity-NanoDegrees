@@ -10,10 +10,10 @@ const ReadablePostsByCategoryList = ({ posts=[], navPaneIsOpen=true }) => {
         ?{flex: "4"}
         :{flex: "4"}
       }>
-      {posts.map((post) => 
+      {Object.keys(posts).map((key) => 
       <PostCard 
-        post={post}
-        key={`_post_${post.id}`}
+        post={posts.key}
+        key={`_post_${posts[key].id}`}
       ></PostCard>
       )}
     </div>

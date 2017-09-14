@@ -25,7 +25,7 @@ const initialMainState = {
   categories: ['all', 'test'],
   newPostModalIsOpen: false,
   nextPostId: 0,
-  posts: []
+  posts: {}
 }
 
 function main(state=initialMainState, action) {
@@ -70,7 +70,10 @@ function main(state=initialMainState, action) {
     case ADD_POST:
       return {
         ...state,
-        ['posts']: [...state.posts, post]
+        ['posts']: {
+          ...state.posts,
+          [post.id]: post
+        }
       }
     // case EDIT_POST:
     //   return {

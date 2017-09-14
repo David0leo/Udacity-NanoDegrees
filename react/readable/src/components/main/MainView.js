@@ -50,9 +50,7 @@ class MainView extends React.Component {
 
     return (
       <div className="main-view">
-        <ReadablePrimaryHeader 
-          currentCategory={main.currentCategory}
-        ></ReadablePrimaryHeader>
+        <ReadablePrimaryHeader/>
         <MainSecondaryHeader 
           size={40}
           newPostCallback={this.handleNewPostModalOpen}
