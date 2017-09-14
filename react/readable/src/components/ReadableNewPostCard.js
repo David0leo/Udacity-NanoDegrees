@@ -6,13 +6,13 @@ import { connect } from "react-redux";
 import TextField from "material-ui/TextField";
 import SelectField from "material-ui/SelectField";
 import MenuItem from "material-ui/MenuItem";
-import RaisedButton from 'material-ui/RaisedButton';
-import CheckCircle from 'material-ui/svg-icons/action/check-circle';
-import HighlightOff from 'material-ui/svg-icons/action/highlight-off';
-import {orange500, blue500, red500} from 'material-ui/styles/colors';
+import RaisedButton from "material-ui/RaisedButton";
+import CheckCircle from "material-ui/svg-icons/action/check-circle";
+import HighlightOff from "material-ui/svg-icons/action/highlight-off";
+import { orange500, blue500, red500 } from "material-ui/styles/colors";
 import validate from "../validate";
 
-import Dialog from 'material-ui/Dialog';
+import Dialog from "material-ui/Dialog";
 
 // Using some code from the redux-form site
 // http://redux-form.com/6.6.3/examples/material-ui/
@@ -25,9 +25,9 @@ const styles = {
     color: blue500
   },
   raisedButton: {
-    margin: 12,
-  },
-}
+    margin: 12
+  }
+};
 
 const renderTextField = ({
   input,
@@ -62,116 +62,134 @@ const renderSelectField = ({
     {...custom}
   />;
 
-let ReadableNewPostCard = props => {
-  const { handleSubmit, 
-          pristine, 
-          reset, 
-          submitting, 
-          categories, 
-          newPostModalIsOpen, 
-          toggleNewPostModalIsOpen 
-  } = props;
+class ReadableNewPostCard extends React.Component {
+  render() {
+    const {
+      handleSubmit,
+      pristine,
+      reset,
+      submitting,
+      categories,
+      newPostModalIsOpen,
+      toggleNewPostModalIsOpen
+    } = this.props;
 
-  const actions = [
-    <RaisedButton
-    type="submit"
-    label="Submit"
-    labelPosition="before"
-    backgroundColor={blue500}
-    labelColor={"#fff"}
-    icon={<CheckCircle />}
-    style={styles.raisedButton}
-    disabled={pristine ||submitting}
-    onClick={handleSubmit}
-    />,
-    <RaisedButton
-    type="submit"
-    label="Clear"
-    labelPosition="after"
-    backgroundColor={orange500}
-    labelColor={"#fff"}
-    icon={<HighlightOff />}
-    style={styles.raisedButton}
-    disabled={pristine ||submitting}
-    onClick={reset}
-    />
-  ]
+    const actions = [
+      <RaisedButton
+        type="submit"
+        label="Submit"
+        labelPosition="before"
+        backgroundColor={blue500}
+        labelColor={"#fff"}
+        icon={<CheckCircle />}
+        style={styles.raisedButton}
+        disabled={pristine || submitting}
+        onClick={this.onClickSubmit}
+      />,
+      <RaisedButton
+        type="submit"
+        label="Clear"
+        labelPosition="after"
+        backgroundColor={orange500}
+        labelColor={"#fff"}
+        icon={<HighlightOff />}
+        style={styles.raisedButton}
+        disabled={pristine || submitting}
+        onClick={reset}
+      />
+    ];
 
-
-  return (
-    <Dialog
-      title="Add Post"
-      actions={actions}
-      modal={false}
-      open={newPostModalIsOpen}
-      onRequestClose={toggleNewPostModalIsOpen}
-    >
-      <div className="readable-new-post-inner-card">
-      <form onSubmit={handleSubmit} className="readable-new-post-form">
-        <div className="readable-new-post-title">
-          <Field
-            name="title"
-            component={renderTextField}
-            hintText="Post Title"
-            floatingLabelText="Post Title - Maximum 50 characters"
-            multiLine={true}
-            rows={1}
-            fullWidth={true}
-            maxLength={50}
-          />
-        </div>
-        <div className="readable-new-post-category">
-          <Field
-            name="category"
-            component={renderSelectField}
-            label="Post Category"
-          >
-            {categories.map(category =>
-              <MenuItem
-                value={category}
-                primaryText={`/${category}`}
-                key={`_addPostCategory_${category}`}
+    return (
+      <Dialog
+        title="Add Post"
+        actions={actions}
+        modal={false}
+        open={newPostModalIsOpen}
+        onRequestClose={this.onDismiss}
+      >
+        <div className="readable-new-post-inner-card">
+          <form onSubmit={handleSubmit} className="readable-new-post-form">
+            <div className="readable-new-post-title">
+              <Field
+                name="title"
+                component={renderTextField}
+                hintText="Post Title"
+                floatingLabelText="Post Title - Maximum 80 characters"
+                multiLine={true}
+                rows={1}
+                fullWidth={true}
+                maxLength={80}
               />
-            )}
-          </Field>
+            </div>
+            <div className="readable-new-post-category">
+              <Field
+                name="category"
+                component={renderSelectField}
+                label="Post Category"
+              >
+                {categories.map(category =>
+                  <MenuItem
+                    value={category}
+                    primaryText={`/${category}`}
+                    key={`_addPostCategory_${category}`}
+                  />
+                )}
+              </Field>
+            </div>
+            <div className="readable-new-post-body">
+              <Field
+                name="body"
+                component={renderTextField}
+                hintText="Post Body"
+                floatingLabelText="Post Body - Maximum 500 Characters"
+                multiLine={true}
+                rows={1}
+                fullWidth={true}
+                maxLength={500}
+              />
+            </div>
+            <div className="readable-new-post-name">
+              <Field
+                name="author"
+                component={renderTextField}
+                hintText="Name"
+                floatingLabelText="Name - Maximum 30 Characters"
+                multiLine={true}
+                rows={1}
+                fullWidth={true}
+                maxLength={30}
+              />
+            </div>
+          </form>
+          <ThumbVoter voteScore={0} disabled={true} />
         </div>
-        <div className="readable-new-post-body">
-          <Field
-            name="body"
-            component={renderTextField}
-            hintText="Post Body"
-            floatingLabelText="Post Body - Maximum 500 Characters"
-            multiLine={true}
-            rows={1}
-            fullWidth={true}
-            maxLength={500}
-          />
-        </div>
-        <div className="readable-new-post-name">
-          <Field
-            name="author"
-            component={renderTextField}
-            hintText="Name"
-            floatingLabelText="Name - Maximum 50 Characters"
-            multiLine={true}
-            rows={1}
-            fullWidth={true}
-            maxLength={50}
-          />
-        </div>
-      </form>
-      <ThumbVoter voteScore={0} disabled={true} />
-      </div>
-    </Dialog>
-  );
-};
+      </Dialog>
+    );
+  }
+
+  onClickSubmit = () => {
+    this.props.handleSubmit()
+    this.props.reset()
+  }
+
+  onDismiss = () => {
+    this.props.reset()
+    this.props.toggleNewPostModalIsOpen()
+  }
+
+}
 
 function mapStateToProps({ main }) {
-  return { categories: main.categories, newPostModalIsOpen: main.newPostModalIsOpen };
+  return {
+    categories: main.categories,
+    newPostModalIsOpen: main.newPostModalIsOpen
+  };
 }
 
 function mapDispatchToProps(dispatch) {
-  return { toggleNewPostModalIsOpen: () => dispatch(toggleNewPostModalIsOpen()) };
+  return {
+    toggleNewPostModalIsOpen: () => dispatch(toggleNewPostModalIsOpen())
+  };
 }
 
 ReadableNewPostCard = connect(mapStateToProps, mapDispatchToProps)(

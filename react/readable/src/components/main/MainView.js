@@ -72,6 +72,7 @@ class MainView extends React.Component {
           >
           </ReadablePostsByCategoryList>
         </div>
+        <div className="main-footer"></div>
         <MuiThemeProvider muiTheme={getMuiTheme()}>
             <ReadableNewPostCard 
               categories={main.categories}
@@ -87,6 +88,7 @@ class MainView extends React.Component {
   addNewPost = () => {
     let newPost = this.props.form.readableNewPostCard.values
     newPost.id = this.props.main.nextPostId
+    newPost.timestamp = Date.now()
     this.props.addPost({post: newPost})
     this.props.incrementNextPostId()
 

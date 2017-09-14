@@ -20,6 +20,16 @@ $base-padding: 10px;
   box-sizing: border-box;
 }
 
+@-webkit-keyframes animation-add-post-card {
+  from {transform: translateX(120%)}
+  to {transform: translateX(0)}
+}
+
+@keyframes animation-add-post-card {
+  from {transform: translateX(120%)}
+  to {transform: translateX(0)}
+}
+
 .post-card {
   display: grid;
   grid-template-columns: .5fr 1fr 1fr 1fr;
@@ -33,6 +43,7 @@ $base-padding: 10px;
   border-radius: $base-border-radius;
   margin: 20px 20px 0px 20px;
   box-shadow: 7px 7px 10px 0px $box-shadow-color;
+  animation: animation-add-post-card 1s ease;
 }
 
 .post-title {
