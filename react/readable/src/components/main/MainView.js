@@ -63,12 +63,7 @@ class MainView extends React.Component {
             navPaneIsOpen={main.categoryNavIsOpen}
             updateCurrentCategoryCallback={this.updateCurrentCategory}
           ></MainCategoryNavPane>
-          
-          <ReadablePostsByCategoryList 
-            posts={main.posts}
-            navPaneIsOpen={main.categoryNavIsOpen}
-          >
-          </ReadablePostsByCategoryList>
+          <ReadablePostsByCategoryList/>
         </div>
         <div className="main-footer"></div>
         <MuiThemeProvider muiTheme={getMuiTheme()}>
