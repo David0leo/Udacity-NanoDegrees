@@ -1,6 +1,6 @@
 import React from "react";
 import ThumbVoter from "./ThumbVoter";
-import { toggleNewPostModalIsOpen } from "../actions";
+import { toggleNewPostModalIsOpen, initializePostFormValues } from "../actions";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import TextField from "material-ui/TextField";
@@ -9,7 +9,7 @@ import MenuItem from "material-ui/MenuItem";
 import RaisedButton from "material-ui/RaisedButton";
 import CheckCircle from "material-ui/svg-icons/action/check-circle";
 import HighlightOff from "material-ui/svg-icons/action/highlight-off";
-import { orange500, blue500, red500 } from "material-ui/styles/colors";
+import { orange500, blue500 } from "material-ui/styles/colors";
 import validate from "../validate";
 
 import Dialog from "material-ui/Dialog";
@@ -70,8 +70,7 @@ class ReadableNewPostCard extends React.Component {
       reset,
       submitting,
       categories,
-      newPostModalIsOpen,
-      toggleNewPostModalIsOpen
+      newPostModalIsOpen
     } = this.props;
 
     const actions = [
@@ -196,10 +195,19 @@ ReadableNewPostCard = connect(mapStateToProps, mapDispatchToProps)(
   ReadableNewPostCard
 );
 
-export default reduxForm({
+ReadableNewPostCard = reduxForm({
   form: "readableNewPostCard",
   validate
 })(ReadableNewPostCard);
+
+ReadableNewPostCard = connect(
+  state => ({
+    initialValues: state.loadPost.post
+  }),
+  { loadPost: initializePostFormValues }
+)(ReadableNewPostCard)
+
+export default ReadableNewPostCard
 
 // export default reduxForm({
 //   form: 'MaterialUiForm', // a unique identifier for this form

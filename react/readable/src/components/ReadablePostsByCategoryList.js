@@ -3,11 +3,9 @@ import PostCard from './PostCard'
 import { connect } from 'react-redux'
 
 class ReadablePostsByCategoryList extends React.Component {
-  
   render() {
     const {posts, categoryNavPaneIsOpen} = this.props
     let filteredPosts = this.filterPosts(posts)
-    console.log(filteredPosts)
     return (
       <div 
         className="readable-posts-by-category-list"
@@ -19,7 +17,7 @@ class ReadablePostsByCategoryList extends React.Component {
         {filteredPosts.map((post) => 
         <PostCard 
           post={post}
-          
+          key={`_post_card_${post.id}`}
         ></PostCard>
         )}
       </div>
@@ -47,6 +45,8 @@ class ReadablePostsByCategoryList extends React.Component {
         } else {
           return b.timestamp - a.timestamp
         }
+      } else {
+        return 0
       }
     })
     return filteredPosts

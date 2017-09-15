@@ -11,6 +11,7 @@ import {
   TOGGLE_NEW_POST_MODAL_IS_OPEN,
   INCREMENT_NEXT_POST_ID,
   //maybe update post vote
+  INITIALIZE_POST_FORM_VALUES,
   ADD_POST
 
 } from '../actions'
@@ -30,9 +31,8 @@ const initialMainState = {
 
 function main(state=initialMainState, action) {
   const { 
-    sortBy, 
-    sortOrderIsDescending, 
-    currentCategory, 
+    sortBy,
+    currentCategory,
     post
   } = action
 
@@ -40,37 +40,37 @@ function main(state=initialMainState, action) {
     case TOGGLE_CATEGORY_NAV:
       return {
         ...state,
-        ['categoryNavIsOpen']: !state.categoryNavIsOpen
+        categoryNavIsOpen: !state.categoryNavIsOpen
       }
     case UPDATE_SORT_BY:
       return {
         ...state,
-        ['sortBy']: sortBy
+        sortBy: sortBy
       }
     case TOGGLE_SORT_ORDER_IS_DESCENDING:
       return {
         ...state,
-        ['sortOrderIsDescending']: !state.sortOrderIsDescending
+        sortOrderIsDescending: !state.sortOrderIsDescending
       }
     case UPDATE_CURRENT_CATEGORY:
       return {
         ...state,
-        ['currentCategory']: currentCategory
+        currentCategory: currentCategory
       }
     case TOGGLE_NEW_POST_MODAL_IS_OPEN:
       return {
         ...state,
-        ['newPostModalIsOpen']: !state.newPostModalIsOpen
+        newPostModalIsOpen: !state.newPostModalIsOpen
       }
     case INCREMENT_NEXT_POST_ID:
       return {
         ...state,
-        ['nextPostId']: state.nextPostId += 1
+        nextPostId: state.nextPostId += 1
       }
     case ADD_POST:
       return {
         ...state,
-        ['posts']: {
+        posts: {
           ...state.posts,
           [post.id]: post
         }
@@ -89,7 +89,32 @@ function main(state=initialMainState, action) {
   }
 }
 
+const initialLoadPostState = {
+  post: {
+    id: '',
+    timestamp: Date.now(),
+    title: '',
+    body: '',
+    author: '',
+    category: 'all',
+    voteScore: 0,
+    deleted: false
+  }
+}
+
+const loadPost = (state=initialLoadPostState, action) => {
+  switch (action.type) {
+    case INITIALIZE_POST_FORM_VALUES:
+      return {
+        post: action.post
+      }
+    default:
+      return state
+  }
+}
+
 export default combineReducers({
   main,
+  loadPost,
   form: reduxFormReducer
 })

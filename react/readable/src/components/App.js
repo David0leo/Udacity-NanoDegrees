@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import * as API from '../utils/ReadableApi';
+// import * as API from '../utils/ReadableApi';
 import MainView from './main/MainView'
 
 class App extends Component {

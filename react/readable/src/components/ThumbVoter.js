@@ -11,7 +11,7 @@ class ThumbVoter extends React.Component {
   };
 
   render() {
-    const { thumbSize, voteChangeCallback } = this.props;
+    const { thumbSize } = this.props;
     const {
       voteScore,
       positivePressed,
@@ -22,75 +22,73 @@ class ThumbVoter extends React.Component {
     return (
       <div className="post-vote-buttons-container">
         <button
-              className="post-button post-positive-button"
-              onClick={() => {
-                if (!disabled) this.incrementVoteScore;
-              }}
-            >
-              <MdThumbUp
-                size={thumbSize}
-                color={!disabled && positivePressed ? "#2196f3" : ""}
-              />
-            </button>
+          className="post-button post-positive-button"
+          onClick={this.incrementVoteScore}
+        >
+          <MdThumbUp
+            size={thumbSize}
+            color={!disabled && positivePressed ? "#2196f3" : ""}
+          />
+        </button>
 
-        <span className="post-vote-count">
-          {voteScore}
-        </span>
+        <span className="post-vote-count">{voteScore}</span>
         <button
-              className="post-button post-negative-button"
-              onClick={() => {
-                if (!disabled) this.decrementVoteScore;
-              }}
-            >
-              <MdThumbDown
-                size={thumbSize}
-                color={!disabled && negativePressed ? "#f44336" : ""}
-              />
-            </button>
+          className="post-button post-negative-button"
+          onClick={this.decrementVoteScore}
+        >
+          <MdThumbDown
+            size={thumbSize}
+            color={!disabled && negativePressed ? "#f44336" : ""}
+          />
+        </button>
       </div>
     );
   }
 
   incrementVoteScore = () => {
-    let newState = {};
-    let newVoteScore = this.state.voteScore;
+    if (!this.props.disabled) {
+      let newState = {};
+      let newVoteScore = this.state.voteScore;
 
-    if (!this.state.positivePressed) {
-      newState = { positivePressed: true, negativePressed: false };
-      newVoteScore += 1;
-      if (this.state.negativePressed) {
-        newVoteScore += 1; // increment by 2 in total to account for removing negative vote
+      if (!this.state.positivePressed) {
+        newState = { positivePressed: true, negativePressed: false };
+        newVoteScore += 1;
+        if (this.state.negativePressed) {
+          newVoteScore += 1; // increment by 2 in total to account for removing negative vote
+        }
+      } else {
+        // if positive pressed already, press again to remove vote
+        newState = { positivePressed: false, negativePressed: false };
+        newVoteScore -= 1;
       }
-    } else {
-      // if positive pressed already, press again to remove vote
-      newState = { positivePressed: false, negativePressed: false };
-      newVoteScore -= 1;
-    }
 
-    this.setState(function(prevState, props) {
-      return newState;
-    }, this.updateVoteScore(newVoteScore));
+      this.setState(function(prevState, props) {
+        return newState;
+      }, this.updateVoteScore(newVoteScore));
+    }
   };
 
   decrementVoteScore = () => {
-    let newState = {};
-    let newVoteScore = this.state.voteScore;
+    if (!this.props.disabled) {
+      let newState = {};
+      let newVoteScore = this.state.voteScore;
 
-    if (!this.state.negativePressed) {
-      newState = { positivePressed: false, negativePressed: true };
-      newVoteScore -= 1;
-      if (this.state.positivePressed) {
-        newVoteScore -= 1; // decrement by 2 in total to account for removing positive vote
+      if (!this.state.negativePressed) {
+        newState = { positivePressed: false, negativePressed: true };
+        newVoteScore -= 1;
+        if (this.state.positivePressed) {
+          newVoteScore -= 1; // decrement by 2 in total to account for removing positive vote
+        }
+      } else {
+        // if negative pressed already, press again to remove vote
+        newState = { positivePressed: false, negativePressed: false };
+        newVoteScore += 1; // increment to remove previous decrement
       }
-    } else {
-      // if negative pressed already, press again to remove vote
-      newState = { positivePressed: false, negativePressed: false };
-      newVoteScore += 1; // increment to remove previous decrement
-    }
 
-    this.setState(function(prevState, props) {
-      return newState;
-    }, this.updateVoteScore(newVoteScore));
+      this.setState(function(prevState, props) {
+        return newState;
+      }, this.updateVoteScore(newVoteScore));
+    }
   };
 
   updateVoteScore = newVoteScore => {

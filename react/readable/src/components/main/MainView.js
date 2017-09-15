@@ -1,8 +1,8 @@
 import React from 'react'
 import '../../style/css/ReadableAppStyle.css'
-import ReadableMainTitle from '../ReadableMainTitle'
-import ReadableCategoryNavPane from '../ReadableCategoryNavPane'
-import ReadableCategoryView from '../ReadableCategoryView'
+// import ReadableMainTitle from '../ReadableMainTitle'
+// import ReadableCategoryNavPane from '../ReadableCategoryNavPane'
+// import ReadableCategoryView from '../ReadableCategoryView'
 
 import ReadablePrimaryHeader from '../ReadablePrimaryHeader'
 import MainSecondaryHeader from './MainSecondaryHeader'
@@ -46,7 +46,7 @@ import {
 
 class MainView extends React.Component {
   render() {
-    const {main, toggleCategoryNav, updateSortBy, updateSortOrder, updateCurrentCategory, addPost} = this.props
+    const {main} = this.props
 
     return (
       <div className="main-view">

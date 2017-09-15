@@ -10,10 +10,7 @@ class SortSelector extends React.Component {
     const { 
       options, 
       size, 
-      sortBy, 
-      sortOrderIsDescending, 
-      updateSortBy, 
-      toggleSortOrderIsDescending
+      sortOrderIsDescending,
     } = this.props
 
     return (
