@@ -15,17 +15,28 @@ class MainCategoryNavPane extends React.Component {
       >
         <h3>Categories</h3>
         <ol className="nav-pane-categories-list">
-          {this.props.categories.map((category) => 
-          <li 
+          <li
             className={
-              this.props.currentCategory === category 
+              this.props.currentCategory === 'all'
               ? 'nav-pane-category-list-item-hover'
               : 'nav-pane-category-list-item'
             }
-            key={`_category_${category}`}
-            onClick={this.updateCurrentCategory.bind(this, category)}
+            key={`_category_all`}
+            onClick={this.updateCurrentCategory.bind(this, 'all')}
           >
-          {category}
+          all
+          </li>
+          {this.props.apiCategories.map((category) => 
+          <li 
+            className={
+              this.props.currentCategory === category.name 
+              ? 'nav-pane-category-list-item-hover'
+              : 'nav-pane-category-list-item'
+            }
+            key={`_category_${category.path}`}
+            onClick={this.updateCurrentCategory.bind(this, category.name)}
+          >
+          {category.name}
           </li>
           )}
         </ol>
@@ -40,8 +51,9 @@ class MainCategoryNavPane extends React.Component {
 
 // Get the main state so you know if the nav pane is open,
 // and so you know what the current category is
-function mapStateToProps ({ main }) {
+function mapStateToProps ({ main, apiReducer }) {
   return {
+    apiCategories: apiReducer.categories,
     currentCategory: main.currentCategory,
     categoryNavIsOpen: main.categoryNavIsOpen,
     categories: main.categories
