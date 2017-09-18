@@ -10,7 +10,7 @@ const headers = {
   headers: {
   //
   // 'Authorization': token
-    'Authorization': 'whatever-you-want'
+    'Authorization': token
   },
   
 }
@@ -22,6 +22,22 @@ class API {
     }).catch(error => {
       return error;
     });
+  }
+
+  static getAllPosts() {
+    return fetch(`${api}/posts`, headers).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    })
+  }
+
+  static getPostsByCategory(category) {
+    return fetch(`${api}/${category}/posts`, headers).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    })
   }
 }
 

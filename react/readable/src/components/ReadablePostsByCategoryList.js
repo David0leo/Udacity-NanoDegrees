@@ -63,9 +63,9 @@ class ReadablePostsByCategoryList extends React.Component {
   }
 }
 
-function mapStateToProps({ main }) {
+function mapStateToProps({ main, API }) {
   return {
-    posts: main.posts,
+    posts: API.posts,
     categoryNavPaneIsOpen: main.categoryNavPaneIsOpen,
     sortBy: main.sortBy,
     sortOrderIsDescending: main.sortOrderIsDescending

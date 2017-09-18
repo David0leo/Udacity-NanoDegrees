@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { updateCurrentCategory } from '../../actions'
+import { getPostsByCategory, getAllPosts } from '../../actions/ApiActions'
 
 class MainCategoryNavPane extends React.Component {
   render() {
@@ -26,7 +27,7 @@ class MainCategoryNavPane extends React.Component {
           >
           all
           </li>
-          {this.props.apiCategories.map((category) => 
+          {this.props.categories.map((category) => 
           <li 
             className={
               this.props.currentCategory === category.name 
@@ -46,23 +47,29 @@ class MainCategoryNavPane extends React.Component {
 
   updateCurrentCategory = (newCurrentCategory, event) => {
     this.props.updateCurrentCategory({currentCategory: newCurrentCategory})
+    if (newCurrentCategory === 'all'){
+      this.props.getAllPosts()
+    } else {
+      this.props.getPostsByCategory(newCurrentCategory)
+    }
   }
 }
 
 // Get the main state so you know if the nav pane is open,
 // and so you know what the current category is
-function mapStateToProps ({ main, apiReducer }) {
+function mapStateToProps ({ main, API }) {
   return {
-    apiCategories: apiReducer.categories,
     currentCategory: main.currentCategory,
     categoryNavIsOpen: main.categoryNavIsOpen,
-    categories: main.categories
+    categories: API.categories
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    updateCurrentCategory: (data) => dispatch(updateCurrentCategory(data))
+    updateCurrentCategory: (data) => dispatch(updateCurrentCategory(data)),
+    getPostsByCategory: (data) => dispatch(getPostsByCategory(data)),
+    getAllPosts: () => dispatch(getAllPosts())
   }
 }
 

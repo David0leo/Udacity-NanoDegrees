@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { reducer as reduxFormReducer } from 'redux-form'
-import apiReducer from './ApiReducers'
+import API from './ApiReducers'
 
 
 // import actions
@@ -118,6 +118,6 @@ const loadPost = (state=initialLoadPostState, action) => {
 export default combineReducers({
   main,
   loadPost,
-  apiReducer,
+  API,
   form: reduxFormReducer
 })

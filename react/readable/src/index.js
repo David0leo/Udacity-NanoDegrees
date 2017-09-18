@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 
 import thunk from 'redux-thunk';
 
-import { getAllCategories } from './actions/ApiActions'
+import { getAllCategories, getAllPosts, getPostsByCategory } from './actions/ApiActions'
 
 
 
@@ -24,6 +24,7 @@ const store = createStore(
 )
 
 store.dispatch(getAllCategories())
+store.dispatch(getAllPosts())
 
 ReactDOM.render(
   <Provider store={store}>
