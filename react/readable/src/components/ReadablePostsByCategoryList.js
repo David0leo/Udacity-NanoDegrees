@@ -2,6 +2,8 @@ import React from 'react'
 import PostCard from './PostCard'
 import { connect } from 'react-redux'
 
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+
 class ReadablePostsByCategoryList extends React.Component {
   render() {
     const {posts, categoryNavPaneIsOpen} = this.props
@@ -14,12 +16,20 @@ class ReadablePostsByCategoryList extends React.Component {
           ?{flex: "4"}
           :{flex: "4"}
         }>
-        {filteredPosts.map((post) => 
-        <PostCard 
-          post={post}
-          key={`_post_card_${post.id}`}
-        ></PostCard>
-        )}
+        <ReactCSSTransitionGroup
+          transitionName="post-transition"
+          transitionAppear={true}
+          transitionAppearTimeout={500}
+          transitionEnterTimeout={500}
+          transitionLeaveTimeout={300}
+        >
+          {filteredPosts.map((post) => 
+          <PostCard 
+            post={post}
+            key={`_post_card_${post.id}`}
+          ></PostCard>
+          )}
+        </ReactCSSTransitionGroup>
       </div>
     )
   }
