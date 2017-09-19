@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 
 import thunk from 'redux-thunk';
 
-import { getAllCategories, getAllPosts, getPostsByCategory } from './actions/ApiActions'
+import { getAllCategories, getAllPosts } from './actions/ApiActions'
 
 
 
@@ -23,8 +23,20 @@ const store = createStore(
   // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
+// first calls to api in order to get categories and posts
 store.dispatch(getAllCategories())
 store.dispatch(getAllPosts())
+// store.dispatch(addNewPost(
+//   {
+//     id: 'test_id',
+//     timestamp: 1467166872634,
+//     title: 'This is a test add post',
+//     body: 'this is a test body',
+//     author: 'John Snow',
+//     category: 'udacity',
+    
+//   }
+// ))
 
 ReactDOM.render(
   <Provider store={store}>

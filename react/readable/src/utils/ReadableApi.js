@@ -10,7 +10,9 @@ const headers = {
   headers: {
   //
   // 'Authorization': token
-    'Authorization': token
+    'Accept': 'application/json',
+    'Authorization': token,
+    'Content-Type': 'application/json'
   },
   
 }
@@ -39,20 +41,80 @@ class API {
       return error;
     })
   }
+
+  static addNewPost(post) {
+    return fetch(`${api}/posts`, {
+      ...headers,
+      method: 'POST',
+      body: JSON.stringify(post)
+    }).then(response => {
+      return response.json()
+    }).catch(error => {
+      return error;
+    })
+  }
+
+  static getPostById(id) {
+    return fetch(`${api}/posts/${id}`, {
+      ...headers,
+      method: 'GET'
+    }).then(response => {
+      return response.json()
+    }).catch(error => {
+      return error;
+    })
+  }
+
+  static editPost(post) {
+    return fetch(`${api}/posts/${post.id}`, {
+      ...headers,
+      method: 'PUT',
+      body: JSON.stringify({title: post.title, body: post.body})
+    }).then(response => {
+      return response.json()
+    }).catch(error => {
+      return error;
+    })
+  }
+
+  static upVotePostById(id) {
+    return fetch(`${api}/posts/${id}`, {
+      ...headers,
+      method: 'POST',
+      body: JSON.stringify({option: "upVote"})
+    }).then(response => {
+      return response.json()
+    }).catch(error => {
+      return error;
+    })
+  }
+
+  static downVotePostById(id) {
+    return fetch(`${api}/posts/${id}`, {
+      ...headers,
+      method: 'POST',
+      body: JSON.stringify({option: "downVote"})
+    }).then(response => {
+      return response.json()
+    }).catch(error => {
+      return error;
+    })
+  }
+
+  static deletePostById(id) {
+    return fetch(`${api}/posts/${id}`, {
+      ...headers,
+      method: 'DELETE'
+    }).then(response => {
+      return response.json()
+    }).catch(error => {
+      return error;
+    })
+  }
+
 }
 
-export default API;  
-    
-// export const getCategoryPosts = (category) => 
-//   fetch(`${api}/:${category}/posts`, headers)
-//     .then(res => res.json())
-//     .then(data => data.posts)
-
-// export const getAllPosts = () => 
-//   fetch(`${api}/posts`, headers)
-//     .then(res => res.json())
-//     .then(data => data.posts)
-
+export default API;
 
 // `
 //     Use an Authorization header to work with your own data:
@@ -60,49 +122,7 @@ export default API;
 //         fetch(url, { headers: { 'Authorization': 'whatever-you-want' }})
     
 //         The following endpoints are available:
-    
-//         GET /categories
-//           USAGE: 
-//             Get all of the categories available for the app. List is found in categories.js.
-//             Feel free to extend this list as you desire.
-        
-//         GET /:category/posts
-//           USAGE:
-//             Get all of the posts for a particular category
-    
-//         GET /posts
-//           USAGE:
-//             Get all of the posts. Useful for the main page when no category is selected.
-        
-//         POST /posts
-//           USAGE:
-//             Add a new post
-          
-//           PARAMS: 
-//             id - UUID should be fine, but any unique id will work
-//             timestamp - timestamp in whatever format you like, you can use Date.now() if you like
-//             title - String
-//             body - String
-//             author - String
-//             category: Any of the categories listed in categories.js. Feel free to extend this list as you desire.
-    
-//         GET /posts/:id
-//           USAGE:
-//             Get the details of a single post
-    
-//         POST /posts/:id
-//           USAGE:
-//             Used for voting on a post
-//           PARAMS:
-//             option - String: Either "upVote" or "downVote"
-            
-//         PUT /posts/:id
-//           USAGE:
-//             Edit the details of an existing post
-//           PARAMS:
-//             title - String
-//             body - String
-    
+
 //         DELETE /posts/:id
 //           USAGE:
 //             Sets the deleted flag for a post to 'true'. 

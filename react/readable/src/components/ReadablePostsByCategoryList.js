@@ -45,15 +45,15 @@ class ReadablePostsByCategoryList extends React.Component {
     filteredPosts.sort(function(a, b) {
       if (sortBy === 'Vote Score') {
         if (sortOrderIsDescending) {
-          return a.voteScore - b.voteScore
-        } else {
           return b.voteScore - a.voteScore
+        } else {
+          return a.voteScore - b.voteScore
         }
       } else if (sortBy === 'Time Posted') {
         if (sortOrderIsDescending) {
-          return a.timestamp - b.timestamp
-        } else {
           return b.timestamp - a.timestamp
+        } else {
+          return a.timestamp - b.timestamp
         }
       } else {
         return 0
