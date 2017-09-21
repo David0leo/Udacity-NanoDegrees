@@ -170,7 +170,7 @@ class API {
     })
   }
 
-  static editCommentByCommentId(comment) {
+  static editComment(comment) {
     return fetch(`${api}/comments/${comment.id}`, {
       ...headers,
       method: 'PUT',
@@ -192,7 +192,6 @@ class API {
       return error;
     })
   }
-
 }
 
 export default API;

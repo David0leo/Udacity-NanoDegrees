@@ -12,7 +12,10 @@ import {
   ADD_COMMENT_SUCCESS,
   LOAD_COMMENT_BY_COMMENT_ID_SUCCESS,
   UP_VOTE_COMMENT_BY_COMMENT_ID_SUCCESS,
-  DOWN_VOTE_COMMENT_BY_COMMENT_ID_SUCCESS
+  DOWN_VOTE_COMMENT_BY_COMMENT_ID_SUCCESS,
+  EDIT_COMMENT_SUCCESS,
+  DELETE_COMMENT_BY_COMMENT_ID_SUCCESS,
+  LOAD_COMMENTS_AND_UPDATE_COMMENT_COUNT_BY_POST_ID_SUCCESS
 } from "../actions/ActionTypes";
 
 const defaultApiState = {
@@ -80,7 +83,12 @@ const API = (state = defaultApiState, action) => {
     case DELETE_POST_BY_ID_SUCCESS:
       return {
         ...state,
-        posts: state.posts.filter(post => post.id !== action.id)
+        posts: state.posts.map(post => {
+          if (post.id === action.id) {
+            post.deleted = true
+          }
+          return post;
+        })
       };
     case LOAD_COMMENTS_BY_POST_ID_SUCCESS:
       return {
@@ -128,6 +136,44 @@ const API = (state = defaultApiState, action) => {
           }
         }
       };
+    case EDIT_COMMENT_SUCCESS:
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          [action.comment.parentId]: {
+            ...state.comments[action.comment.parentId],
+            timestamp: action.comment.timestamp,
+            body: action.comment.body
+          }
+        }
+      }
+    case DELETE_COMMENT_BY_COMMENT_ID_SUCCESS:
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          [action.parentId]: {
+            ...state.comments[action.parentId],
+            deleted: true
+          }
+        }
+      }
+    case LOAD_COMMENTS_AND_UPDATE_COMMENT_COUNT_BY_POST_ID_SUCCESS:
+      return {
+        ...state,
+        comments: {
+          ...state.comments,
+          [action.id]: action.comments
+        },
+        posts: 
+          state.posts.map(post => {
+            if (post.id === action.id) {
+              post.commentCount = action.comments.length
+            }
+            return post
+          })
+      }
     default:
       return state;
   }

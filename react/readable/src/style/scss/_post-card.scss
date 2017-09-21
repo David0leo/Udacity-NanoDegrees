@@ -7,12 +7,6 @@ $border-color: $md-grey-400;
 $box-shadow-color: $md-grey-400;
 $light-text-grey: $md-grey-400;
 
-$font-size-xs: 0.25em;
-$font-size-s: 0.5em;
-$font-size-m: 1em;
-$font-size-l: 1.5em;
-$font-size-xl: 2em;
-
 $base-border-radius: 5px;
 $base-padding: 10px;
 
@@ -44,12 +38,12 @@ $base-padding: 10px;
 
 .post-card {
   display: grid;
-  grid-template-columns: .5fr 1fr 1fr 1fr;
+  grid-template-columns: .5fr 1fr 1fr 1fr 0.5fr;
   grid-template-rows: 1fr 0.5fr 1fr;
   grid-template-areas: 
-    "vote title title category"
-    "vote preview preview preview"
-    "vote time time time";
+    "vote title title category comments"
+    "vote preview preview preview comments"
+    "vote time time time comments";
   align-items: center;
   border: 1px solid $border-color;
   border-radius: $base-border-radius;
@@ -121,6 +115,26 @@ $base-padding: 10px;
   @extend .voter-counter;
 }
 
+.comments-button {
+  grid-area: comments;
+  height: 100%;
+  border: none;
+  border-left: 1px solid $border-color;
+  background: transparent;
+  outline: none;
+  padding: 5px;
+  transition: color 0.2s, background 0.2s;
+  font-size: $font-size-m;
+}
+
+.comments-button:hover {
+  color: gray;
+}
+
+.comments-button:active {
+  background: rgba(150, 150, 150, 0.2);
+}
+
 @media only screen 
 and (min-device-width : 320px) 
 and (max-device-width : 568px) { 
@@ -133,6 +147,7 @@ and (max-device-width : 568px) {
       "title"
       "preview"
       "time"
+      "comments"
       "vote";
     align-items: center;
   }
@@ -149,6 +164,10 @@ and (max-device-width : 568px) {
 
   .post-time {
     text-align: center;
+  }
+
+  .comments-button {
+    border: 1px 0 1px 0 solid $border-color;
   }
   
 }

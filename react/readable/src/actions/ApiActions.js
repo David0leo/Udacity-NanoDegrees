@@ -15,6 +15,9 @@ import {
   LOAD_COMMENT_BY_COMMENT_ID_SUCCESS,
   UP_VOTE_COMMENT_BY_COMMENT_ID_SUCCESS,
   DOWN_VOTE_COMMENT_BY_COMMENT_ID_SUCCESS,
+  EDIT_COMMENT_SUCCESS,
+  DELETE_COMMENT_BY_COMMENT_ID_SUCCESS,
+  LOAD_COMMENTS_AND_UPDATE_COMMENT_COUNT_BY_POST_ID_SUCCESS
 } from './ActionTypes'
 
 export function getAllCategories() {
@@ -143,7 +146,7 @@ export function deletePostByIdSuccess(id) {
   return {type: DELETE_POST_BY_ID_SUCCESS, id}
 }
 
-export function loadCommentsByPostId(id) {
+export function getCommentsByPostId(id) {
   return function(dispatch) {
     return API.getCommentsByPostId(id).then(comments => {
       dispatch(loadCommentsByPostIdSuccess(id, comments))
@@ -212,4 +215,48 @@ export function downVoteCommentByCommentId(id) {
 
 export function downVoteCommentByCommentIdSuccess(parentId) {
   return {type: DOWN_VOTE_COMMENT_BY_COMMENT_ID_SUCCESS, parentId}
+}
+
+export function editComment(comment) {
+  return function(dispatch){
+    return API.editComment(comment).then(comment => {
+      dispatch(editCommentSuccess(comment))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function editCommentSuccess(comment) {
+  return {type: EDIT_COMMENT_SUCCESS, comment}
+}
+
+export function deleteCommentByCommentId(id) {
+  return function(dispatch) {
+    return API.deleteCommentByCommentId(id).then(comment => {
+      dispatch(deleteCommentByCommentIdSuccess(comment.parentId))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function deleteCommentByCommentIdSuccess(parentId) {
+  return {type: DELETE_COMMENT_BY_COMMENT_ID_SUCCESS, parentId}
+}
+
+// action for updating comment count
+
+export function updateCommentCountByPostId(id) {
+  return function(dispatch) {
+    return API.getCommentsByPostId(id).then(comments => {
+      dispatch(loadCommentsAndUpdateCommentCountByPostId(id, comments))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function loadCommentsAndUpdateCommentCountByPostId(id, comments) {
+  return {type:  LOAD_COMMENTS_AND_UPDATE_COMMENT_COUNT_BY_POST_ID_SUCCESS, id, comments}
 }

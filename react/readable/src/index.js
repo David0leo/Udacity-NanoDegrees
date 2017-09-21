@@ -9,7 +9,7 @@ import { Provider } from 'react-redux';
 
 import thunk from 'redux-thunk';
 
-import { getAllCategories, getAllPosts, getCommentByCommentId} from './actions/ApiActions'
+import { getAllCategories, getAllPosts, addComment, editComment, deleteCommentByCommentId,getCommentByCommentId} from './actions/ApiActions'
 
 
 
@@ -26,9 +26,14 @@ const store = createStore(
 // first calls to api in order to get categories and posts
 store.dispatch(getAllCategories())
 store.dispatch(getAllPosts())
-store.dispatch(getCommentByCommentId('test_comment_id'))
 // store.dispatch(downVoteCommentByCommentId('test_comment_id'))
-// store.dispatch(getCommentsByPostId("test_id"))
+// store.dispatch(getCommentByCommentId("test_comment_id"))
+// store.dispatch(deleteCommentByCommentId("test_comment_id"))
+// store.dispatch(editComment({
+//   id: 'test_comment_id',
+//   timestamp: 1467166872634,
+//   body: 'this is an edited comment body'
+// }))
 // store.dispatch(addComment({
 //   id: 'test_comment_id',
 //   timestamp: 0,

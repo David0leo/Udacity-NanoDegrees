@@ -3,10 +3,16 @@ import {connect} from 'react-redux'
 import '../style/css/ReadableAppStyle.css'
 import { postUnixTimeToSimplifiedTimeElapsedString } from '../utils/helpers'
 import ThumbVoter from './ThumbVoter'
+import CommentsButton from './CommentsButton'
 
-import { upVotePostById, downVotePostById } from '../actions/ApiActions'
+import { upVotePostById, downVotePostById, getCommentsByPostId, updateCommentCountByPostId } from '../actions/ApiActions'
 
 class PostCard extends React.Component {
+  
+  componentDidMount() {
+    this.props.updateCommentCountByPostId(this.props.post.id)
+  }
+
   // if no post info is passed in, it will use the default post values
   // current values are just for testing purposes
   render() {
@@ -25,11 +31,13 @@ class PostCard extends React.Component {
         <p className="post-time">
           Posted {postUnixTimeToSimplifiedTimeElapsedString(Date.now(), post.timestamp)} by {post.author}
         </p>
+        <CommentsButton
+          commentsCount={post.commentCount || 0}
+        />
         <ThumbVoter 
           voteScore={post.voteScore}
           voteChangeCallback={this.handleVoteChange}
-        >
-        </ThumbVoter>
+        />
       </div>
     )
   }
@@ -43,14 +51,19 @@ class PostCard extends React.Component {
   }
 }
 
-function mapStateToProps ({}) {
-  return {}
+function mapStateToProps ({API}) {
+  return {
+    comments: API.comments, 
+    
+  }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     upVotePostById: (id) => dispatch(upVotePostById(id)),
-    downVotePostById: (id) => dispatch(downVotePostById(id))
+    downVotePostById: (id) => dispatch(downVotePostById(id)),
+    getCommentsByPostId: (id) => dispatch(getCommentsByPostId(id)),
+    updateCommentCountByPostId: (id) => dispatch(updateCommentCountByPostId(id))
   }
 }
 

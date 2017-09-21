@@ -162,9 +162,9 @@
 
 .post-card {
   display: grid;
-  grid-template-columns: .5fr 1fr 1fr 1fr;
+  grid-template-columns: .5fr 1fr 1fr 1fr 0.5fr;
   grid-template-rows: 1fr 0.5fr 1fr;
-  grid-template-areas: "vote title title category" "vote preview preview preview" "vote time time time";
+  grid-template-areas: "vote title title category comments" "vote preview preview preview comments" "vote time time time comments";
   align-items: center;
   border: 1px solid #bdbdbd;
   border-radius: 5px;
@@ -215,12 +215,29 @@
 .post-button:active {
   background: rgba(150, 150, 150, 0.2); }
 
+.comments-button {
+  grid-area: comments;
+  height: 100%;
+  border: none;
+  border-left: 1px solid #bdbdbd;
+  background: transparent;
+  outline: none;
+  padding: 5px;
+  transition: color 0.2s, background 0.2s;
+  font-size: 1em; }
+
+.comments-button:hover {
+  color: gray; }
+
+.comments-button:active {
+  background: rgba(150, 150, 150, 0.2); }
+
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
   .post-card {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto;
-    grid-template-areas: "category" "title" "preview" "time" "vote";
+    grid-template-areas: "category" "title" "preview" "time" "comments" "vote";
     align-items: center; }
 
   .post-title {
@@ -232,7 +249,10 @@
     max-width: 84vw; }
 
   .post-time {
-    text-align: center; } }
+    text-align: center; }
+
+  .comments-button {
+    border: 1px 0 1px 0 solid #bdbdbd; } }
 .main-body-container {
   display: flex;
   padding: 10px;
