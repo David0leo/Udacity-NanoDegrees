@@ -9,6 +9,12 @@ import {
   EDIT_POST_SUCCESS,
   UP_VOTE_POST_BY_ID_SUCCESS,
   DOWN_VOTE_POST_BY_ID_SUCCESS,
+  DELETE_POST_BY_ID_SUCCESS,
+  LOAD_COMMENTS_BY_POST_ID_SUCCESS,
+  ADD_COMMENT_SUCCESS,
+  LOAD_COMMENT_BY_COMMENT_ID_SUCCESS,
+  UP_VOTE_COMMENT_BY_COMMENT_ID_SUCCESS,
+  DOWN_VOTE_COMMENT_BY_COMMENT_ID_SUCCESS,
 } from './ActionTypes'
 
 export function getAllCategories() {
@@ -97,8 +103,8 @@ export function editPostSuccess(post) {
 
 export function upVotePostById(id) {
   return function(dispatch) {
-    return API.upVotePostById(id).then(id => {
-      dispatch(upVotePostByIdSuccess(id))
+    return API.upVotePostById(id).then(post => {
+      dispatch(upVotePostByIdSuccess(post.id))
     }).catch(error => {
       throw(error)
     })
@@ -111,8 +117,8 @@ export function upVotePostByIdSuccess(id) {
 
 export function downVotePostById(id) {
   return function(dispatch) {
-    return API.downVotePostById(id).then(id => {
-      dispatch(downVotePostByIdSuccess(id))
+    return API.downVotePostById(id).then(post => {
+      dispatch(downVotePostByIdSuccess(post.id))
     }).catch(error => {
       throw(error)
     })
@@ -120,5 +126,90 @@ export function downVotePostById(id) {
 }
 
 export function downVotePostByIdSuccess(id) {
-  return {type: UP_VOTE_POST_BY_ID_SUCCESS, id}
+  return {type: DOWN_VOTE_POST_BY_ID_SUCCESS, id}
+}
+
+export function deletePostById(id) {
+  return function(dispatch) {
+    return API.deletePostById(id).then(id => {
+      dispatch(deletePostByIdSuccess(id))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function deletePostByIdSuccess(id) {
+  return {type: DELETE_POST_BY_ID_SUCCESS, id}
+}
+
+export function loadCommentsByPostId(id) {
+  return function(dispatch) {
+    return API.getCommentsByPostId(id).then(comments => {
+      dispatch(loadCommentsByPostIdSuccess(id, comments))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function loadCommentsByPostIdSuccess(id, comments) {
+  return {type: LOAD_COMMENTS_BY_POST_ID_SUCCESS, id, comments}
+}
+
+export function addComment(comment) {
+  return function(dispatch) {
+    return API.addComment(comment).then(comment => {
+      dispatch(addCommentSuccess(comment))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function addCommentSuccess(comment) {
+  return {type: ADD_COMMENT_SUCCESS, comment}
+}
+
+export function getCommentByCommentId(id) {
+  return function(dispatch) {
+    return API.getCommentByCommentId(id).then(comment => {
+      dispatch(loadCommentByCommentIdSuccess(comment))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function loadCommentByCommentIdSuccess(comment) {
+  return {type: LOAD_COMMENT_BY_COMMENT_ID_SUCCESS, comment}
+}
+
+
+export function upVoteCommentByCommentId(id) {
+  return function(dispatch) {
+    return API.upVoteCommentByCommentId(id).then(comment => {    
+      dispatch(upVoteCommentByCommentIdSuccess(comment.parentId))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function upVoteCommentByCommentIdSuccess(parentId) {
+  return {type: UP_VOTE_COMMENT_BY_COMMENT_ID_SUCCESS, parentId}
+}
+
+export function downVoteCommentByCommentId(id) {
+  return function(dispatch) {
+    return API.downVoteCommentByCommentId(id).then(comment => {
+      dispatch(downVoteCommentByCommentIdSuccess(comment.parentId))
+    }).catch(error => {
+      throw(error)
+    })
+  }
+}
+
+export function downVoteCommentByCommentIdSuccess(parentId) {
+  return {type: DOWN_VOTE_COMMENT_BY_COMMENT_ID_SUCCESS, parentId}
 }

@@ -106,6 +106,87 @@ class API {
       ...headers,
       method: 'DELETE'
     }).then(response => {
+      return id
+    }).catch(error => {
+      return error;
+    })
+  }
+
+  static getCommentsByPostId(id) {
+    return fetch(`${api}/posts/${id}/comments`, {
+      ...headers,
+      method: 'GET'
+    }).then(response => {
+      return response.json()
+    }).catch(error => {
+      return error;
+    })
+  }
+
+  static addComment(comment) {
+    return fetch(`${api}/comments`, {
+      ...headers,
+      method: 'POST',
+      body: JSON.stringify(comment)
+    }).then(response => {
+      return response.json()
+    }).catch(error => {
+      return error
+    })
+  }
+
+  static getCommentByCommentId(id) {
+    return fetch(`${api}/comments/${id}`, {
+      ...headers,
+      method: 'GET'
+    }).then(response => {
+      return response.json()
+    }).catch(error => {
+      return error
+    })
+  }
+
+  static upVoteCommentByCommentId(id) {
+    return fetch(`${api}/comments/${id}`, {
+      ...headers,
+      method: 'POST',
+      body: JSON.stringify({option: "upVote"})
+    }).then(response => {
+      return response.json()
+    }).catch(error => {
+      return error;
+    })
+  }
+
+  static downVoteCommentByCommentId(id) {
+    return fetch(`${api}/comments/${id}`, {
+      ...headers,
+      method: 'POST',
+      body: JSON.stringify({option: "downVote"})
+    }).then(response => {
+      return response.json()
+    }).catch(error => {
+      return error;
+    })
+  }
+
+  static editCommentByCommentId(comment) {
+    return fetch(`${api}/comments/${comment.id}`, {
+      ...headers,
+      method: 'PUT',
+      body: JSON.stringify({timestamp: comment.timestamp, body:comment.body})
+    }).then(response => {
+      return response.json()
+    }).catch(error => {
+      return error;
+    })
+  }
+
+  static deleteCommentByCommentId(id) {
+    return fetch(`${api}/comments/${id}`, {
+      ...headers,
+      method: 'DELETE'
+    }).then(response => {
       return response.json()
     }).catch(error => {
       return error;
@@ -122,30 +203,6 @@ export default API;
 //         fetch(url, { headers: { 'Authorization': 'whatever-you-want' }})
     
 //         The following endpoints are available:
-
-//         DELETE /posts/:id
-//           USAGE:
-//             Sets the deleted flag for a post to 'true'. 
-//             Sets the parentDeleted flag for all child comments to 'true'.
-          
-//         GET /posts/:id/comments
-//           USAGE:
-//             Get all the comments for a single post
-        
-//         POST /comments
-//           USAGE:
-//             Add a comment to a post
-    
-//           PARAMS:
-//             id: Any unique ID. As with posts, UUID is probably the best here.
-//             timestamp: timestamp. Get this however you want.
-//             body: String
-//             author: String
-//             parentId: Should match a post id in the database.
-    
-//         GET /comments/:id
-//           USAGE:
-//             Get the details for a single comment
     
 //         POST /comments/:id
 //           USAGE:

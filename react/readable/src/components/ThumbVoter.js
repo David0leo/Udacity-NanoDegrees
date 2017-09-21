@@ -48,60 +48,96 @@ class ThumbVoter extends React.Component {
   incrementVoteScore = () => {
     if (!this.props.disabled) {
       let newState = {};
+      let oldVoteScore = this.state.voteScore;
       let newVoteScore = this.state.voteScore;
 
       if (!this.state.positivePressed) {
-        newState = { positivePressed: true, negativePressed: false };
         newVoteScore += 1;
         if (this.state.negativePressed) {
           newVoteScore += 1; // increment by 2 in total to account for removing negative vote
         }
+        newState = {
+          positivePressed: true,
+          negativePressed: false,
+          voteScore: newVoteScore
+        };
       } else {
         // if positive pressed already, press again to remove vote
-        newState = { positivePressed: false, negativePressed: false };
+
         newVoteScore -= 1;
+        newState = {
+          positivePressed: false,
+          negativePressed: false,
+          voteScore: newVoteScore
+        };
       }
 
       this.setState(function(prevState, props) {
         return newState;
-      }, this.updateVoteScore(newVoteScore));
+      }, this.updateVoteScore(oldVoteScore, newVoteScore));
     }
   };
 
   decrementVoteScore = () => {
     if (!this.props.disabled) {
       let newState = {};
+      let oldVoteScore = this.state.voteScore;
       let newVoteScore = this.state.voteScore;
 
       if (!this.state.negativePressed) {
-        newState = { positivePressed: false, negativePressed: true };
         newVoteScore -= 1;
         if (this.state.positivePressed) {
           newVoteScore -= 1; // decrement by 2 in total to account for removing positive vote
         }
+        newState = {
+          positivePressed: false,
+          negativePressed: true,
+          voteScore: newVoteScore
+        };
       } else {
         // if negative pressed already, press again to remove vote
-        newState = { positivePressed: false, negativePressed: false };
         newVoteScore += 1; // increment to remove previous decrement
+        newState = {
+          positivePressed: false,
+          negativePressed: false,
+          voteScore: newVoteScore
+        };
       }
 
       this.setState(function(prevState, props) {
         return newState;
-      }, this.updateVoteScore(newVoteScore));
+      }, this.updateVoteScore(oldVoteScore, newVoteScore));
     }
   };
 
-  updateVoteScore = newVoteScore => {
-    this.setState(function(prevState, props) {
-      return { voteScore: newVoteScore };
-    }, this.props.voteChangeCallback(newVoteScore));
+  updateVoteScore = (oldVoteScore, newVoteScore) => {
+    // TODO: fix logic, use a switch
+    let update = {};
+    const voteDifference = newVoteScore - oldVoteScore;
+    if (voteDifference > 0) {
+      update.option = "upVote";
+    } else if (voteDifference < 0) {
+      update.option = "downVote";
+    } 
+    if (voteDifference === 2) {
+      this.props.voteChangeCallback(update);
+    } else if (voteDifference === -2) {
+      this.props.voteChangeCallback(update);
+    }
+    this.props.voteChangeCallback(update);
   };
+  //   updateVoteScore = newVoteScore => {
+  //     this.setState(function(prevState, props) {
+  //       return { voteScore: newVoteScore };
+  //     }, this.props.voteChangeCallback(newVoteScore));
+  //   };
+  // }
 }
 
 ThumbVoter.defaultProps = {
   voteScore: 0,
   thumbSize: 30,
-  voteChangeCallback: function(newVoteScore) {}
+  voteChangeCallback: function(oldVoteScore, newVoteScore) {}
 };
 
 export default ThumbVoter;
