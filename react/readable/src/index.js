@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { Route } from 'react-router'
@@ -10,7 +9,8 @@ import {main, loadPost} from './reducers';
 import API from './reducers/ApiReducers'
 import {reducer as reduxFormReducer } from 'redux-form'
 import { Provider } from 'react-redux';
-import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
+import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux'
+import { getAllCategories, getAllPosts } from './actions/ApiActions'
 
 import thunk from 'redux-thunk';
 
@@ -36,13 +36,17 @@ const store = createStore(
   )
 )
 
+store.dispatch(getAllCategories())
+store.dispatch(getAllPosts())
 
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
     <div>
-      <Route path="/" >
-        {/* <App></App> */}
+      <Route exact path="/" >
+        <MainView currenCategory={"all"}></MainView>
+      </Route>
+      <Route path="/:category" >
         <MainView></MainView>
       </Route>
       <Route path="/:category/:id">

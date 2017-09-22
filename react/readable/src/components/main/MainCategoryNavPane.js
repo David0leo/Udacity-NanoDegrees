@@ -21,7 +21,7 @@ class MainCategoryNavPane extends React.Component {
         <ol className="nav-pane-categories-list">
           <li
             className={
-              this.props.currentCategory === "" ? (
+              this.props.currentCategory === "all" ? (
                 "nav-pane-category-list-item-hover"
               ) : (
                 "nav-pane-category-list-item"
@@ -65,9 +65,8 @@ class MainCategoryNavPane extends React.Component {
 
 // Get the main state so you know if the nav pane is open,
 // and so you know what the current category is
-function mapStateToProps({ main, API, routing }) {
+function mapStateToProps({ main, API }) {
   return {
-    currentCategory: routing.location.pathname.slice(1),
     categoryNavIsOpen: main.categoryNavIsOpen,
     categories: API.categories
   };

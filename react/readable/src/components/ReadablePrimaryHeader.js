@@ -1,6 +1,5 @@
 import React from "react";
 import ReadableIcon from "./ReadableIcon";
-import { connect } from "react-redux";
 
 class ReadablePrimaryHeader extends React.Component {
   render() {
@@ -28,10 +27,4 @@ class ReadablePrimaryHeader extends React.Component {
   }
 }
 
-function mapStateToProps({ routing }) {
-  return {
-    currentCategory: routing.location.pathname.slice(1)
-  };
-}
-
-export default connect(mapStateToProps)(ReadablePrimaryHeader);
+export default ReadablePrimaryHeader;

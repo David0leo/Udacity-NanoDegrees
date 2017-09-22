@@ -45,17 +45,16 @@ import { getAllCategories, getAllPosts} from '../../actions/ApiActions'
 // }
 
 class MainView extends React.Component {
-  componentDidMount() {
-    this.props.getAllCategories()
-    this.props.getAllPosts()
-  }
 
   render() {
     const { main } = this.props;
-
+    let currentCategory = this.props.match.params.category;
+    if (currentCategory === undefined) {
+      currentCategory = 'all'
+    }
     return (
       <div className="main-view">
-        <ReadablePrimaryHeader />
+        <ReadablePrimaryHeader currentCategory={currentCategory} />
         <MainSecondaryHeader
           size={40}
           newPostCallback={this.handleNewPostModalOpen}
@@ -65,8 +64,8 @@ class MainView extends React.Component {
 
         <div className="main-body-container">
           <MainCategoryNavPane
+            currentCategory={currentCategory}
             navPaneIsOpen={main.categoryNavIsOpen}
-            updateCurrentCategoryCallback={this.updateCurrentCategory}
           />
           <ReadablePostsByCategoryList />
         </div>
