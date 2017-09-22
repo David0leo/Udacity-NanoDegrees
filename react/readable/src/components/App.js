@@ -1,16 +1,37 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import './App.css';
 // import * as API from '../utils/ReadableApi';
 import MainView from './main/MainView'
+import { getAllCategories, getAllPosts} from '../actions/ApiActions'
+import {withRouter} from 'react-router'
 
 class App extends Component {
+  componentDidMount() {
+    this.props.getAllCategories()
+    this.props.getAllPosts()
+  }
+
   render() {
     return (
       <div className="App">
-        <MainView></MainView>
+        <MainView currentCategory={this.props.currentCategory}></MainView>
       </div>
     );
   }
 }
 
-export default App;
+function mapStateToProps({routing}) {
+  return {
+    currentCategory: routing.location.pathname.slice(1)
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getAllCategories: () => dispatch(getAllCategories()),
+    getAllPosts: () => dispatch(getAllPosts())
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

@@ -85,7 +85,7 @@ const API = (state = defaultApiState, action) => {
         ...state,
         posts: state.posts.map(post => {
           if (post.id === action.id) {
-            post.deleted = true
+            post.deleted = true;
           }
           return post;
         })
@@ -147,7 +147,7 @@ const API = (state = defaultApiState, action) => {
             body: action.comment.body
           }
         }
-      }
+      };
     case DELETE_COMMENT_BY_COMMENT_ID_SUCCESS:
       return {
         ...state,
@@ -158,7 +158,7 @@ const API = (state = defaultApiState, action) => {
             deleted: true
           }
         }
-      }
+      };
     case LOAD_COMMENTS_AND_UPDATE_COMMENT_COUNT_BY_POST_ID_SUCCESS:
       return {
         ...state,
@@ -166,14 +166,13 @@ const API = (state = defaultApiState, action) => {
           ...state.comments,
           [action.id]: action.comments
         },
-        posts: 
-          state.posts.map(post => {
-            if (post.id === action.id) {
-              post.commentCount = action.comments.length
-            }
-            return post
-          })
-      }
+        posts: state.posts.map(post => {
+          if (post.id === action.id) {
+            post.commentCount = action.comments.length;
+          }
+          return post;
+        })
+      };
     default:
       return state;
   }

@@ -31,7 +31,7 @@ const initialMainState = {
   posts: {}
 }
 
-function main(state=initialMainState, action) {
+export const main = (state=initialMainState, action) => {
   const { 
     sortBy,
     currentCategory,
@@ -104,7 +104,7 @@ const initialLoadPostState = {
   }
 }
 
-const loadPost = (state=initialLoadPostState, action) => {
+export const loadPost = (state=initialLoadPostState, action) => {
   switch (action.type) {
     case INITIALIZE_POST_FORM_VALUES:
       return {

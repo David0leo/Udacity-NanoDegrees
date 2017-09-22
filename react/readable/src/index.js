@@ -3,58 +3,51 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
-import { createStore, applyMiddleware, compose } from 'redux';
-import reducer from './reducers';
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { Route } from 'react-router'
+import createHistory from 'history/createBrowserHistory'
+import {main, loadPost} from './reducers';
+import API from './reducers/ApiReducers'
+import {reducer as reduxFormReducer } from 'redux-form'
 import { Provider } from 'react-redux';
+import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux'
 
 import thunk from 'redux-thunk';
 
-import { getAllCategories, getAllPosts, addComment, editComment, deleteCommentByCommentId,getCommentByCommentId} from './actions/ApiActions'
+import MainView from './components/main/MainView'
 
 
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
+const history = createHistory()
+const middleware = routerMiddleware(history)
+
 const store = createStore(
-  reducer, /* preloadedState, */
+  combineReducers({
+    main,
+    loadPost,
+    API,
+    form: reduxFormReducer,
+    routing: routerReducer
+  }),
   composeEnhancers(
-    applyMiddleware(thunk)
+    applyMiddleware(middleware, thunk)
   )
-  // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 
-// first calls to api in order to get categories and posts
-store.dispatch(getAllCategories())
-store.dispatch(getAllPosts())
-// store.dispatch(downVoteCommentByCommentId('test_comment_id'))
-// store.dispatch(getCommentByCommentId("test_comment_id"))
-// store.dispatch(deleteCommentByCommentId("test_comment_id"))
-// store.dispatch(editComment({
-//   id: 'test_comment_id',
-//   timestamp: 1467166872634,
-//   body: 'this is an edited comment body'
-// }))
-// store.dispatch(addComment({
-//   id: 'test_comment_id',
-//   timestamp: 0,
-//   body: "test comment body",
-//   author: "test comment author",
-//   parentId: "test_id"
-// }))
-// store.dispatch(addNewPost(
-//   {
-//     id: 'test_id',
-//     timestamp: 1467166872634,
-//     title: 'This is a test add post',
-//     body: 'this is a test body',
-//     author: 'John Snow',
-//     category: 'udacity',
-    
-//   }
-// ))
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <ConnectedRouter history={history}>
+    <div>
+      <Route path="/" >
+        {/* <App></App> */}
+        <MainView></MainView>
+      </Route>
+      <Route path="/:category/:id">
+      </Route>
+    </div>
+    </ConnectedRouter>
   </Provider>, document.getElementById('root'));
 registerServiceWorker();

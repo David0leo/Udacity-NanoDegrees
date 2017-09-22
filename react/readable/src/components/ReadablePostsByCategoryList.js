@@ -1,6 +1,7 @@
 import React from 'react'
 import PostCard from './PostCard'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
@@ -35,11 +36,16 @@ class ReadablePostsByCategoryList extends React.Component {
   }
 
   filterPosts = (posts) => {
-    const {sortBy, sortOrderIsDescending} = this.props
+    const {sortBy, sortOrderIsDescending, currentCategory} = this.props
 
     let filteredPosts = []
-    for (var postId in posts) {
-      filteredPosts.push(posts[postId])
+    if (posts) {
+      if (currentCategory === '') {
+        filteredPosts = posts
+      } else {
+        filteredPosts = posts.filter(post => post.category === currentCategory)
+      }
+      
     }
 
     filteredPosts.sort(function(a, b) {
@@ -63,9 +69,10 @@ class ReadablePostsByCategoryList extends React.Component {
   }
 }
 
-function mapStateToProps({ main, API }) {
+function mapStateToProps({ main, API, routing }) {
   return {
     posts: API.posts,
+    currentCategory: routing.location.pathname.slice(1),
     categoryNavPaneIsOpen: main.categoryNavPaneIsOpen,
     sortBy: main.sortBy,
     sortOrderIsDescending: main.sortOrderIsDescending
@@ -73,4 +80,4 @@ function mapStateToProps({ main, API }) {
 }
 
 
-export default connect(mapStateToProps)(ReadablePostsByCategoryList)
+export default withRouter(connect(mapStateToProps)(ReadablePostsByCategoryList))

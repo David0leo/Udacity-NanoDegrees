@@ -16,15 +16,21 @@ class ReadablePrimaryHeader extends React.Component {
         />
         <h1 className="app-title">Readable</h1>
         {/* TODO: Wrap category in link, to refresh that category view */}
-        <h2 className="app-category">/{this.props.currentCategory}</h2>
+        <h2 className="app-category">
+          /{this.props.currentCategory !== "" ? (
+            this.props.currentCategory
+          ) : (
+            "all"
+          )}
+        </h2>
       </div>
     );
   }
 }
 
-function mapStateToProps({ main }) {
+function mapStateToProps({ routing }) {
   return {
-    currentCategory: main.currentCategory
+    currentCategory: routing.location.pathname.slice(1)
   };
 }
 

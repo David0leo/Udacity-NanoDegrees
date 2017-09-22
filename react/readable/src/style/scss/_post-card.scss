@@ -60,6 +60,7 @@ $base-padding: 10px;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  text-decoration: underline;
 }
 
 .post-category {
@@ -128,7 +129,7 @@ $base-padding: 10px;
 }
 
 .comments-button:hover {
-  color: gray;
+  color: $secondary-color;
 }
 
 .comments-button:active {

@@ -1,31 +1,31 @@
-import React from 'react'
-import '../../style/css/ReadableAppStyle.css'
+import React from "react";
+import "../../style/css/ReadableAppStyle.css";
 // import ReadableMainTitle from '../ReadableMainTitle'
 // import ReadableCategoryNavPane from '../ReadableCategoryNavPane'
 // import ReadableCategoryView from '../ReadableCategoryView'
 
-import ReadablePrimaryHeader from '../ReadablePrimaryHeader'
-import MainSecondaryHeader from './MainSecondaryHeader'
-import MainCategoryNavPane from './MainCategoryNavPane'
-import ReadablePostsByCategoryList from '../ReadablePostsByCategoryList'
+import ReadablePrimaryHeader from "../ReadablePrimaryHeader";
+import MainSecondaryHeader from "./MainSecondaryHeader";
+import MainCategoryNavPane from "./MainCategoryNavPane";
+import ReadablePostsByCategoryList from "../ReadablePostsByCategoryList";
 
+import ReadableNewPostCard from "../ReadableNewPostCard";
+import getMuiTheme from "material-ui/styles/getMuiTheme";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import { withRouter } from "react-router-dom";
 
-
-import ReadableNewPostCard from '../ReadableNewPostCard'
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-import { connect } from 'react-redux'
-import { 
-  toggleCategoryNav, 
-  updateSortBy, 
-  toggleSortOrderIsDescending, 
-  updateCurrentCategory, 
+import { connect } from "react-redux";
+import {
+  toggleCategoryNav,
+  updateSortBy,
+  toggleSortOrderIsDescending,
+  updateCurrentCategory,
   toggleNewPostModalIsOpen,
   incrementNextPostId,
-  addPost 
-} from '../../actions'
+  addPost
+} from "../../actions";
 
+import { getAllCategories, getAllPosts} from '../../actions/ApiActions'
 
 // const MainView = ({  }) => {
 //   return (
@@ -45,84 +45,95 @@ import {
 // }
 
 class MainView extends React.Component {
+  componentDidMount() {
+    this.props.getAllCategories()
+    this.props.getAllPosts()
+  }
+
   render() {
-    const {main} = this.props
+    const { main } = this.props;
 
     return (
       <div className="main-view">
-        <ReadablePrimaryHeader/>
-        <MainSecondaryHeader 
+        <ReadablePrimaryHeader />
+        <MainSecondaryHeader
           size={40}
           newPostCallback={this.handleNewPostModalOpen}
           sortCallback={this.sortPosts}
           toggleNavPaneCallback={this.handleNavPaneToggle}
-        ></MainSecondaryHeader>
-        
+        />
+
         <div className="main-body-container">
-          <MainCategoryNavPane 
+          <MainCategoryNavPane
             navPaneIsOpen={main.categoryNavIsOpen}
             updateCurrentCategoryCallback={this.updateCurrentCategory}
-          ></MainCategoryNavPane>
-          <ReadablePostsByCategoryList/>
+          />
+          <ReadablePostsByCategoryList />
         </div>
-        <div className="main-footer"></div>
+        <div className="main-footer" />
         <MuiThemeProvider muiTheme={getMuiTheme()}>
-            <ReadableNewPostCard 
-              categories={main.categories}
-              handleSubmit={this.addNewPost}
-            />
-          </MuiThemeProvider>
+          <ReadableNewPostCard
+            categories={main.categories}
+            handleSubmit={this.addNewPost}
+          />
+        </MuiThemeProvider>
       </div>
-    )
+    );
   }
 
   // for these functions, change to arrow notation if want access to this.
 
   addNewPost = () => {
-    let newPost = this.props.form.readableNewPostCard.values
-    newPost.id = this.props.main.nextPostId
-    newPost.timestamp = Date.now()
-    this.props.addPost({post: newPost})
-    this.props.incrementNextPostId()
+    let newPost = this.props.form.readableNewPostCard.values;
+    newPost.id = this.props.main.nextPostId;
+    newPost.timestamp = Date.now();
+    this.props.addPost({ post: newPost });
+    this.props.incrementNextPostId();
 
-    this.handleNewPostModalClose()
-  }
+    this.handleNewPostModalClose();
+  };
 
   sortPosts(sortKey, sortOrderIsDescending) {
-    console.log(`Sorting with key ${sortKey} and it is ${sortOrderIsDescending} that it is descending`)
+    console.log(
+      `Sorting with key ${sortKey} and it is ${sortOrderIsDescending} that it is descending`
+    );
   }
 
   handleNavPaneToggle = () => {
-    this.props.toggleCategoryNav()
-  }
+    this.props.toggleCategoryNav();
+  };
 
   handleNewPostModalOpen = () => {
     //Open and close is the same because just toggling
-    this.props.toggleNewPostModalIsOpen()
-  }
+    this.props.toggleNewPostModalIsOpen();
+  };
 
   handleNewPostModalClose = () => {
-    this.props.toggleNewPostModalIsOpen()
-  }
+    this.props.toggleNewPostModalIsOpen();
+  };
 }
 
-function mapStateToProps ({ main, form }) {
+function mapStateToProps({ main, form }) {
   return {
     main,
     form
-  }
+  };
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps(dispatch) {
   return {
     toggleCategoryNav: () => dispatch(toggleCategoryNav()),
-    updateSortBy: (data) => dispatch(updateSortBy(data)),
+    // updateSortBy: (data) => dispatch(updateSortBy(data)),
     toggleSortOrderIsDescending: () => dispatch(toggleSortOrderIsDescending()),
-    updateCurrentCategory: (data) => dispatch(updateCurrentCategory(data)),
+    updateCurrentCategory: data => dispatch(updateCurrentCategory(data)),
     toggleNewPostModalIsOpen: () => dispatch(toggleNewPostModalIsOpen()),
     incrementNextPostId: () => dispatch(incrementNextPostId()),
-    addPost: (data) => dispatch(addPost(data))
-  }
+    addPost: data => dispatch(addPost(data)),
+    getAllCategories: () => dispatch(getAllCategories()),
+    getAllPosts: () => dispatch(getAllPosts())
+  };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainView)
+export default withRouter(
+  connect(mapStateToProps, mapDispatchToProps)(MainView)
+);
