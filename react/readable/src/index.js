@@ -15,6 +15,7 @@ import { getAllCategories, getAllPosts } from './actions/ApiActions'
 import thunk from 'redux-thunk';
 
 import MainView from './components/main/MainView'
+import PostDetailsView from './components/PostDetailsView'
 
 
 
@@ -46,10 +47,11 @@ ReactDOM.render(
       <Route exact path="/" >
         <MainView currenCategory={"all"}></MainView>
       </Route>
-      <Route path="/:category" >
+      <Route exact path="/:category" >
         <MainView></MainView>
       </Route>
-      <Route path="/:category/:id">
+      <Route exact path="/:category/:id">
+        <PostDetailsView></PostDetailsView>
       </Route>
     </div>
     </ConnectedRouter>

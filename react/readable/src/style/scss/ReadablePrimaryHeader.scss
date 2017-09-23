@@ -3,10 +3,11 @@
   // box-shadow: $base-box-shadow;
   color: white;
 
-  padding-left: 15px;
+  padding: 15px;
   text-align: left;
   position: relative;
   display: block;
+  
 
   > * {
     display: inline-block;
@@ -18,12 +19,17 @@
   }
 
   .app-title {
-    margin-left: 20px;
-
+    margin-left: 15px;
+    text-decoration: none;
+    font-size: $font-size-xxxl;
+    color: white;
   }
 
   .app-category {
     margin-left: 20px;
+    text-decoration: none;
+    font-size: $font-size-xl;
+    color: white;
   }
 
 }

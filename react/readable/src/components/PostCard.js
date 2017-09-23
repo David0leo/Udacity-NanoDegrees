@@ -4,6 +4,8 @@ import '../style/css/ReadableAppStyle.css'
 import { postUnixTimeToSimplifiedTimeElapsedString } from '../utils/helpers'
 import ThumbVoter from './ThumbVoter'
 import CommentsButton from './CommentsButton'
+import EditButton from './EditButton'
+import DeleteButton from './DeleteButton'
 
 import { upVotePostById, downVotePostById, getCommentsByPostId, updateCommentCountByPostId } from '../actions/ApiActions'
 
@@ -33,11 +35,17 @@ class PostCard extends React.Component {
         </p>
         <CommentsButton
           commentsCount={post.commentCount || 0}
-        />
+          to={`/${post.category}/${post.id}`}
+        >
+        </CommentsButton>
         <ThumbVoter 
           voteScore={post.voteScore}
           voteChangeCallback={this.handleVoteChange}
         />
+        <div className="modify-post-buttons">
+          <EditButton onClick={this.handleEditPost}></EditButton>
+          <DeleteButton onClick={this.handleDeletePost}></DeleteButton>
+        </div>
       </div>
     )
   }
@@ -48,6 +56,14 @@ class PostCard extends React.Component {
     } else if (update.option === "downVote") {
       this.props.downVotePostById(this.props.post.id)
     }
+  }
+
+  handleDeletePost = () => {
+
+  }
+
+  handleEditPost = () => {
+
   }
 }
 

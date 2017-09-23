@@ -13,10 +13,10 @@ class ThumbVoter extends React.Component {
   render() {
     const { thumbSize } = this.props;
     const {
-      voteScore,
       positivePressed,
       negativePressed,
-      disabled
+      disabled,
+      voteScore
     } = this.state;
 
     return (

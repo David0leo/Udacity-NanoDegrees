@@ -160,13 +160,17 @@ const API = (state = defaultApiState, action) => {
         }
       };
     case LOAD_COMMENTS_AND_UPDATE_COMMENT_COUNT_BY_POST_ID_SUCCESS:
+      let posts = state.posts
+      if (state.posts === undefined) {
+        posts = [action]
+      }
       return {
         ...state,
         comments: {
           ...state.comments,
           [action.id]: action.comments
         },
-        posts: state.posts.map(post => {
+        posts: posts.map(post => {
           if (post.id === action.id) {
             post.commentCount = action.comments.length;
           }

@@ -1,7 +1,7 @@
 .readable-primary-header {
   background: #37474f;
   color: white;
-  padding-left: 15px;
+  padding: 15px;
   text-align: left;
   position: relative;
   display: block; }
@@ -9,9 +9,15 @@
     display: inline-block;
     vertical-align: middle; }
   .readable-primary-header .app-title {
-    margin-left: 20px; }
+    margin-left: 15px;
+    text-decoration: none;
+    font-size: 2.5em;
+    color: white; }
   .readable-primary-header .app-category {
-    margin-left: 20px; }
+    margin-left: 20px;
+    text-decoration: none;
+    font-size: 1.5em;
+    color: white; }
 
 .main-secondary-header {
   background: #546e7a;
@@ -162,9 +168,9 @@
 
 .post-card {
   display: grid;
-  grid-template-columns: .5fr 1fr 1fr 1fr 0.5fr;
-  grid-template-rows: 1fr 0.5fr 1fr;
-  grid-template-areas: "vote title title category comments" "vote preview preview preview comments" "vote time time time comments";
+  grid-template-columns: .5fr 1fr 1fr 1fr 0.25fr 0.25fr;
+  grid-template-rows: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
+  grid-template-areas: "vote title title category comments modifyPostButtons" "vote title title category comments modifyPostButtons" "vote preview preview preview comments modifyPostButtons" "vote preview preview preview comments modifyPostButtons" "vote time time time comments modifyPostButtons";
   align-items: center;
   border: 1px solid #bdbdbd;
   border-radius: 5px;
@@ -172,20 +178,38 @@
   box-shadow: 7px 7px 10px 0px #bdbdbd; }
 
 .post-title {
+  overflow: hidden;
+  position: relative;
+  line-height: 1em;
+  max-height: 2em;
+  text-align: justify;
+  margin-right: -1em;
+  padding-right: 0.8em;
   font-size: 1em;
   grid-area: title;
-  text-align: left;
-  padding-left: 10px;
-  padding-right: 10px;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  text-decoration: underline; }
+  text-decoration: underline;
+  margin-left: 1em; }
+  .post-title:before {
+    content: '...';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    text-decoration: underline; }
+  .post-title:after {
+    content: '';
+    position: absolute;
+    right: 0;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.2em;
+    background: white; }
 
 .post-category {
   grid-area: category;
   font-size: 1em;
-  text-align: center; }
+  text-align: right;
+  padding-right: 20px;
+  margin-left: 1em; }
 
 .post-body-preview {
   grid-area: preview;
@@ -219,13 +243,21 @@
 .comments-button {
   grid-area: comments;
   height: 100%;
+  width: 100%;
   border: none;
   border-left: 1px solid #bdbdbd;
   background: transparent;
   outline: none;
+  text-decoration: none;
+  text-align: center;
+  color: black;
   padding: 5px;
-  transition: color 0.2s, background 0.2s;
-  font-size: 1em; }
+  transition: all 0.2s ease;
+  font-size: 1em;
+  display: table; }
+  .comments-button > div {
+    display: table-cell;
+    vertical-align: middle; }
 
 .comments-button:hover {
   color: #546e7a; }
@@ -233,27 +265,138 @@
 .comments-button:active {
   background: rgba(150, 150, 150, 0.2); }
 
-@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
-  .post-card {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-    grid-template-areas: "category" "title" "preview" "time" "comments" "vote";
-    align-items: center; }
+.modify-post-buttons {
+  grid-area: modifyPostButtons;
+  height: 100%;
+  display: table; }
+  .modify-post-buttons button {
+    background: transparent;
+    border: none;
+    width: 100%;
+    height: 50%;
+    outline: none;
+    border-left: 1px solid #bdbdbd;
+    display: table-cell;
+    transition: all 0.2s ease; }
+  .modify-post-buttons button:active {
+    background: rgba(150, 150, 150, 0.2); }
+  .modify-post-buttons .edit-button {
+    border-bottom: 1px solid #bdbdbd; }
+  .modify-post-buttons .edit-button:hover {
+    color: #4caf50; }
+  .modify-post-buttons .delete-button:hover {
+    color: #f44336; }
 
-  .post-title {
-    text-align: center; }
+.voter-buttons-container, .voter-buttons-container-horizontal, .voter-buttons-container-vertical, .post-vote-buttons-container {
+  display: grid;
+  align-content: center; }
 
-  .post-body-preview {
-    text-align: center;
-    align-self: center;
-    max-width: 84vw; }
+.voter-buttons-container-horizontal {
+  grid-template-columns: 2fr 1fr 2fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "positiveButton voteCount negativeButton"; }
 
-  .post-time {
-    text-align: center; }
+.voter-buttons-container-vertical, .post-vote-buttons-container {
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr 0.5fr 1fr;
+  grid-template-areas: "positiveButton" "voteCount" "negativeButton";
+  border-right: 1px solid #bdbdbd; }
 
-  .comments-button {
-    border: 1px 0 1px 0 solid #bdbdbd; } }
+.voter-button, .voter-positive-button, .voter-positive-button-horizontal, .voter-positive-button-vertical, .post-positive-button, .voter-negative-button, .voter-negative-button-horizontal, .voter-negative-button-vertical, .post-negative-button, .post-button {
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 5px;
+  transition: color 0.2s, background 0.2s; }
+
+.voter-positive-button, .voter-positive-button-horizontal, .voter-positive-button-vertical, .post-positive-button {
+  grid-area: positiveButton; }
+
+.voter-positive-button:hover, .voter-positive-button-horizontal:hover, .voter-positive-button-vertical:hover, .post-positive-button:hover {
+  color: #2196f3; }
+
+.voter-positive-button-horizontal {
+  border-radius: 5px 0 0 5px; }
+
+.voter-positive-button-vertical, .post-positive-button {
+  border-bottom: 1px solid #bdbdbd;
+  border-radius: 5px 5px 0 0; }
+
+.voter-negative-button, .voter-negative-button-horizontal, .voter-negative-button-vertical, .post-negative-button {
+  grid-area: negativeButton; }
+
+.voter-negative-button:hover, .voter-negative-button-horizontal:hover, .voter-negative-button-vertical:hover, .post-negative-button:hover {
+  color: #f44336; }
+
+.voter-negative-button-horizontal {
+  border-radius: 0 5px 5px 0; }
+
+.voter-negative-button-vertical, .post-negative-button {
+  border-top: 1px solid #bdbdbd;
+  border-radius: 0 0 5px 5px; }
+
+.voter-counter, .post-vote-count {
+  grid-area: voteCount;
+  align-self: center;
+  text-align: center; }
+
+.comment-card {
+  display: grid;
+  grid-template-columns: 0.1fr 1fr 0.1fr;
+  grid-template-rows: auto;
+  grid-template-areas: "vote author modifyCommentButtons" "vote body modifyCommentButtons" "vote time modifyCommentButtons";
+  align-items: center;
+  border: 1px solid #bdbdbd;
+  border-radius: 5px;
+  margin: 10px 12.5% 0px 12.5%;
+  box-shadow: 7px 7px 10px 0px #bdbdbd;
+  background: #fafafa; }
+
+.comment-author {
+  grid-area: author;
+  font-size: 1em;
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px; }
+
+.comment-time {
+  grid-area: time;
+  color: #bdbdbd;
+  font-size: 0.75em;
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px; }
+
+.comment-body {
+  grid-area: body;
+  margin: 0;
+  font-size: 1.1em;
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 10px; }
+
+.modify-comment-buttons {
+  grid-area: modifyCommentButtons;
+  height: 100%;
+  display: table; }
+  .modify-comment-buttons button {
+    background: transparent;
+    border: none;
+    width: 100%;
+    height: 50%;
+    outline: none;
+    border-left: 1px solid #bdbdbd;
+    display: table-cell;
+    transition: all 0.2s ease; }
+  .modify-comment-buttons button:active {
+    background: rgba(150, 150, 150, 0.2); }
+  .modify-comment-buttons .edit-button {
+    border-bottom: 1px solid #bdbdbd; }
+  .modify-comment-buttons .edit-button:hover {
+    color: #4caf50; }
+  .modify-comment-buttons .delete-button:hover {
+    color: #f44336; }
+
 .main-body-container {
   display: flex;
   padding: 10px;
