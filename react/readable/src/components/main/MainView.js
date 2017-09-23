@@ -20,11 +20,10 @@ import {
   toggleSortOrderIsDescending,
   updateCurrentCategory,
   toggleNewPostModalIsOpen,
-  incrementNextPostId,
-  addPost
+  incrementNextPostId
 } from "../../actions";
 
-import { getAllCategories, getAllPosts} from '../../actions/ApiActions'
+import { getAllCategories, getAllPosts, addNewPost as addPost} from '../../actions/ApiActions'
 
 // const MainView = ({  }) => {
 //   return (
@@ -85,7 +84,7 @@ class MainView extends React.Component {
     let newPost = this.props.form.readableNewPostCard.values;
     newPost.id = this.props.main.nextPostId;
     newPost.timestamp = Date.now();
-    this.props.addPost({ post: newPost });
+    this.props.addPost(newPost);
     this.props.incrementNextPostId();
 
     this.handleNewPostModalClose();

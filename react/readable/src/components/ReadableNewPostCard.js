@@ -128,9 +128,9 @@ class ReadableNewPostCard extends React.Component {
               >
                 {categories.map(category =>
                   <MenuItem
-                    value={category}
-                    primaryText={`/${category}`}
-                    key={`_addPostCategory_${category}`}
+                    value={category.name}
+                    primaryText={`/${category.name}`}
+                    key={`_addPostCategory_${category.name}`}
                   />
                 )}
               </Field>
@@ -178,9 +178,9 @@ class ReadableNewPostCard extends React.Component {
 
 }
 
-function mapStateToProps({ main }) {
+function mapStateToProps({ main, API }) {
   return {
-    categories: main.categories,
+    categories: API.categories,
     newPostModalIsOpen: main.newPostModalIsOpen
   };
 }

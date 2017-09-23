@@ -25,16 +25,22 @@ class PostDetailsView extends React.Component {
     return (
       <div>
         <ReadablePrimaryHeader currentCategory={this.props.match.params.category}/>
-        <PostCard post={post}></PostCard>
-        <div className='comments-container'>
-          {comments.map((comment) => 
-          <CommentCard
-            key={`comment_${comment.id}`}
-            comment={comment}
-          >
-          </CommentCard>
-          )}
-        </div>
+        {!post.deleted 
+        ? <div>
+            <PostCard post={post}></PostCard>
+            <div className='comments-container'>
+              {comments.map((comment) => 
+              <CommentCard
+                key={`comment_${comment.id}`}
+                comment={comment}
+              >
+              </CommentCard>
+            )}
+            </div>
+          </div>
+        :
+        <div><br/>>> Oops, the post you are looking for has been deleted! :(</div>
+        }
       </div>
     )
   }

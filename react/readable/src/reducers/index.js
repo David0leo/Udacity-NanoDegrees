@@ -27,7 +27,7 @@ const initialMainState = {
   currentCategory: 'all',
   categories: ['all', 'test'],
   newPostModalIsOpen: false,
-  nextPostId: 0,
+  nextPostId: '0',
   posts: {}
 }
 
@@ -67,7 +67,7 @@ export const main = (state=initialMainState, action) => {
     case INCREMENT_NEXT_POST_ID:
       return {
         ...state,
-        nextPostId: state.nextPostId += 1
+        nextPostId: (parseInt(state.nextPostId) + 1).toString()
       }
     case ADD_POST:
       return {

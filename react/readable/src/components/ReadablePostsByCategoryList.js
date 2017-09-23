@@ -41,9 +41,9 @@ class ReadablePostsByCategoryList extends React.Component {
     let filteredPosts = []
     if (posts) {
       if (currentCategory === '') {
-        filteredPosts = posts
+        filteredPosts = posts.filter(post => !post.deleted)
       } else {
-        filteredPosts = posts.filter(post => post.category === currentCategory)
+        filteredPosts = posts.filter(post => (post.category === currentCategory && !post.deleted))
       }
       
     }

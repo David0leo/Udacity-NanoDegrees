@@ -58,7 +58,7 @@ $base-padding: 10px;
   overflow: hidden;
   position: relative;
   line-height: $font-size-m;
-  max-height: $font-size-m * 2;
+  max-height: $font-size-m * 4;
   text-align: justify;
   margin-right: -1em;
   padding-right: 0.8em;
@@ -88,7 +88,7 @@ $base-padding: 10px;
   // overflow: hidden;
   // white-space: nowrap;
   text-decoration: underline;
-  margin-left: 1em;
+  margin-left: $base-padding;
 }
 
 .post-category {
@@ -96,6 +96,7 @@ $base-padding: 10px;
   font-size: $font-size-m;
   text-align: right;
   padding-right: 20px;
+  padding-left: 10px;
   margin-left: 1em;
 }
 

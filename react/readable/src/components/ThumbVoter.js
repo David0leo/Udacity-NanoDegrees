@@ -30,7 +30,6 @@ class ThumbVoter extends React.Component {
             color={!disabled && positivePressed ? "#2196f3" : ""}
           />
         </button>
-
         <span className="post-vote-count">{voteScore}</span>
         <button
           className="post-button post-negative-button"
@@ -118,7 +117,7 @@ class ThumbVoter extends React.Component {
       update.option = "upVote";
     } else if (voteDifference < 0) {
       update.option = "downVote";
-    } 
+    }
     if (voteDifference === 2) {
       this.props.voteChangeCallback(update);
     } else if (voteDifference === -2) {
