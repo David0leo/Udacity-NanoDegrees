@@ -67,6 +67,7 @@ class ReadableNewPostCard extends React.Component {
     const {
       handleSubmit,
       pristine,
+      valid,
       reset,
       submitting,
       categories,
@@ -82,7 +83,7 @@ class ReadableNewPostCard extends React.Component {
         labelColor={"#fff"}
         icon={<CheckCircle />}
         style={styles.raisedButton}
-        disabled={pristine || submitting}
+        disabled={pristine || submitting || !valid}
         onClick={this.onClickSubmit}
       />,
       <RaisedButton

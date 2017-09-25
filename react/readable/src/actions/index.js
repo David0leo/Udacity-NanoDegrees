@@ -3,8 +3,10 @@ export const UPDATE_SORT_BY = 'UPDATE_SORT_BY'
 export const TOGGLE_SORT_ORDER_IS_DESCENDING = 'TOGGLE_SORT_ORDER_IS_DESCENDING'
 export const UPDATE_CURRENT_CATEGORY = 'UPDATE_CURRENT_CATEGORY'
 export const TOGGLE_NEW_POST_MODAL_IS_OPEN = 'TOGGLE_NEW_POST_MODAL_IS_OPEN'
+export const TOGGLE_EDIT_POST_MODAL_IS_OPEN = 'TOGGLE_EDIT_POST_MODAL_IS_OPEN'
 export const INCREMENT_NEXT_POST_ID = 'INCREMENT_NEXT_POST_ID'
 export const INITIALIZE_POST_FORM_VALUES = 'INITIALIZE_POST_FORM_VALUES'
+export const INITIALIZE_EDIT_POST = 'INITIALIZE_EDIT_POST'
 export const ADD_POST = 'ADD_POST'
 
 export function toggleCategoryNav() {
@@ -39,6 +41,13 @@ export function toggleNewPostModalIsOpen() {
   }
 }
 
+export function toggleEditPostModalIsOpen(post) {
+  return {
+    type: TOGGLE_EDIT_POST_MODAL_IS_OPEN,
+    post
+  }
+}
+
 export function incrementNextPostId() {
   return {
     type: INCREMENT_NEXT_POST_ID
@@ -48,6 +57,13 @@ export function incrementNextPostId() {
 export function initializePostFormValues({post}) {
   return {
     type: INITIALIZE_POST_FORM_VALUES,
+    post
+  }
+}
+
+export function initializeEditPost(post) {
+  return {
+    type: INITIALIZE_EDIT_POST,
     post
   }
 }

@@ -1,13 +1,13 @@
 export default function(values) {
   const errors = {};
   const requiredFields = [
-    'postTitle',
-    'postCategory',
-    'postBody',
-    'postName'
+    'title',
+    'category',
+    'body',
+    'author'
   ];
   requiredFields.forEach(field => {
-    if (!values[field]) {
+    if (!values[field] ) {
       errors[field] = 'Required';
     }
   });

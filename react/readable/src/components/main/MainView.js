@@ -10,6 +10,7 @@ import MainCategoryNavPane from "./MainCategoryNavPane";
 import ReadablePostsByCategoryList from "../ReadablePostsByCategoryList";
 
 import ReadableNewPostCard from "../ReadableNewPostCard";
+import ReadableEditPostCard from '../ReadableEditPostCard';
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { withRouter } from "react-router-dom";
@@ -20,10 +21,16 @@ import {
   toggleSortOrderIsDescending,
   updateCurrentCategory,
   toggleNewPostModalIsOpen,
+  toggleEditPostModalIsOpen,
   incrementNextPostId
 } from "../../actions";
 
-import { getAllCategories, getAllPosts, addNewPost as addPost} from '../../actions/ApiActions'
+import { 
+  getAllCategories, 
+  getAllPosts, 
+  addNewPost as addPost, 
+  editPost
+} from '../../actions/ApiActions'
 
 // const MainView = ({  }) => {
 //   return (
@@ -74,6 +81,17 @@ class MainView extends React.Component {
             handleSubmit={this.addNewPost}
           />
         </MuiThemeProvider>
+        {
+          main.editPostModalIsOpen
+          &&
+          <MuiThemeProvider muiTheme={getMuiTheme()}>
+        <ReadableEditPostCard
+            handleSubmit={this.handleEditPost}
+          >
+          </ReadableEditPostCard>
+        </MuiThemeProvider>
+        }
+        
       </div>
     );
   }
@@ -108,6 +126,19 @@ class MainView extends React.Component {
   handleNewPostModalClose = () => {
     this.props.toggleNewPostModalIsOpen();
   };
+
+  handleEditPost = () => {
+    let editedPost = this.props.form.readableEditPostCard.values;
+    editedPost.timestamp = Date.now();
+    this.props.editPost(editedPost);
+    this.handleEditPostModalClose(editedPost);
+  };
+
+  handleEditPostModalClose = (post) => {
+    this.props.toggleEditPostModalIsOpen(post)
+  }
+
+  
 }
 
 function mapStateToProps({ main, form }) {
@@ -127,7 +158,9 @@ function mapDispatchToProps(dispatch) {
     incrementNextPostId: () => dispatch(incrementNextPostId()),
     addPost: data => dispatch(addPost(data)),
     getAllCategories: () => dispatch(getAllCategories()),
-    getAllPosts: () => dispatch(getAllPosts())
+    getAllPosts: () => dispatch(getAllPosts()),
+    toggleEditPostModalIsOpen: (data) => dispatch(toggleEditPostModalIsOpen(data)),
+    editPost: data => dispatch(editPost(data)),
   };
 }
 

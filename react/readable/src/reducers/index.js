@@ -11,9 +11,11 @@ import {
   TOGGLE_SORT_ORDER_IS_DESCENDING,
   UPDATE_CURRENT_CATEGORY,
   TOGGLE_NEW_POST_MODAL_IS_OPEN,
+  TOGGLE_EDIT_POST_MODAL_IS_OPEN,
   INCREMENT_NEXT_POST_ID,
   //maybe update post vote
   INITIALIZE_POST_FORM_VALUES,
+  INITIALIZE_EDIT_POST,
   ADD_POST
 
 } from '../actions'
@@ -27,6 +29,8 @@ const initialMainState = {
   currentCategory: 'all',
   categories: ['all', 'test'],
   newPostModalIsOpen: false,
+  editPostModalIsOpen: false,
+  loadedPost: {},
   nextPostId: '0',
   posts: {}
 }
@@ -64,10 +68,16 @@ export const main = (state=initialMainState, action) => {
         ...state,
         newPostModalIsOpen: !state.newPostModalIsOpen
       }
+    case TOGGLE_EDIT_POST_MODAL_IS_OPEN:
+      return {
+        ...state,
+        editPostModalIsOpen: !state.editPostModalIsOpen,
+        loadedPost: post
+      }
     case INCREMENT_NEXT_POST_ID:
       return {
         ...state,
-        nextPostId: (parseInt(state.nextPostId) + 1).toString()
+        nextPostId: (parseInt(state.nextPostId, 10) + 1).toString()
       }
     case ADD_POST:
       return {
@@ -101,6 +111,10 @@ const initialLoadPostState = {
     category: 'all',
     voteScore: 0,
     deleted: false
+  },
+  loadedPost: {
+    title: 'test',
+    body: 'test'
   }
 }
 
@@ -108,7 +122,13 @@ export const loadPost = (state=initialLoadPostState, action) => {
   switch (action.type) {
     case INITIALIZE_POST_FORM_VALUES:
       return {
+        ...state,
         post: action.post
+      }
+    case INITIALIZE_EDIT_POST:
+      return {
+        ...state,
+        loadedPost: action.post
       }
     default:
       return state

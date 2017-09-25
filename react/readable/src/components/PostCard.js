@@ -13,7 +13,9 @@ import {
   getCommentsByPostId,
   updateCommentCountByPostId,
   deletePostById,
+  editPost
 } from "../actions/ApiActions";
+import { toggleEditPostModalIsOpen, initializeEditPost } from '../actions';
 
 class PostCard extends React.Component {
   componentDidMount() {
@@ -46,7 +48,7 @@ class PostCard extends React.Component {
           voteChangeCallback={this.handleVoteChange}
         />
         <div className="modify-post-buttons">
-          <EditButton onClick={this.handleEditPost} />
+          <EditButton onClick={this.handleEditPostModalOpen} />
           <DeleteButton onClick={this.handleDeletePost} />
         </div>
       </div>
@@ -65,12 +67,19 @@ class PostCard extends React.Component {
     this.props.deletePostById(this.props.post.id)
   };
 
-  handleEditPost = () => {};
+  handleEditPostModalOpen = () => {
+    
+    this.props.toggleEditPostModalIsOpen(this.props.post)
+    this.props.initializeEditPost(this.props.post)
+  }
+
+
 }
 
-function mapStateToProps({ API }) {
+function mapStateToProps({ API, form }) {
   return {
-    comments: API.comments
+    comments: API.comments,
+    form
   };
 }
 
@@ -81,6 +90,9 @@ function mapDispatchToProps(dispatch) {
     getCommentsByPostId: id => dispatch(getCommentsByPostId(id)),
     updateCommentCountByPostId: id => dispatch(updateCommentCountByPostId(id)),
     deletePostById: id => dispatch(deletePostById(id)),
+    editPost: data => dispatch(editPost(data)),
+    toggleEditPostModalIsOpen: (data) => dispatch(toggleEditPostModalIsOpen(data)),
+    initializeEditPost: (data) => dispatch(initializeEditPost(data))
   };
 }
 
