@@ -27,6 +27,7 @@ class ReadablePostsByCategoryList extends React.Component {
           {filteredPosts.map((post) => 
           <PostCard 
             post={post}
+            previewBody={true}
             key={`_post_card_${post.id}`}
           ></PostCard>
           )}

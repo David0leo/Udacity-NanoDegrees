@@ -43,8 +43,8 @@ $base-padding: 10px;
   grid-template-areas: 
     "vote title title category comments modifyPostButtons"
     "vote title title category comments modifyPostButtons"
-    "vote preview preview preview comments modifyPostButtons"
-    "vote preview preview preview comments modifyPostButtons"
+    "vote body body body comments modifyPostButtons"
+    "vote body body body comments modifyPostButtons"
     "vote time time time comments modifyPostButtons";
   align-items: center;
   border: 1px solid $border-color;
@@ -100,16 +100,18 @@ $base-padding: 10px;
   margin-left: 1em;
 }
 
-.post-body-preview {
-  grid-area: preview;
+.post-body {
+  grid-area: body;
   font-size: $font-size-m;
   padding-left: $base-padding;
   padding-right: $base-padding;
   text-align: left;
+}
+
+.preview {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  text-align: left;
 }
 
 .post-time {

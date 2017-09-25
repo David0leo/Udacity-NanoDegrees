@@ -170,7 +170,7 @@
   display: grid;
   grid-template-columns: .5fr 1fr 1fr 1fr 0.25fr 0.25fr;
   grid-template-rows: 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr;
-  grid-template-areas: "vote title title category comments modifyPostButtons" "vote title title category comments modifyPostButtons" "vote preview preview preview comments modifyPostButtons" "vote preview preview preview comments modifyPostButtons" "vote time time time comments modifyPostButtons";
+  grid-template-areas: "vote title title category comments modifyPostButtons" "vote title title category comments modifyPostButtons" "vote body body body comments modifyPostButtons" "vote body body body comments modifyPostButtons" "vote time time time comments modifyPostButtons";
   align-items: center;
   border: 1px solid #bdbdbd;
   border-radius: 5px;
@@ -212,16 +212,17 @@
   padding-left: 10px;
   margin-left: 1em; }
 
-.post-body-preview {
-  grid-area: preview;
+.post-body {
+  grid-area: body;
   font-size: 1em;
   padding-left: 10px;
   padding-right: 10px;
-  text-align: left;
+  text-align: left; }
+
+.preview {
   overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
-  text-align: left; }
+  text-overflow: ellipsis; }
 
 .post-time {
   color: #bdbdbd;

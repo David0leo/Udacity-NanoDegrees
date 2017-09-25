@@ -41,7 +41,7 @@ class PostDetailsView extends React.Component {
         />
         {!post.deleted ? (
           <div>
-            <PostCard post={post} />
+            <PostCard post={post} previewBody={false}/>
             <div className="comments-container">
               {comments.map(comment => (
                 <CommentCard key={`comment_${comment.id}`} comment={comment} />
