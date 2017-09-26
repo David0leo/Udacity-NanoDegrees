@@ -3,6 +3,7 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
+import { MdAddCircle } from 'react-icons/lib/md';
 
 import PostCard from "./PostCard";
 import CommentCard from "./CommentCard";
@@ -39,14 +40,19 @@ class PostDetailsView extends React.Component {
     
 
     return (
-      <div>
+      <div className="post-details-view">
         <ReadablePrimaryHeader
           currentCategory={this.props.match.params.category}
         />
         {!post.deleted ? (
           <div>
             <PostCard post={post} previewBody={false}/>
-            <button onClick={this.props.toggleNewCommentModalIsOpen}></button>
+            <button 
+              className="add-comment-button"
+              onClick={this.props.toggleNewCommentModalIsOpen}>
+              <MdAddCircle size={30}/>
+              Add Comment
+            </button>
             <div className="comments-container">
               {
                 Array.isArray(comments) 

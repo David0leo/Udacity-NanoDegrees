@@ -577,4 +577,24 @@
   text-align: left;
   align-self: center; }
 
+.post-details-view {
+  text-align: center; }
+
+.add-comment-button {
+  background: white;
+  color: black;
+  box-shadow: 7px 7px 10px #bdbdbd;
+  outline: none;
+  border: 1px solid #bdbdbd;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.2s ease; }
+
+.add-comment-button:hover {
+  color: #2196f3; }
+
+.add-comment-button:active {
+  background: rgba(150, 150, 150, 0.2); }
+
 /*# sourceMappingURL=ReadableAppStyle.css.map */

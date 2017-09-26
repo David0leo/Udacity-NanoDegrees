@@ -1,0 +1,23 @@
+.post-details-view {
+  text-align: center;
+}
+
+.add-comment-button {
+  background: white;
+  color: black;
+  box-shadow: $base-box-shadow;
+  outline: none;
+  border: 1px solid $post-border-color;
+  border-radius: $base-border-radius;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: all 0.2s ease;
+}
+
+.add-comment-button:hover {
+  color: $md-blue-500;
+}
+
+.add-comment-button:active {
+  background: rgba(150, 150, 150, 0.2);
+}
