@@ -9,7 +9,8 @@ import PostCard from "./PostCard";
 import CommentCard from "./CommentCard";
 import ReadablePrimaryHeader from "./ReadablePrimaryHeader";
 import ReadableEditPostCard from "./ReadableEditPostCard";
-import ReadableNewCommentCard from './ReadableNewCommentCard'
+import ReadableNewCommentCard from './ReadableNewCommentCard';
+import ReadableEditCommentCard from './ReadableEditCommentCard';
 
 import {
   getPostById,
@@ -17,11 +18,13 @@ import {
   updateCommentCountByPostId,
   editPost,
   addComment,
+  editComment
 } from "../actions/ApiActions";
 
 import {
   toggleEditPostModalIsOpen,
   toggleNewCommentModalIsOpen,
+  toggleEditCommentModalIsOpen,
   incrementNextCommentId
 } from '../actions'
 
@@ -72,6 +75,12 @@ class PostDetailsView extends React.Component {
                 <ReadableNewCommentCard handleSubmit={this.handleNewComment}/>
               </MuiThemeProvider>
             )}
+            {main.editCommentModalIsOpen && (
+              <MuiThemeProvider muiTheme={getMuiTheme()}>
+                <ReadableEditCommentCard handleSubmit={this.handleEditComment}/>
+              </MuiThemeProvider>
+            )}
+            <div className="main-footer" />
           </div>
         ) : (
           <div>
@@ -86,12 +95,8 @@ class PostDetailsView extends React.Component {
     let editedPost = this.props.form.readableEditPostCard.values;
     editedPost.timestamp = Date.now();
     this.props.editPost(editedPost);
-    this.handleEditPostModalClose(editedPost);
+    this.props.toggleEditPostModalIsOpen(editedPost)
   };
-
-  handleEditPostModalClose = (post) => {
-    this.props.toggleEditPostModalIsOpen(post)
-  }
 
   handleNewComment = () => {
     let newComment = this.props.form.readableNewComment.values
@@ -104,6 +109,15 @@ class PostDetailsView extends React.Component {
     this.props.updateCommentCountByPostId(this.props.post.id)
 
     this.props.toggleNewCommentModalIsOpen()
+  }
+
+  handleEditComment = () => {
+    let editedComment = this.props.form.readableEditComment.values;
+    editedComment.timestamp = Date.now();
+    this.props.editComment(editedComment)
+    this.props.updateCommentCountByPostId(this.props.post.id)
+    
+    this.props.toggleEditCommentModalIsOpen()
   }
 }
 
@@ -143,7 +157,9 @@ function mapDispatchToProps(dispatch) {
     editPost: data => dispatch(editPost(data)),
     toggleEditPostModalIsOpen: (data) => dispatch(toggleEditPostModalIsOpen(data)),
     toggleNewCommentModalIsOpen: () => dispatch(toggleNewCommentModalIsOpen()),
+    toggleEditCommentModalIsOpen: (data) => dispatch(toggleEditCommentModalIsOpen(data)),
     addComment: (comment) => dispatch(addComment(comment)),
+    editComment: data => dispatch(editComment(data)),
     incrementNextCommentId: () => dispatch(incrementNextCommentId()),
   };
 }

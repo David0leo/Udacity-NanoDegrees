@@ -25,6 +25,8 @@ import {
 
 //State for our main view, includes category view
 
+// TODO: setup users and UUID + some user data for post / comment id's
+// these are 'random' but not unique
 const initialMainState = {
   categoryNavIsOpen: true,
   sortBy: 'Vote Score',
@@ -36,8 +38,8 @@ const initialMainState = {
   editCommentModalIsOpen: false,
   loadedPost: {},
   loadedComment: {},
-  nextPostId: '0',
-  nextCommentId: '0',
+  nextPostId: (Math.floor(Math.random() * 1000000)).toString(),
+  nextCommentId: Math.floor(Math.random() * 1000000),
   posts: {}
 }
 

@@ -9,7 +9,6 @@ import DeleteButton from './DeleteButton'
 
 import { 
   deleteCommentByCommentId, 
-  editComment, 
   upVoteCommentByCommentId, 
   downVoteCommentByCommentId,
   updateCommentCountByPostId
@@ -51,10 +50,11 @@ class CommentCard extends React.Component{
         <ThumbVoter
           voteScore={comment.voteScore}
           thumbSize={20}
+          voteChangeCallback={this.handleVoteChange}
         >
         </ThumbVoter>
         <div className="modify-comment-buttons">
-            <EditButton onClick={this.handleEditComment}></EditButton>
+            <EditButton onClick={this.handleEditCommentModalOpen}></EditButton>
             <DeleteButton onClick={this.handleDeleteComment}></DeleteButton>
           </div>
       </div>
@@ -67,6 +67,7 @@ class CommentCard extends React.Component{
     } else if (update.option === 'downVote') {
       this.props.downVoteCommentByCommentId(this.props.comment.id)
     }
+    setTimeout(() => {this.props.updateCommentCountByPostId(this.props.comment.parentId)}, 1000)
   }
 
   handleDeleteComment = () => {
@@ -74,7 +75,7 @@ class CommentCard extends React.Component{
     setTimeout(() => {this.props.updateCommentCountByPostId(this.props.comment.parentId)}, 1000)
   }
   
-  handleEditComment = () => {
+  handleEditCommentModalOpen = () => {
     this.props.toggleEditCommentModalIsOpen(this.props.comment)
     this.props.initializeEditComment(this.props.comment)
   }
