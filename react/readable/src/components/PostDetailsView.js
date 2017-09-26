@@ -8,16 +8,20 @@ import PostCard from "./PostCard";
 import CommentCard from "./CommentCard";
 import ReadablePrimaryHeader from "./ReadablePrimaryHeader";
 import ReadableEditPostCard from "./ReadableEditPostCard";
+import ReadableNewCommentCard from './ReadableNewCommentCard'
 
 import {
   getPostById,
   getCommentsByPostId,
   updateCommentCountByPostId,
   editPost,
+  addComment,
 } from "../actions/ApiActions";
 
 import {
-  toggleEditPostModalIsOpen
+  toggleEditPostModalIsOpen,
+  toggleNewCommentModalIsOpen,
+  incrementNextCommentId
 } from '../actions'
 
 class PostDetailsView extends React.Component {
@@ -31,8 +35,8 @@ class PostDetailsView extends React.Component {
 
   render() {
     const { main, post, comments } = this.props;
-    // console.log(comments)
     // console.log(post)
+    
 
     return (
       <div>
@@ -42,14 +46,24 @@ class PostDetailsView extends React.Component {
         {!post.deleted ? (
           <div>
             <PostCard post={post} previewBody={false}/>
+            <button onClick={this.props.toggleNewCommentModalIsOpen}></button>
             <div className="comments-container">
-              {comments.map(comment => (
+              {
+                Array.isArray(comments) 
+              ? comments.map(comment => (
                 <CommentCard key={`comment_${comment.id}`} comment={comment} />
-              ))}
+              ))
+              : <CommentCard key={`comment_${comments.id}`} comment={comments} />
+              }
             </div>
             {main.editPostModalIsOpen && (
               <MuiThemeProvider muiTheme={getMuiTheme()}>
                 <ReadableEditPostCard handleSubmit={this.handleEditPost} />
+              </MuiThemeProvider>
+            )}
+            {main.newCommentModalIsOpen && (
+              <MuiThemeProvider muiTheme={getMuiTheme()}>
+                <ReadableNewCommentCard handleSubmit={this.handleNewComment}/>
               </MuiThemeProvider>
             )}
           </div>
@@ -71,6 +85,19 @@ class PostDetailsView extends React.Component {
 
   handleEditPostModalClose = (post) => {
     this.props.toggleEditPostModalIsOpen(post)
+  }
+
+  handleNewComment = () => {
+    let newComment = this.props.form.readableNewComment.values
+    newComment.timestamp = Date.now()
+    newComment.parentId = this.props.post.id
+    newComment.id = this.props.main.nextCommentId;
+
+    this.props.addComment(newComment)
+    this.props.incrementNextCommentId();
+    this.props.updateCommentCountByPostId(this.props.post.id)
+
+    this.props.toggleNewCommentModalIsOpen()
   }
 }
 
@@ -98,7 +125,7 @@ function mapStateToProps({ main, API, form }, props) {
     main,
     form,
     post: post,
-    comments: comments
+    comments
   };
 }
 
@@ -109,6 +136,9 @@ function mapDispatchToProps(dispatch) {
     updateCommentCountByPostId: id => dispatch(updateCommentCountByPostId(id)),
     editPost: data => dispatch(editPost(data)),
     toggleEditPostModalIsOpen: (data) => dispatch(toggleEditPostModalIsOpen(data)),
+    toggleNewCommentModalIsOpen: () => dispatch(toggleNewCommentModalIsOpen()),
+    addComment: (comment) => dispatch(addComment(comment)),
+    incrementNextCommentId: () => dispatch(incrementNextCommentId()),
   };
 }
 

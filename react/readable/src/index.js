@@ -5,7 +5,7 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { Route } from 'react-router'
 import createHistory from 'history/createBrowserHistory'
-import {main, loadPost} from './reducers';
+import {main, load} from './reducers';
 import API from './reducers/ApiReducers'
 import {reducer as reduxFormReducer } from 'redux-form'
 import { Provider } from 'react-redux';
@@ -27,7 +27,7 @@ const middleware = routerMiddleware(history)
 const store = createStore(
   combineReducers({
     main,
-    loadPost,
+    load,
     API,
     form: reduxFormReducer,
     routing: routerReducer

@@ -75,10 +75,9 @@ class PostCard extends React.Component {
 
 }
 
-function mapStateToProps({ API, form }) {
+function mapStateToProps({ API}) {
   return {
-    comments: API.comments,
-    form
+    comments: API.comments
   };
 }
 

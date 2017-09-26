@@ -152,8 +152,8 @@ class ReadableNewPostCard extends React.Component {
               <Field
                 name="author"
                 component={renderTextField}
-                hintText="Name"
-                floatingLabelText="Name - Maximum 30 Characters"
+                hintText="Author"
+                floatingLabelText="Author - Maximum 30 Characters"
                 multiLine={true}
                 rows={1}
                 fullWidth={true}
@@ -161,7 +161,7 @@ class ReadableNewPostCard extends React.Component {
               />
             </div>
           </form>
-          <ThumbVoter voteScore={0} disabled={true} />
+          <ThumbVoter voteScore={1} disabled={true} />
         </div>
       </Dialog>
     );
@@ -203,7 +203,7 @@ ReadableNewPostCard = reduxForm({
 
 ReadableNewPostCard = connect(
   state => ({
-    initialValues: state.loadPost.post
+    initialValues: state.load.post
   }),
   { loadPost: initializePostFormValues }
 )(ReadableNewPostCard)

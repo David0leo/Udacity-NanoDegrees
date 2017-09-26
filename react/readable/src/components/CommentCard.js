@@ -1,9 +1,24 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
 import '../style/css/ReadableAppStyle.css'
 import { postUnixTimeToSimplifiedTimeElapsedString } from '../utils/helpers'
 import ThumbVoter from './ThumbVoter'
 import EditButton from './EditButton'
 import DeleteButton from './DeleteButton'
+
+import { 
+  deleteCommentByCommentId, 
+  editComment, 
+  upVoteCommentByCommentId, 
+  downVoteCommentByCommentId,
+  updateCommentCountByPostId
+} from '../actions/ApiActions'
+import { 
+  toggleEditCommentModalIsOpen, 
+  initializeEditComment 
+} from '../actions'
+
 
 class CommentCard extends React.Component{
   render() {
@@ -39,20 +54,46 @@ class CommentCard extends React.Component{
         >
         </ThumbVoter>
         <div className="modify-comment-buttons">
-            <EditButton onClick={this.handleEditPost}></EditButton>
-            <DeleteButton onClick={this.handleDeletePost}></DeleteButton>
+            <EditButton onClick={this.handleEditComment}></EditButton>
+            <DeleteButton onClick={this.handleDeleteComment}></DeleteButton>
           </div>
       </div>
     )
   }
 
-  handleDeletePost() {
+  handleVoteChange = update => {
+    if (update.option === 'upVote') {
+      this.props.upVoteCommentByCommentId(this.props.comment.id)
+    } else if (update.option === 'downVote') {
+      this.props.downVoteCommentByCommentId(this.props.comment.id)
+    }
+  }
 
+  handleDeleteComment = () => {
+    this.props.deleteCommentByCommentId(this.props.comment.id)
+    setTimeout(() => {this.props.updateCommentCountByPostId(this.props.comment.parentId)}, 1000)
   }
   
-  handleEditPost() {
-
+  handleEditComment = () => {
+    this.props.toggleEditCommentModalIsOpen(this.props.comment)
+    this.props.initializeEditComment(this.props.comment)
   }
 }
 
-export default CommentCard
+function mapStateToProps({}) {
+  return {
+    
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    upVoteCommentByCommentId: id => dispatch(upVoteCommentByCommentId(id)),
+    downVoteCommentByCommentId: id => dispatch(downVoteCommentByCommentId(id)),
+    initializeEditComment: comment => dispatch(initializeEditComment(comment)),
+    toggleEditCommentModalIsOpen: comment => dispatch(toggleEditCommentModalIsOpen(comment)),
+    deleteCommentByCommentId: id => dispatch(deleteCommentByCommentId(id)),
+    updateCommentCountByPostId: id => dispatch(updateCommentCountByPostId(id)),
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(CommentCard)

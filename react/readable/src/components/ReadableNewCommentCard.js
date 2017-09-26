@@ -1,17 +1,18 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import Dialog from "material-ui/Dialog";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
 import CheckCircle from "material-ui/svg-icons/action/check-circle";
 import HighlightOff from "material-ui/svg-icons/action/highlight-off";
 import { orange500, blue500 } from "material-ui/styles/colors";
+import Dialog from "material-ui/Dialog";
 
 import ThumbVoter from "./ThumbVoter";
-import { postUnixTimeToSimplifiedTimeElapsedString } from "../utils/helpers";
-
-import { toggleEditPostModalIsOpen, initializeEditPost } from "../actions";
+import {
+  toggleNewCommentModalIsOpen,
+  initializeCommentFormValues,
+} from "../actions";
 
 const styles = {
   errorStyle: {
@@ -27,7 +28,7 @@ const styles = {
 
 function validate(values) {
   const errors = {};
-  const requiredFields = ["title", "body"];
+  const requiredFields = ["author", "body"];
   requiredFields.forEach(field => {
     if (!values[field]) {
       errors[field] = "Required";
@@ -54,22 +55,15 @@ const renderTextField = ({
   />
 );
 
-class ReadableEditPostCard extends React.Component {
-  componentDidMount() {
-    // this.props.initialize()
-  }
-
-  compo;
-
+class ReadableNewCommentCard extends React.Component {
   render() {
     const {
       handleSubmit,
       pristine,
       valid,
       reset,
-      post,
       submitting,
-      editPostModalIsOpen
+      newCommentModalIsOpen
     } = this.props;
 
     const actions = [
@@ -86,7 +80,7 @@ class ReadableEditPostCard extends React.Component {
       />,
       <RaisedButton
         type="submit"
-        label="Clear Changes"
+        label="Clear"
         labelPosition="after"
         backgroundColor={orange500}
         labelColor={"#fff"}
@@ -99,100 +93,84 @@ class ReadableEditPostCard extends React.Component {
 
     return (
       <Dialog
-        title="Edit Post"
+        title="Add Comment"
         actions={actions}
         modal={false}
-        open={editPostModalIsOpen}
+        open={newCommentModalIsOpen}
         onRequestClose={this.onDismiss}
       >
-        <div className="readable-edit-post-inner-card">
-          <form onSubmit={handleSubmit} className="readable-edit-post-form">
-            <div className="readable-edit-post-title">
+        <div className="readable-new-comment-inner-card">
+          <form onSubmit={handleSubmit} className="readable-new-comment-form">
+            <div className="readable-new-comment-author">
               <Field
-                name="title"
+                name="author"
                 component={renderTextField}
-                hintText="Post Title"
-                floatingLabelText="Post Title - Max 80 characters"
+                hintText="Name"
+                floatingLabelText="Author - Maximum 30 Characters"
                 multiLine={true}
                 rows={1}
                 fullWidth={true}
-                maxLength={80}
+                maxLength={30}
               />
             </div>
-            <div className="readable-edit-post-category">
-              {`/${post.category}`}
-            </div>
-            <div className="readable-edit-post-body">
+            <div className="readable-new-comment-body">
               <Field
                 name="body"
                 component={renderTextField}
-                hintText="Post Body"
-                floatingLabelText="Post Body - Max 500 characters"
+                hintText="Comment Body"
+                floatingLabelText="Comment Body - Maximum 500 Characters"
                 multiLine={true}
                 rows={1}
                 fullWidth={true}
                 maxLength={500}
               />
             </div>
-            <div className="readable-edit-post-author">
-              {"Posted "}
-              {postUnixTimeToSimplifiedTimeElapsedString(
-                Date.now(),
-                post.timestamp
-              )}{" "}
-              by {post.author}
-            </div>
           </form>
-
-          <ThumbVoter voteScore={post.voteScore} disabled={true} />
+          <ThumbVoter voteScore={1} disabled={true} />
         </div>
       </Dialog>
     );
   }
 
   onClickSubmit = () => {
-    this.props.handleSubmit();
-    this.props.reset();
-  };
+    this.props.handleSubmit()
+    this.props.reset()
+  }
 
   onDismiss = () => {
-    this.props.reset();
-    this.props.toggleEditPostModalIsOpen(this.props.post);
-  };
+    this.props.reset()
+    this.props.toggleNewCommentModalIsOpen()
+  }
 }
 
-function mapStateToProps({ main }) {
+function mapStateToProps({ main}) {
   return {
-    post: main.loadedPost,
-    editPostModalIsOpen: main.editPostModalIsOpen
-    // initialValues: {
-    //   title: main.loadedPost.title,
-    //   body: main.loadedPost.body
-    // }
-  };
+    newCommentModalIsOpen: main.newCommentModalIsOpen
+  }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    toggleEditPostModalIsOpen: data => dispatch(toggleEditPostModalIsOpen(data))
-  };
+    toggleNewCommentModalIsOpen: () => dispatch(toggleNewCommentModalIsOpen())
+  }
 }
 
-ReadableEditPostCard = connect(mapStateToProps, mapDispatchToProps)(
-  ReadableEditPostCard
-);
 
-ReadableEditPostCard = reduxForm({
-  form: "readableEditPostCard",
-  // enableReinitialize: false,
+
+ReadableNewCommentCard = connect(mapStateToProps, mapDispatchToProps)(
+  ReadableNewCommentCard
+)
+
+ReadableNewCommentCard = reduxForm({
+  form: 'readableNewComment',
   validate
-})(ReadableEditPostCard);
+})(ReadableNewCommentCard)
 
-ReadableEditPostCard = connect(
+ReadableNewCommentCard = connect(
   state => ({
-    initialValues: state.load.loadedPost
+    initialValues: state.load.comment
   }),
-  { loadPost: initializeEditPost }
-)(ReadableEditPostCard);
+  { loadComment: initializeCommentFormValues }
+)(ReadableNewCommentCard)
 
-export default ReadableEditPostCard;
+export default ReadableNewCommentCard
