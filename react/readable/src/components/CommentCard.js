@@ -44,7 +44,7 @@ class CommentCard extends React.Component {
 		);
 	}
 
-	handleVoteChange = update => {
+	handleVoteChange = (update) => {
 		if (update.option === "upVote") {
 			this.props.upVoteCommentByCommentId(this.props.comment.id);
 		} else if (update.option === "downVote") {
