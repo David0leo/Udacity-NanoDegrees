@@ -5,12 +5,12 @@ import getMuiTheme from "material-ui/styles/getMuiTheme";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { MdAddCircle } from "react-icons/lib/md";
 
-import PostCard from "./PostCard";
-import CommentCard from "./CommentCard";
-import ReadablePrimaryHeader from "./ReadablePrimaryHeader";
-import ReadableEditPostCard from "./ReadableEditPostCard";
-import ReadableNewCommentCard from "./ReadableNewCommentCard";
-import ReadableEditCommentCard from "./ReadableEditCommentCard";
+import PostCard from "../post_card/PostCard";
+import CommentCard from "./comment_card/CommentCard";
+import ReadablePrimaryHeader from "../ReadablePrimaryHeader";
+import ReadableEditPostCard from "../post_card/dialogs/ReadableEditPostCard";
+import ReadableNewCommentCard from "./comment_card/dialogs/ReadableNewCommentCard";
+import ReadableEditCommentCard from "./comment_card/dialogs/ReadableEditCommentCard";
 
 import {
 	getPostById,
@@ -19,14 +19,14 @@ import {
 	editPost,
 	addComment,
 	editComment
-} from "../actions/ApiActions";
+} from "../../actions/ApiActions";
 
 import {
 	toggleEditPostModalIsOpen,
 	toggleNewCommentModalIsOpen,
 	toggleEditCommentModalIsOpen,
 	incrementNextCommentId
-} from "../actions";
+} from "../../actions";
 
 class PostDetailsView extends React.Component {
 	componentDidMount() {

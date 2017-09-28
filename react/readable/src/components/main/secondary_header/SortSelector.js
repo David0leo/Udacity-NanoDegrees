@@ -2,7 +2,7 @@ import React from "react";
 import { MdSort } from "react-icons/lib/md";
 import SortOrderButton from "./SortOrderButton";
 import { connect } from "react-redux";
-import { updateSortBy, toggleSortOrderIsDescending } from "../actions";
+import { updateSortBy, toggleSortOrderIsDescending } from "../../../actions";
 
 class SortSelector extends React.Component {
 	render() {

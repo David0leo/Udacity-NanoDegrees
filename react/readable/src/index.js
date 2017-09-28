@@ -19,7 +19,7 @@ import { getAllCategories, getAllPosts } from "./actions/ApiActions";
 import thunk from "redux-thunk";
 
 import MainView from "./components/main/MainView";
-import PostDetailsView from "./components/PostDetailsView";
+import PostDetailsView from "./components/post_details/PostDetailsView";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

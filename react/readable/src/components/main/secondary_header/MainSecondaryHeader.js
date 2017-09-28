@@ -1,7 +1,7 @@
 import React from "react";
-import NavToggleButton from "../NavToggleButton";
-import SortSelector from "../SortSelector";
-import ReadableNewPostButton from "../ReadableNewPostButton";
+import NavToggleButton from "./NavToggleButton";
+import SortSelector from "./SortSelector";
+import ReadableNewPostButton from "./ReadableNewPostButton";
 
 const MainSecondaryHeader = ({
 	size,

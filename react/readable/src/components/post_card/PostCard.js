@@ -1,12 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
 import { Link, withRouter } from "react-router-dom";
-import "../style/css/ReadableAppStyle.css";
-import { postUnixTimeToSimplifiedTimeElapsedString } from "../utils/helpers";
-import ThumbVoter from "./ThumbVoter";
+import { postUnixTimeToSimplifiedTimeElapsedString } from "../../utils/helpers";
+import ThumbVoter from "../card_parts/ThumbVoter";
 import CommentsButton from "./CommentsButton";
-import EditButton from "./EditButton";
-import DeleteButton from "./DeleteButton";
+import EditButton from "../card_parts/EditButton";
+import DeleteButton from "../card_parts/DeleteButton";
 
 import {
 	upVotePostById,
@@ -15,8 +14,8 @@ import {
 	updateCommentCountByPostId,
 	deletePostById,
 	editPost
-} from "../actions/ApiActions";
-import { toggleEditPostModalIsOpen, initializeEditPost } from "../actions";
+} from "../../actions/ApiActions";
+import { toggleEditPostModalIsOpen, initializeEditPost } from "../../actions";
 
 class PostCard extends React.Component {
 	componentDidMount() {

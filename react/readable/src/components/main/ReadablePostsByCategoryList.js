@@ -1,5 +1,5 @@
 import React from "react";
-import PostCard from "./PostCard";
+import PostCard from "../post_card/PostCard";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 

@@ -1,12 +1,11 @@
 import React from "react";
 import "../../style/css/ReadableAppStyle.css";
 import ReadablePrimaryHeader from "../ReadablePrimaryHeader";
-import MainSecondaryHeader from "./MainSecondaryHeader";
+import MainSecondaryHeader from "./secondary_header/MainSecondaryHeader";
 import MainCategoryNavPane from "./MainCategoryNavPane";
-import ReadablePostsByCategoryList from "../ReadablePostsByCategoryList";
-
-import ReadableNewPostCard from "../ReadableNewPostCard";
-import ReadableEditPostCard from "../ReadableEditPostCard";
+import ReadablePostsByCategoryList from "./ReadablePostsByCategoryList";
+import ReadableNewPostCard from "../post_card/dialogs/ReadableNewPostCard";
+import ReadableEditPostCard from "../post_card/dialogs/ReadableEditPostCard";
 import getMuiTheme from "material-ui/styles/getMuiTheme";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import { withRouter } from "react-router-dom";

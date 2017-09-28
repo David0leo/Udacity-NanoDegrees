@@ -1,22 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import "../style/css/ReadableAppStyle.css";
-import { postUnixTimeToSimplifiedTimeElapsedString } from "../utils/helpers";
-import ThumbVoter from "./ThumbVoter";
-import EditButton from "./EditButton";
-import DeleteButton from "./DeleteButton";
+import { postUnixTimeToSimplifiedTimeElapsedString } from "../../../utils/helpers";
+import ThumbVoter from "../../card_parts/ThumbVoter";
+import EditButton from "../../card_parts/EditButton";
+import DeleteButton from "../../card_parts/DeleteButton";
 
 import {
 	deleteCommentByCommentId,
 	upVoteCommentByCommentId,
 	downVoteCommentByCommentId,
 	updateCommentCountByPostId
-} from "../actions/ApiActions";
+} from "../../../actions/ApiActions";
 import {
 	toggleEditCommentModalIsOpen,
 	initializeEditComment
-} from "../actions";
+} from "../../../actions";
 
 class CommentCard extends React.Component {
 	render() {

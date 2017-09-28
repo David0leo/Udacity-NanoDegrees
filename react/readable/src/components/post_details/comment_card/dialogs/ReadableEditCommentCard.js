@@ -8,11 +8,11 @@ import HighlightOff from "material-ui/svg-icons/action/highlight-off";
 import { orange500, blue500, red500 } from "material-ui/styles/colors";
 import Dialog from "material-ui/Dialog";
 
-import ThumbVoter from "./ThumbVoter";
+import ThumbVoter from "../../../card_parts/ThumbVoter";
 import {
 	toggleEditCommentModalIsOpen,
 	initializeEditComment
-} from "../actions";
+} from "../../../../actions";
 
 const styles = {
 	errorStyle: {

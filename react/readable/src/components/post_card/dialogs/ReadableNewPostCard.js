@@ -1,17 +1,23 @@
 import React from "react";
+import ThumbVoter from "../../card_parts/ThumbVoter";
+import {
+	toggleNewPostModalIsOpen,
+	initializePostFormValues
+} from "../../../actions";
 import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import Dialog from "material-ui/Dialog";
 import TextField from "material-ui/TextField";
+import SelectField from "material-ui/SelectField";
+import MenuItem from "material-ui/MenuItem";
 import RaisedButton from "material-ui/RaisedButton";
 import CheckCircle from "material-ui/svg-icons/action/check-circle";
 import HighlightOff from "material-ui/svg-icons/action/highlight-off";
 import { orange500, blue500, red500 } from "material-ui/styles/colors";
 
-import ThumbVoter from "./ThumbVoter";
-import { postUnixTimeToSimplifiedTimeElapsedString } from "../utils/helpers";
+import Dialog from "material-ui/Dialog";
 
-import { toggleEditPostModalIsOpen, initializeEditPost } from "../actions";
+// Using some code from the redux-form site
+// http://redux-form.com/6.6.3/examples/material-ui/
 
 const styles = {
 	errorStyle: {
@@ -27,7 +33,7 @@ const styles = {
 
 function validate(values) {
 	const errors = {};
-	const requiredFields = ["title", "body"];
+	const requiredFields = ["title", "category", "body", "author"];
 	requiredFields.forEach(field => {
 		if (!values[field]) {
 			errors[field] = "Required";
@@ -54,20 +60,33 @@ const renderTextField = ({
 	/>
 );
 
-class ReadableEditPostCard extends React.Component {
-	componentDidMount() {
-		// this.props.initialize()
-	}
+const renderSelectField = ({
+	input,
+	label,
+	meta: { touched, error },
+	children,
+	...custom
+}) => (
+	<SelectField
+		floatingLabelText={label}
+		errorText={touched && error}
+		{...input}
+		onChange={(event, index, value) => input.onChange(value)}
+		children={children}
+		{...custom}
+	/>
+);
 
+class ReadableNewPostCard extends React.Component {
 	render() {
 		const {
 			handleSubmit,
 			pristine,
 			valid,
 			reset,
-			post,
 			submitting,
-			editPostModalIsOpen
+			categories,
+			newPostModalIsOpen
 		} = this.props;
 
 		const actions = [
@@ -84,7 +103,7 @@ class ReadableEditPostCard extends React.Component {
 			/>,
 			<RaisedButton
 				type="submit"
-				label="Clear Changes"
+				label="Clear"
 				labelPosition="after"
 				backgroundColor={orange500}
 				labelColor={"#fff"}
@@ -107,52 +126,67 @@ class ReadableEditPostCard extends React.Component {
 
 		return (
 			<Dialog
-				title="Edit Post"
+				title="Add Post"
 				actions={actions}
 				modal={false}
-				open={editPostModalIsOpen}
+				open={newPostModalIsOpen}
 				onRequestClose={this.onDismiss}
 			>
-				<div className="readable-edit-post-inner-card">
-					<form onSubmit={handleSubmit} className="readable-edit-post-form">
-						<div className="readable-edit-post-title">
+				<div className="readable-new-post-inner-card">
+					<form onSubmit={handleSubmit} className="readable-new-post-form">
+						<div className="readable-new-post-title">
 							<Field
 								name="title"
 								component={renderTextField}
 								hintText="Post Title"
-								floatingLabelText="Post Title - Max 80 characters"
+								floatingLabelText="Post Title - Maximum 80 characters"
 								multiLine={true}
 								rows={1}
 								fullWidth={true}
 								maxLength={80}
 							/>
 						</div>
-						<div className="readable-edit-post-category">
-							{`/${post.category}`}
+						<div className="readable-new-post-category">
+							<Field
+								name="category"
+								component={renderSelectField}
+								label="Post Category"
+							>
+								{categories.map(category => (
+									<MenuItem
+										value={category.name}
+										primaryText={`/${category.name}`}
+										key={`_addPostCategory_${category.name}`}
+									/>
+								))}
+							</Field>
 						</div>
-						<div className="readable-edit-post-body">
+						<div className="readable-new-post-body">
 							<Field
 								name="body"
 								component={renderTextField}
 								hintText="Post Body"
-								floatingLabelText="Post Body - Max 500 characters"
+								floatingLabelText="Post Body - Maximum 500 Characters"
 								multiLine={true}
 								rows={1}
 								fullWidth={true}
 								maxLength={500}
 							/>
 						</div>
-						<div className="readable-edit-post-author">
-							{"Posted "}
-							{postUnixTimeToSimplifiedTimeElapsedString(
-								Date.now(),
-								post.timestamp
-							)}{" "}
-							by {post.author}
+						<div className="readable-new-post-name">
+							<Field
+								name="author"
+								component={renderTextField}
+								hintText="Author"
+								floatingLabelText="Author - Maximum 30 Characters"
+								multiLine={true}
+								rows={1}
+								fullWidth={true}
+								maxLength={30}
+							/>
 						</div>
 					</form>
-
-					<ThumbVoter voteScore={post.voteScore} disabled={true} />
+					<ThumbVoter voteScore={1} disabled={true} />
 				</div>
 			</Dialog>
 		);
@@ -165,42 +199,37 @@ class ReadableEditPostCard extends React.Component {
 
 	onDismiss = () => {
 		this.props.reset();
-		this.props.toggleEditPostModalIsOpen(this.props.post);
+		this.props.toggleNewPostModalIsOpen();
 	};
 }
 
-function mapStateToProps({ main }) {
+function mapStateToProps({ main, API }) {
 	return {
-		post: main.loadedPost,
-		editPostModalIsOpen: main.editPostModalIsOpen
-		// initialValues: {
-		//   title: main.loadedPost.title,
-		//   body: main.loadedPost.body
-		// }
+		categories: API.categories,
+		newPostModalIsOpen: main.newPostModalIsOpen
 	};
 }
 
 function mapDispatchToProps(dispatch) {
 	return {
-		toggleEditPostModalIsOpen: data => dispatch(toggleEditPostModalIsOpen(data))
+		toggleNewPostModalIsOpen: () => dispatch(toggleNewPostModalIsOpen())
 	};
 }
 
-ReadableEditPostCard = connect(mapStateToProps, mapDispatchToProps)(
-	ReadableEditPostCard
+ReadableNewPostCard = connect(mapStateToProps, mapDispatchToProps)(
+	ReadableNewPostCard
 );
 
-ReadableEditPostCard = reduxForm({
-	form: "readableEditPostCard",
-	// enableReinitialize: false,
+ReadableNewPostCard = reduxForm({
+	form: "readableNewPostCard",
 	validate
-})(ReadableEditPostCard);
+})(ReadableNewPostCard);
 
-ReadableEditPostCard = connect(
+ReadableNewPostCard = connect(
 	state => ({
-		initialValues: state.load.loadedPost
+		initialValues: state.load.post
 	}),
-	{ loadPost: initializeEditPost }
-)(ReadableEditPostCard);
+	{ loadPost: initializePostFormValues }
+)(ReadableNewPostCard);
 
-export default ReadableEditPostCard;
+export default ReadableNewPostCard;

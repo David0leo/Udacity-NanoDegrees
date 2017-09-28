@@ -1,6 +1,5 @@
 import React from "react";
 import { MdThumbUp, MdThumbDown } from "react-icons/lib/md";
-import "../style/css/ReadableAppStyle.css";
 
 class ThumbVoter extends React.Component {
 	state = {
