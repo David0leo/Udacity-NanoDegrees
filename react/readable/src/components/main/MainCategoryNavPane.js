@@ -23,8 +23,7 @@ class MainCategoryNavPane extends React.Component {
 								? "nav-pane-category-list-item-hover"
 								: "nav-pane-category-list-item"
 						}
-						key={`_category_all`}
-						onClick={this.updateCurrentCategory.bind(this, "all")}
+						key={`category_all`}
 					>
 						<Link to="/">/ all</Link>
 					</li>
@@ -36,8 +35,7 @@ class MainCategoryNavPane extends React.Component {
 									? "nav-pane-category-list-item-hover"
 									: "nav-pane-category-list-item"
 							}
-							key={`_category_${category.path}`}
-							onClick={this.updateCurrentCategory.bind(this, category.name)}
+							key={`category_${category.path}`}
 						>
 							<Link to={`/${category.name}`}>/ {category.name}</Link>
 						</li>
@@ -46,15 +44,6 @@ class MainCategoryNavPane extends React.Component {
 			</div>
 		);
 	}
-
-	updateCurrentCategory = (newCurrentCategory, event) => {
-		// this.props.updateCurrentCategory({ currentCategory: newCurrentCategory });
-		// if (newCurrentCategory === 'all'){
-		//   this.props.getAllPosts()
-		// } else {
-		//   this.props.getPostsByCategory(newCurrentCategory)
-		// }
-	};
 }
 
 // Get the main state so you know if the nav pane is open,

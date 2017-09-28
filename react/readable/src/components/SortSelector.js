@@ -1,71 +1,58 @@
-import React from 'react'
-import { MdSort } from 'react-icons/lib/md'
-import SortOrderButton from './SortOrderButton'
-import { connect } from 'react-redux'
-import { updateSortBy, toggleSortOrderIsDescending } from '../actions'
+import React from "react";
+import { MdSort } from "react-icons/lib/md";
+import SortOrderButton from "./SortOrderButton";
+import { connect } from "react-redux";
+import { updateSortBy, toggleSortOrderIsDescending } from "../actions";
 
 class SortSelector extends React.Component {
+	render() {
+		const { options, size, sortOrderIsDescending } = this.props;
 
-  render() {
-    const { 
-      options, 
-      size, 
-      sortOrderIsDescending,
-    } = this.props
+		return (
+			<div className="sort-selector">
+				<MdSort size={size} />
+				<select
+					onChange={event => {
+						this.handleSelectOnChange(event.target.value);
+					}}
+				>
+					{options.map(option => (
+						<option value={option} key={`_option_${option}`}>
+							{option}
+						</option>
+					))}
+				</select>
+				<SortOrderButton
+					size={size}
+					sortOrderIsDescending={sortOrderIsDescending}
+					sortOrderButtonOnClickCallback={this.handleSortOrderToggle}
+				/>
+			</div>
+		);
+	}
 
-    return (
-      <div className="sort-selector">
-        <MdSort size={size}></MdSort>
-        <select 
-          onChange={(event) => {
-            this.handleSelectOnChange(event.target.value)
-          }}
-        >
-          {options.map((option) =>
-          <option 
-            value={option} 
-            key={`_option_${option}`}
-          >
-          {option}
-          </option>
-          )}
-        </select>
-        <SortOrderButton 
-          size={size} 
-          sortOrderIsDescending={sortOrderIsDescending}
-          sortOrderButtonOnClickCallback={this.handleSortOrderToggle}
-        ></SortOrderButton>
-      </div>
-    )
-  }
+	handleSelectOnChange = value => {
+		this.props.updateSortBy({ sortBy: value });
+	};
 
-  handleSelectOnChange = (value) => {
-    this.props.updateSortBy({sortBy: value})
-  }
-
-  handleSortOrderToggle = () => {
-    this.props.toggleSortOrderIsDescending()
-  }
+	handleSortOrderToggle = () => {
+		this.props.toggleSortOrderIsDescending();
+	};
 }
 
-// defaultProps = {
-//   options: [],
-//   size: 50,
-//   sortCallback: function(a, b){}
-// }
-
 function mapStateToProps({ main }) {
-  return {
-    sortBy: main.sortBy,
-    sortOrderIsDescending: main.sortOrderIsDescending
-  }
+	return {
+		sortBy: main.sortBy,
+		sortOrderIsDescending: main.sortOrderIsDescending
+	};
 }
 
 function mapDispatchToProps(dispatch) {
-  return {
-    updateSortBy: (data) => dispatch(updateSortBy(data)),
-    toggleSortOrderIsDescending: (data) => dispatch(toggleSortOrderIsDescending(data))
-  }
+	return {
+		updateSortBy: data => dispatch(updateSortBy(data)),
+		toggleSortOrderIsDescending: data =>
+			dispatch(toggleSortOrderIsDescending(data))
+	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SortSelector)
+export default connect(mapStateToProps, mapDispatchToProps)(SortSelector);

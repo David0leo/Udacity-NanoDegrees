@@ -20,21 +20,7 @@ import {
 
 class CommentCard extends React.Component {
 	render() {
-		const defaultComment = {
-			id: "",
-			parentId: "",
-			timestamp: "",
-			body: "",
-			author: "",
-			voteScore: 0,
-			deleted: false,
-			parentDeleted: false
-		};
-
-		const comment = {
-			...defaultComment,
-			...this.props.comment
-		};
+		const comment = this.props.comment;
 		return (
 			<div className="comment-card">
 				<h1 className="comment-author">{comment.author}</h1>
@@ -51,8 +37,8 @@ class CommentCard extends React.Component {
 					voteChangeCallback={this.handleVoteChange}
 				/>
 				<div className="modify-comment-buttons">
-					<EditButton onClick={this.handleEditCommentModalOpen} />
-					<DeleteButton onClick={this.handleDeleteComment} />
+					<EditButton onClick={this.handleEditCommentModalOpen} size={20} />
+					<DeleteButton onClick={this.handleDeleteComment} size={20} />
 				</div>
 			</div>
 		);

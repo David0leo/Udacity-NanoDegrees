@@ -4,10 +4,10 @@ import SortSelector from "../SortSelector";
 import ReadableNewPostButton from "../ReadableNewPostButton";
 
 const MainSecondaryHeader = ({
-	size = 50,
-	newPostCallback = function() {},
-	sortCallback = function() {},
-	toggleNavPaneCallback = function() {}
+	size,
+	newPostCallback,
+	sortCallback,
+	toggleNavPaneCallback
 }) => {
 	return (
 		<div className="main-secondary-header">
