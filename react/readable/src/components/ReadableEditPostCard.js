@@ -59,8 +59,6 @@ class ReadableEditPostCard extends React.Component {
     // this.props.initialize()
   }
 
-  compo;
-
   render() {
     const {
       handleSubmit,
@@ -190,7 +188,7 @@ ReadableEditPostCard = reduxForm({
 
 ReadableEditPostCard = connect(
   state => ({
-    initialValues: state.load.loadedPost
+    initialValues: state.loadPost.loadedPost
   }),
   { loadPost: initializeEditPost }
 )(ReadableEditPostCard);

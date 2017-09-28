@@ -54,7 +54,7 @@ class PostCard extends React.Component {
     );
   }
 
-  handleVoteChange = update => {
+  handleVoteChange = (update) => {
     if (update.option === "upVote") {
       this.props.upVotePostById(this.props.post.id);
     } else if (update.option === "downVote") {
