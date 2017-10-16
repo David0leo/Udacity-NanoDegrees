@@ -1,6 +1,19 @@
 import React, { Component } from "react";
-import { View, Text } from "react-native";
-import { getMetricMetaInfo } from "../utils/helpers";
+import { View, Text, TouchableOpacity } from "react-native";
+import { getMetricMetaInfo, timeToString } from "../utils/helpers";
+import UdaciSlider from "./UdaciSlider";
+import UdaciStepper from "./UdaciStepper";
+import DateHeader from "./DateHeader";
+
+function SubmitButton({ onPress }) {
+  return (
+    <TouchableOpacity
+      onPress={onPress}
+    >
+      <Text>Submit</Text>
+    </TouchableOpacity>
+  )
+}
 
 export default class AddEntry extends Component {
 	state = {
@@ -39,9 +52,62 @@ export default class AddEntry extends Component {
 		this.setState(() => ({
 			[metric]: value
 		}));
-	};
+  };
+  
+  submit = () => {
+    const key = timeToString()
+    const entry = this.state
+
+    this.setState(() => ({
+      run: 0,
+      bike: 0,
+      swim: 0,
+      sleep: 0,
+      eat: 0
+    }))
+
+    // Update Redux
+
+    // Navigate to home
+
+    // Save to a db
+
+    // clear local notification
+
+  }
 
 	render() {
-		return <View>{getMetricMetaInfo("bike").getIcon()}</View>;
+		const metaInfo = getMetricMetaInfo();
+
+		return (
+			<View>
+				<DateHeader date={new Date().toLocaleDateString()} />
+				{Object.keys(metaInfo).map(key => {
+					const { getIcon, type, ...rest } = metaInfo[key];
+					const value = this.state[key];
+
+					return (
+						<View key={key}>
+							{getIcon()}
+							{type === "slider" ? (
+								<UdaciSlider
+									value={value}
+									onChange={value => this.slide(key, value)}
+									{...rest}
+								/>
+							) : (
+								<UdaciStepper
+									value={value}
+									onIncrement={() => this.increment(key)}
+									onDecrement={() => this.decrement(key)}
+									{...rest}
+								/>
+							)}
+						</View>
+					);
+				})}
+        <SubmitButton onPress={this.submit}/>
+			</View>
+		);
 	}
 }
