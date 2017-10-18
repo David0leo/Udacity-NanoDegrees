@@ -1,26 +1,43 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, Platform, StyleSheet } from "react-native";
-import { Ionicons } from '@expo/vector-icons'
-import { connect } from 'react-redux'
+import {
+	View,
+	Text,
+	TouchableOpacity,
+	Platform,
+	StyleSheet
+} from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { connect } from "react-redux";
+import { NavigationActions } from "react-navigation";
 
-import { getMetricMetaInfo, timeToString, getDailyReminderValue } from "../utils/helpers";
+import {
+	getMetricMetaInfo,
+	timeToString,
+	getDailyReminderValue,
+	clearLocalNotifications,
+	setLocalNotification
+} from "../utils/helpers";
 import UdaciSlider from "./UdaciSlider";
 import UdaciStepper from "./UdaciStepper";
 import DateHeader from "./DateHeader";
-import TextButton from './TextButton';
-import { submitEntry, removeEntry } from '../utils/api';
-import { addEntry } from '../actions';
-import { purple, white } from '../utils/colors'
+import TextButton from "./TextButton";
+import { submitEntry, removeEntry } from "../utils/api";
+import { addEntry } from "../actions";
+import { purple, white } from "../utils/colors";
 
 function SubmitButton({ onPress }) {
-  return (
-    <TouchableOpacity
-      onPress={onPress}
-			style={Platform.OS === 'ios' ? styles.iosSubmitButton : styles.androidSubmitButton}
-    >
-      <Text style={styles.submitButtonText}>Submit</Text>
-    </TouchableOpacity>
-  )
+	return (
+		<TouchableOpacity
+			onPress={onPress}
+			style={
+				Platform.OS === "ios"
+					? styles.iosSubmitButton
+					: styles.androidSubmitButton
+			}
+		>
+			<Text style={styles.submitButtonText}>Submit</Text>
+		</TouchableOpacity>
+	);
 }
 
 class AddEntry extends Component {
@@ -60,60 +77,80 @@ class AddEntry extends Component {
 		this.setState(() => ({
 			[metric]: value
 		}));
-  };
-  
-  submit = () => {
-    const key = timeToString()
-    const entry = this.state
+	};
 
-    this.setState(() => ({
-      run: 0,
-      bike: 0,
-      swim: 0,
-      sleep: 0,
-      eat: 0
-    }))
+	submit = () => {
+		const key = timeToString();
+		const entry = this.state;
 
-    // Update Redux
-    this.props.dispatch(addEntry({
-      [key]: entry
-    }))
+		this.setState(() => ({
+			run: 0,
+			bike: 0,
+			swim: 0,
+			sleep: 0,
+			eat: 0
+		}));
 
-    // Navigate to home
+		// Update Redux
+		this.props.dispatch(
+			addEntry({
+				[key]: entry
+			})
+		);
 
-    // Save to a db
-    submitEntry({ key, entry })
+		// Navigate to home
+		this.toHome();
 
-    // clear local notification
+		// Save to a db
+		submitEntry({ key, entry });
 
-  }
+		// clear local notification
+		clearLocalNotifications()
+			.then(setLocalNotification)
+	};
 
-  reset = () => {
-    const key = timeToString()
+	reset = () => {
+		const key = timeToString();
 
-    // update redux
-    this.props.dispatch(addEntry({
-      [key]: getDailyReminderValue()
-    }))
+		// update redux
+		this.props.dispatch(
+			addEntry({
+				[key]: getDailyReminderValue()
+			})
+		);
 
-    // route to home
+		// route to home
+		this.toHome();
 
-    // update db
-    removeEntry({ key })
-  }
+		// update db
+		removeEntry({ key });
+	};
+
+	toHome = () => {
+		this.props.navigation.dispatch(
+			NavigationActions.back({
+				key: "AddEntry"
+			})
+		);
+	};
 
 	render() {
-    const metaInfo = getMetricMetaInfo();
-    
-    if (this.props.alreadyLogged) {
-      return (
-        <View style={styles.center}>
-          <Ionicons name={Platform.OS === 'ios' ? 'ios-happy-outline' : 'md-happy'} size={100}></Ionicons>
-          <Text>You already logged your information for today.</Text>
-          <TextButton style={{padding: 10}} onPress={this.reset}>Reset</TextButton>
-        </View>
-      )
-    }
+		const metaInfo = getMetricMetaInfo();
+
+		if (this.props.alreadyLogged) {
+			return (
+				<View style={styles.center}>
+					<Ionicons
+						name={Platform.OS === "ios" ? "ios-happy-outline" : "md-happy"}
+						size={100}
+					/>
+					<Text>You already logged your information for today.</Text>
+					<TextButton style={{ padding: 10 }} onPress={this.reset}>
+						Reset
+					</TextButton>
+				</View>
+			);
+		}
 
 		return (
 			<View style={styles.container}>
@@ -142,7 +179,7 @@ class AddEntry extends Component {
 						</View>
 					);
 				})}
-        <SubmitButton onPress={this.submit}/>
+				<SubmitButton onPress={this.submit} />
 			</View>
 		);
 	}
@@ -152,19 +189,19 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		padding: 20,
-		backgroundColor: white,
+		backgroundColor: white
 	},
 	row: {
-		flexDirection: 'row',
+		flexDirection: "row",
 		flex: 1,
-		alignItems: 'center',
+		alignItems: "center"
 	},
 	center: {
 		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
+		justifyContent: "center",
+		alignItems: "center",
 		marginLeft: 30,
-		marginRight: 30,
+		marginRight: 30
 	},
 	iosSubmitButton: {
 		backgroundColor: purple,
@@ -172,7 +209,7 @@ const styles = StyleSheet.create({
 		borderRadius: 7,
 		height: 45,
 		marginLeft: 40,
-		marginRight: 40,
+		marginRight: 40
 	},
 	androidSubmitButton: {
 		backgroundColor: purple,
@@ -181,23 +218,23 @@ const styles = StyleSheet.create({
 		paddingRight: 30,
 		height: 45,
 		borderRadius: 2,
-		alignSelf: 'flex-end',
-		justifyContent: 'center',
-		alignItems: 'center',
+		alignSelf: "flex-end",
+		justifyContent: "center",
+		alignItems: "center"
 	},
 	submitButtonText: {
 		color: white,
 		fontSize: 22,
-		textAlign: 'center',
+		textAlign: "center"
 	}
-})
+});
 
 function mapStateToProps(state) {
-  const key = timeToString()
+	const key = timeToString();
 
-  return {
-    alreadyLogged: state[key] && typeof state[key].today ==='undefined'
-  }
+	return {
+		alreadyLogged: state[key] && typeof state[key].today === "undefined"
+	};
 }
 
-export default connect(mapStateToProps)(AddEntry)
+export default connect(mapStateToProps)(AddEntry);
