@@ -1,13 +1,19 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import './ReactotronConfig';
+
+import { getDecks, saveDeckTitle } from './utils/api';
 
 export default class App extends React.Component {
+  addDeckTitle() {
+    saveDeckTitle({title: "help"})
+  }
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+      <TouchableOpacity style={{backgroundColor: 'red', width: 50, height: 50}} onPress={this.addDeckTitle}/>
+        <TouchableOpacity style={{backgroundColor: 'blue', width: 50, height: 50}} onPress={getDecks}/>
       </View>
     );
   }
