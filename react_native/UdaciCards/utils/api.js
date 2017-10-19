@@ -6,10 +6,10 @@ const API_STORAGE_KEY = "UdaciCards:david0leo";
 export async function getDecks() {
   try {
     const value = await AsyncStorage.getItem(API_STORAGE_KEY).then((response)=>{return JSON.parse(response)});
-    console.log(value)
+    // console.log(value)
     return value
   } catch (error) {
-    console.warn('error fetching decks')
+    console.warn('Error loading decks')
   }
 }
 
@@ -23,7 +23,7 @@ export function getDeck({ id }) {
 }
 // saveDeckTitle: take in a single title argument and add it to the decks
 export function saveDeckTitle({ title }) {
-	return AsyncStorage.setItem(
+	return AsyncStorage.mergeItem(
 		API_STORAGE_KEY,
 		JSON.stringify({
 			[title]: {
