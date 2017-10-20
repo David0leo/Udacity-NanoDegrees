@@ -1,9 +1,12 @@
 import React from "react";
 import { StyleSheet, View, Text, TextInput, Platform } from "react-native";
-import { addCardToDeck } from "../utils/api";
-import SimpleButton from './SimpleButton';
+import { connect } from "react-redux";
 
-export default class NewQuestionView extends React.Component {
+import { addCardToDeck } from "../utils/api";
+import { addCard } from "../actions";
+import SimpleButton from "./SimpleButton";
+
+class NewQuestionView extends React.Component {
 	static navigationOptions = ({ navigation }) => {
 		const { deck } = navigation.state.params;
 
@@ -20,11 +23,12 @@ export default class NewQuestionView extends React.Component {
 
 	submitQuestion = () => {
 		const { question, answer } = this.state;
-		const { deck, addQuestionCallback } = this.props.navigation.state.params;
+		const { deck, addCard } = this.props;
 
 		if (question !== "" && answer !== "") {
-      addCardToDeck({ title: deck.title, card: { question, answer } }).then(addQuestionCallback({question, answer}))
-      this.props.navigation.goBack();
+			addCardToDeck({ title: deck.title, card: { question, answer } });
+			addCard(deck.title, { question, answer });
+			this.props.navigation.goBack();
 		} else {
 			this.setState({ displayWarning: true });
 		}
@@ -53,7 +57,7 @@ export default class NewQuestionView extends React.Component {
 						selectionColor={"black"}
 					/>
 				</View>
-        <SimpleButton buttonText="Submit" onPress={this.submitQuestion}/>
+				<SimpleButton buttonText="Submit" onPress={this.submitQuestion} />
 			</View>
 		);
 	}
@@ -64,15 +68,14 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center"
-  },
-  qaContainer: {
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  qaText: {
-    fontSize: 20,
-
-  },
+	},
+	qaContainer: {
+		flexDirection: "row",
+		alignItems: "center"
+	},
+	qaText: {
+		fontSize: 20
+	},
 	textInput: {
 		marginTop: 20,
 		marginBottom: 20,
@@ -82,3 +85,18 @@ const styles = StyleSheet.create({
 		textAlign: "center"
 	}
 });
+
+function mapStateToProps(decks, { navigation }) {
+	const { deck } = navigation.state.params;
+	return {
+		deck: decks[deck.title]
+	};
+}
+
+function mapDispatchToProps(dispatch) {
+	return {
+		addCard: (title, card) => dispatch(addCard(title, card))
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewQuestionView);

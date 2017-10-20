@@ -3,12 +3,11 @@ import { AsyncStorage } from "react-native";
 const API_STORAGE_KEY = "UdaciCards:david0leo";
 
 // getDecks: return all the decks along with titles questions and answers
-export async function getDecks() {
+export function getDecks() {
 	try {
-		const value = await AsyncStorage.getItem(API_STORAGE_KEY).then(response => {
+		const value = AsyncStorage.getItem(API_STORAGE_KEY).then(response => {
 			return JSON.parse(response);
 		});
-		// console.log(value)
 		return value;
 	} catch (error) {
 		console.warn("Error loading decks");
@@ -52,12 +51,4 @@ export function addCardToDeck({ title, card }) {
 			})
 		);
 	});
-	// return AsyncStorage.mergeItem(
-	// 	API_STORAGE_KEY,
-	// 	JSON.stringify({
-	// 		[title]: {
-	// 			questions: [card]
-	// 		}
-	// 	})
-	// );
 }

@@ -1,11 +1,12 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { connect } from "react-redux";
 
 import Deck from "./Deck";
 import SimpleButton from "./SimpleButton";
 import { getDeck } from "../utils/api";
 
-export default class DeckView extends React.Component {
+class DeckView extends React.Component {
 	static navigationOptions = ({ navigation }) => {
 		return {
 			headerTitle: ``,
@@ -13,54 +14,23 @@ export default class DeckView extends React.Component {
 		};
 	};
 
-	state = {
-		deck: {
-			title: "",
-			questions: []
-		}
-	};
-
-	componentDidMount() {
-		const { deck } = this.props.navigation.state.params;
-
-		this.refresh(deck.title);
-	}
-
-	refresh = title => {
-		getDeck({ id: title })
-			.then(deck => this.setState({ deck }))
-			.then(() => console.log("yes"));
-	};
-
-	addQuestionCallback = question => {
-    console.log(question)
-    console.log(this.state.questions)
-    this.setState(state => {
-      return {
-        ...state,
-        ['deck']: {
-          ...state.deck,
-          'questions': [...state.deck.questions, question]
-        }
-        
-      }})
-  };
-
 	addCard = () => {
 		//navigate to new question view
-		const { deck } = this.state;
+		const { deck } = this.props;
 		this.props.navigation.navigate("NewQuestionView", {
-			deck,
-			addQuestionCallback: this.addQuestionCallback
+			deck
 		});
 	};
 
-	startQuiz() {}
+	startQuiz = () => {
+		const { deck } = this.props;
+		this.props.navigation.navigate("QuizView", {
+			deck
+		});
+	};
 
 	render() {
-		const { deck } = this.state;
-
-		console.log(this.state);
+		const { deck } = this.props;
 
 		return (
 			<View style={styles.container}>
@@ -84,7 +54,15 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: "white"
-		// justifyContent: 'center',
-		// alignItems: 'center'
 	}
 });
+
+function mapStateToProps(decks, { navigation }) {
+	const { deck } = navigation.state.params;
+
+	return {
+		deck: decks[deck.title]
+	};
+}
+
+export default connect(mapStateToProps)(DeckView);
