@@ -7,11 +7,13 @@ import {
 	StatusBar,
 	Platform
 } from "react-native";
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 import { TabNavigator, StackNavigator } from "react-navigation";
 import { Constants } from 'expo';
+import { Entypo } from '@expo/vector-icons';
 
 import DeckListView from "./components/DeckListView";
-import NewDeck from "./components/NewDeck";
 import DeckView from './components/DeckView';
 import NewDeckView from './components/NewDeckView';
 import NewQuestionView from './components/NewQuestionView';
@@ -30,18 +32,18 @@ function MainStatusBar({ backgroundColor, ...props}) {
 
 const Tabs = TabNavigator(
 	{
-		DeckList: {
+		DeckListView: {
 			screen: DeckListView,
 			navigationOptions: {
-				tabBarLabel: "Decks"
-				//tabBarIcon: some decks icon
+				tabBarLabel: "Decks",
+				tabBarIcon: ({ tintColor }) => <Entypo name='document-landscape' size={30} color={tintColor}/>
 			}
 		},
-		NewDeck: {
-			screen: NewDeck,
+		NewDeckView: {
+			screen: NewDeckView,
 			navigationOptions: {
-				tabBarLabel: "New Deck"
-				//tabBarIcon: probably some plus icon
+				tabBarLabel: "New Deck",
+				tabBarIcon: ({ tintColor }) => <Entypo name='plus' size={30} color={tintColor}/>
 			}
 		}
 	},
@@ -51,8 +53,10 @@ const Tabs = TabNavigator(
 		},
 		tabBarOptions: {
 			activeTintColor: "white",
+			inactiveTintColor: "rgba(255, 255, 255, 0.5)",
 			style: {
 				height: 50,
+				paddingBottom: 3,
 				backgroundColor: primaryColor,
 				shadowOffset: {
 					width: 0,
@@ -67,7 +71,10 @@ const Tabs = TabNavigator(
 
 const MainNavigator = StackNavigator({
 	Home: {
-		screen: Tabs
+		screen: Tabs,
+		navigationOptions: {
+			headerBackTitle: 'Decks',
+		}
   },
   QuizView: {
     screen: QuizView,
@@ -83,8 +90,15 @@ const MainNavigator = StackNavigator({
     navigationOptions: {
       headerTintColor: 'white',
       headerStyle: {
-        backgroundColor: 'green'
-      }
+				backgroundColor: 'green',
+				paddingTop: 20,
+				paddingBottom: 20,
+			},
+			headerTitleStyle: {
+				// alignSelf: 'flex-start',
+				// left: Platform.OS === 'ios' ? -50 : -15,
+				// fontSize: 20,
+			},
     }
   },
   DeckView: {
@@ -97,12 +111,11 @@ const MainNavigator = StackNavigator({
 				paddingBottom: 20
 			},
 			headerTitleStyle: {
-				alignSelf: 'flex-start',
-				left: Platform.OS === 'ios' ? -50 : -15,
-				fontSize: 20,
+				// alignSelf: 'flex-start',
+				// left: Platform.OS === 'ios' ? -50 : -15,
+				// fontSize: 20,
 			},
-			title: 'Decks'
-    }
+		},
   }
 });
 

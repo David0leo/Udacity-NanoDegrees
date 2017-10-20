@@ -15,7 +15,6 @@ export default class DeckListView extends React.Component {
 	};
 
 	componentDidMount() {
-		saveDeckTitle({ title: "work" });
 		getDecks()
 			.then(response => {
 				if (response !== undefined) {
