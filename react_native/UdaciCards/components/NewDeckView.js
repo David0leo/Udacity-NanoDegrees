@@ -18,7 +18,12 @@ class NewDeckView extends React.Component {
 			// add deck to redux store
 			this.props.dispatch(addDeck(this.state.newDeckTitle));
 		}
-		this.props.navigation.navigate("Home");
+		this.props.navigation.navigate("DeckView", {
+			deck: {
+				title: this.state.newDeckTitle,
+				questions: []
+			}
+		});
 	};
 
 	render() {

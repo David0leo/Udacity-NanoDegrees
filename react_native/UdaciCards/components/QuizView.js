@@ -34,13 +34,7 @@ function CardFace({
 				textColor={"black"}
 			/>
 
-			<View
-				style={{
-					flexDirection: "column",
-					justifyContent: "center",
-					alignItems: "center"
-				}}
-			>
+			<View style={styles.center}>
 				<Text style={styles.headerText}>{header}</Text>
 				<Text style={styles.titleText}> {title} </Text>
 			</View>
@@ -76,6 +70,7 @@ class QuizView extends React.Component {
 
 	state = {
 		quizFinished: false,
+		hasQuestions: false,
 		currentCardIndex: 0,
 		numberCards: 0,
 		currentCard: {
@@ -93,12 +88,7 @@ class QuizView extends React.Component {
 	};
 
 	componentDidMount() {
-		const { deck } = this.props.navigation.state.params;
-
-		this.setState({
-			currentCard: deck.questions[this.state.currentCardIndex],
-			numberCards: deck.questions.length
-		});
+		this.restart();
 	}
 
 	flipCard = () => {
@@ -155,19 +145,48 @@ class QuizView extends React.Component {
 	};
 
 	nextCard = () => {
-		const { deck } = this.props.navigation.state.params;
-		if (this.state.currentCardIndex < this.state.numberCards - 1) {
-			this.setState((prevState, props) => {
-				return {
-					currentCardIndex: prevState.currentCardIndex + 1,
-					currentCard: deck.questions[prevState.currentCardIndex + 1]
-				};
-			});
-		} else {
-			this.setState({
-				quizFinished: true
-			});
+		if (!this.state.frontVisible) {
+			this.flipCard();
 		}
+		setTimeout(() => {
+			const { deck } = this.props.navigation.state.params;
+			if (this.state.currentCardIndex < this.state.numberCards - 1) {
+				this.setState((prevState, props) => {
+					return {
+						currentCardIndex: prevState.currentCardIndex + 1,
+						currentCard: deck.questions[prevState.currentCardIndex + 1]
+					};
+				});
+			} else {
+				this.setState({
+					quizFinished: true
+				});
+			}
+		}, this.state.flipDuration);
+	};
+
+	restart = () => {
+		const { deck } = this.props.navigation.state.params;
+		const numberCards = deck.questions.length;
+		let hasQuestions = false;
+		let currentCard = {};
+		if (numberCards > 0) {
+			hasQuestions = true;
+			currentCard = deck.questions[0];
+		}
+
+		this.setState({
+			quizFinished: false,
+			numCorrect: 0,
+			numIncorrect: 0,
+			numberCards,
+			currentCardIndex: 0,
+			hasQuestions,
+			currentCard,
+			frontVisible: true,
+			frontRotation: new Animated.Value(0),
+			backRotation: new Animated.Value(0.5)
+		});
 	};
 
 	render() {
@@ -183,7 +202,8 @@ class QuizView extends React.Component {
 			numberCards,
 			currentCard,
 			quizFinished,
-			numCorrect
+			numCorrect,
+			hasQuestions
 		} = this.state;
 
 		const scoreColor = (numCorrect, numberCards) => {
@@ -196,72 +216,79 @@ class QuizView extends React.Component {
 			}
 		};
 
-		return quizFinished ? (
-			<View
-				style={[
-					styles.container,
-					{ justifyContent: "center", alignItems: "center" }
-				]}
-			>
-				<Text style={{ fontSize: 40 }}>Quiz Complete!</Text>
-				<View style={{ flexDirection: "row" }}>
-					<Text style={{ fontSize: 30 }}>Your Score: </Text>
-					<Text
-						style={{ fontSize: 30, color: scoreColor(numCorrect, numberCards) }}
-					>
-						{numCorrect}
-					</Text>
-					<Text style={{ fontSize: 30 }}>/{numberCards}</Text>
+		return hasQuestions ? (
+			quizFinished ? (
+				<View style={[styles.container, styles.center]}>
+					<Text style={{ fontSize: 40 }}>Quiz Complete!</Text>
+					<View style={{ flexDirection: "row" }}>
+						<Text style={{ fontSize: 30 }}>Your Score: </Text>
+						<Text
+							style={{
+								fontSize: 30,
+								color: scoreColor(numCorrect, numberCards)
+							}}
+						>
+							{numCorrect}
+						</Text>
+						<Text style={{ fontSize: 30 }}>/{numberCards}</Text>
+					</View>
+					<SimpleButton buttonText={"Restart Quiz"} onPress={this.restart} />
 				</View>
-			</View>
+			) : (
+				<View style={styles.container}>
+					<Text style={styles.indexText}>{`${currentCardIndex +
+						1}/${numberCards}`}</Text>
+					{/* Front */}
+					<Animated.View
+						style={[
+							styles.card,
+							styles.flipView,
+							{
+								transform: [
+									{ perspective: this.state.perspective },
+									{ rotateY: frontRotation }
+								]
+							}
+						]}
+					>
+						<CardFace
+							title={currentCard.question}
+							header="Q:"
+							onFlip={this.flipCard}
+							frontVisible={this.state.frontVisible}
+							onPressCorrect={this.markCorrect}
+							onPressIncorrect={this.markIncorrect}
+						/>
+					</Animated.View>
+					{/* Back */}
+					<Animated.View
+						style={[
+							styles.card,
+							styles.flipView,
+							{
+								transform: [
+									{ perspective: this.state.perspective },
+									{ rotateY: backRotation }
+								]
+							}
+						]}
+					>
+						<CardFace
+							title={currentCard.answer}
+							header="A:"
+							onFlip={this.flipCard}
+							frontVisible={this.state.frontVisible}
+							onPressCorrect={this.markCorrect}
+							onPressIncorrect={this.markIncorrect}
+						/>
+					</Animated.View>
+				</View>
+			)
 		) : (
-			<View style={styles.container}>
-				<Text style={styles.indexText}>{`${currentCardIndex +
-					1}/${numberCards}`}</Text>
-				{/* Front */}
-				<Animated.View
-					style={[
-						styles.card,
-						styles.flipView,
-						{
-							transform: [
-								{ perspective: this.state.perspective },
-								{ rotateY: frontRotation }
-							]
-						}
-					]}
-				>
-					<CardFace
-						title={currentCard.question}
-						header="Q:"
-						onFlip={this.flipCard}
-						frontVisible={this.state.frontVisible}
-						onPressCorrect={this.markCorrect}
-						onPressIncorrect={this.markIncorrect}
-					/>
-				</Animated.View>
-				{/* Back */}
-				<Animated.View
-					style={[
-						styles.card,
-						styles.flipView,
-						{
-							transform: [
-								{ perspective: this.state.perspective },
-								{ rotateY: backRotation }
-							]
-						}
-					]}
-				>
-					<CardFace
-						title={currentCard.answer}
-						header="A:"
-						onFlip={this.flipCard}
-						frontVisible={this.state.frontVisible}
-						onPressCorrect={this.markCorrect}
-						onPressIncorrect={this.markIncorrect}
-					/>
-				</Animated.View>
+			<View style={[styles.container, styles.center]}>
+				<Text style={styles.noCardsText}>
+					This deck has no cards. Press back and add a card to start a quiz.
+				</Text>
 			</View>
 		);
 	}
@@ -270,6 +297,10 @@ class QuizView extends React.Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1
+	},
+	center: {
+		justifyContent: "center",
+		alignItems: "center"
 	},
 	card: {
 		margin: 50,
@@ -308,7 +339,7 @@ const styles = StyleSheet.create({
 		fontSize: 32,
 		maxWidth: 250,
 		maxHeight: 250,
-		flexWrap: 'wrap'
+		flexWrap: "wrap"
 	},
 	answerInputText: {
 		marginTop: 20,
@@ -323,10 +354,15 @@ const styles = StyleSheet.create({
 	},
 	flipButton: {
 		backgroundColor: "white",
-		borderWidth:0,
+		borderWidth: 0,
 		padding: 10,
 		marginBottom: 100
 		// alignSelf: "flex-end"
+	},
+	noCardsText: {
+		textAlign: "center",
+		fontSize: 32,
+		padding: 20
 	}
 });
 
