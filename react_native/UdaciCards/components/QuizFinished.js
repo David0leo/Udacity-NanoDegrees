@@ -3,7 +3,7 @@ import { StyleSheet, View, Text } from "react-native";
 import { connect } from "react-redux";
 
 import SimpleButton from "./SimpleButton";
-import { mdOrange700, mdRed500, mdGreen500 } from "../utils/colors";
+import { mdOrange700, mdRed500, mdGreen500, mdBlue700 } from "../utils/colors";
 
 const scoreColor = (numberCorrect, numberOfQuestions) => {
 	if (numberCorrect === numberOfQuestions) {
@@ -18,7 +18,7 @@ const scoreColor = (numberCorrect, numberOfQuestions) => {
 class QuizFinished extends React.Component {
 
 	render() {
-    const { numberOfQuestions, numberCorrect, restartCallback } = this.props
+    const { numberOfQuestions, numberCorrect, restartCallback, goBackCallback } = this.props
 		return (
 			<View style={[styles.container, styles.center]}>
 				<Text style={{ fontSize: 40 }}>Quiz Complete!</Text>
@@ -40,6 +40,12 @@ class QuizFinished extends React.Component {
 					style={{ backgroundColor: mdOrange700 }}
 					textColor={"white"}
 				/>
+        <SimpleButton
+          buttonText={"Back To Deck"}
+          onPress={goBackCallback}
+          style={{backgroundColor: mdBlue700}}
+          textColor={"white"}
+        />
 			</View>
 		);
 	}

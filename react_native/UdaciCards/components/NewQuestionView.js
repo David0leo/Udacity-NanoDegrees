@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, TextInput, Platform } from "react-native";
+import { StyleSheet, View, KeyboardAvoidingView, Text, TextInput, Platform } from "react-native";
 import { connect } from "react-redux";
 
 import { addCardToDeck } from "../utils/api";
@@ -37,7 +37,7 @@ class NewQuestionView extends React.Component {
 
 	render() {
 		return (
-			<View style={styles.container}>
+			<KeyboardAvoidingView style={styles.container} behavior='padding'>
 				<View style={styles.qaContainer}>
 					<Text style={styles.qaText}>Q:</Text>
 					<TextInput
@@ -64,7 +64,7 @@ class NewQuestionView extends React.Component {
 					style={{ backgroundColor: mdBlue700 }}
 					textColor={"white"}
 				/>
-			</View>
+			</KeyboardAvoidingView>
 		);
 	}
 }

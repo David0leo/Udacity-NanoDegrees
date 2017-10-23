@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, TextInput, Platform } from "react-native";
+import { StyleSheet, KeyboardAvoidingView, Text, TextInput, Platform } from "react-native";
 import { connect } from "react-redux";
 
 import SimpleButton from "./SimpleButton";
@@ -30,7 +30,7 @@ class NewDeckView extends React.Component {
 
 	render() {
 		return (
-			<View style={styles.container}>
+			<KeyboardAvoidingView style={styles.container} behavior='padding'>
 				<Text style={styles.title}>What is the title of your new deck?</Text>
 				<TextInput
 					style={styles.textInput}
@@ -45,7 +45,7 @@ class NewDeckView extends React.Component {
 					onPress={this.submitDeck}
 					textColor={"white"}
 				/>
-			</View>
+			</KeyboardAvoidingView>
 		);
 	}
 }

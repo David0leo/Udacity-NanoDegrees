@@ -21,11 +21,7 @@ import {
 	setLocalNotification
 } from "../utils/helpers";
 import { mdBlue700, mdRed700, mdOrange700 } from "../utils/colors";
-import {
-	incrementNumberCorrect,
-	setNumberOfQuestions,
-	resetQuiz
-} from "../actions";
+import * as actions from "../actions";
 
 class QuizView extends React.Component {
 	static navigationOptions = ({ navigation }) => {
@@ -59,27 +55,34 @@ class QuizView extends React.Component {
 		this.nextCard();
 	};
 
+	finishQuiz = () => {
+		// finished a quiz, so they studied at least once a day
+		// clear the notification for today, and set notification for tomorrow
+		clearLocalNotifications().then(setLocalNotification);
+
+		this.setState({
+			quizFinished: true
+		});
+	};
+
 	nextCard = () => {
-		setTimeout(() => {
-			const { deck } = this.props.navigation.state.params;
-			if (this.state.currentCardIndex < this.props.numberOfQuestions - 1) {
-				this.setState((prevState, props) => {
+		const { deck } = this.props.navigation.state.params;
+		const { currentCardIndex } = this.state;
+		const { numberOfQuestions } = this.props;
+
+		currentCardIndex < numberOfQuestions - 1
+			? this.setState((prevState, props) => {
 					return {
 						currentCardIndex: prevState.currentCardIndex + 1,
 						currentCard: deck.questions[prevState.currentCardIndex + 1]
 					};
-				});
-			} else {
-				// finished a quiz, so they studied at least once a day
-				// clear the notification for today, and set notification for tomorrow
-				clearLocalNotifications().then(setLocalNotification);
-
-				this.setState({
-					quizFinished: true
-				});
-			}
-		}, 10);
+				})
+			: this.finishQuiz();
 	};
+
+	backToDeck = () => {
+		this.props.navigation.goBack();
+	}
 
 	restart = () => {
 		// sets number correct to 0 in redux
@@ -117,7 +120,7 @@ class QuizView extends React.Component {
 
 		return hasQuestions ? (
 			quizFinished ? (
-				<QuizFinished restartCallback={this.restart} />
+				<QuizFinished restartCallback={this.restart} goBackCallback={this.backToDeck}/>
 			) : (
 				<View style={styles.container}>
 					<Text style={styles.indexText}>{`${currentCardIndex +
@@ -162,13 +165,4 @@ function mapStateToProps({ quiz }) {
 	};
 }
 
-function mapDispatchToProps(dispatch) {
-	return {
-		incrementNumberCorrect: () => dispatch(incrementNumberCorrect()),
-		setNumberOfQuestions: numberOfQuestions =>
-			dispatch(setNumberOfQuestions(numberOfQuestions)),
-		resetQuiz: () => dispatch(resetQuiz())
-	};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(QuizView);
+export default connect(mapStateToProps, actions)(QuizView);

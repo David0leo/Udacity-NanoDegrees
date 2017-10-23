@@ -46,8 +46,12 @@ class DeckListView extends React.Component {
 	};
 
 	render() {
-		const { decks } = this.props;
+		let { decks } = this.props;
 		const { ready } = this.state;
+
+		if (decks === undefined) {
+			decks = {};
+		}
 
 		if (!ready) {
 			return <AppLoading />;
@@ -79,10 +83,4 @@ function mapStateToProps({decks}) {
 	};
 }
 
-function mapDispatchToProps(dispatch) {
-	return {
-		recieveDecks: decks => dispatch(recieveDecks(decks))
-	};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(DeckListView);
+export default connect(mapStateToProps, { recieveDecks })(DeckListView);

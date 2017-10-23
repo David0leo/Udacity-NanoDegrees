@@ -10,22 +10,16 @@ import {
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 import { TabNavigator, StackNavigator } from "react-navigation";
-import { Constants } from "expo";
 import { Entypo } from "@expo/vector-icons";
 
 import MainNavigator from "./navigation";
+import MainStatusBar from "./components/MainStatusBar";
 import reducer from "./reducers";
 import { setLocalNotification } from "./utils/helpers";
 
-import { primaryColor, secondaryColor } from "./utils/colors";
+import { secondaryColor } from "./utils/colors";
 
-function MainStatusBar({ backgroundColor, ...props }) {
-	return (
-		<View style={{ backgroundColor, height: Constants.statusBarHeight }}>
-			<StatusBar translucent backgroundColor={backgroundColor} {...props} />
-		</View>
-	);
-}
+
 
 export default class App extends React.Component {
 	componentDidMount() {
