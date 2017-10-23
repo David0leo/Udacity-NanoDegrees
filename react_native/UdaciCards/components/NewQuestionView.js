@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { addCardToDeck } from "../utils/api";
 import { addCard } from "../actions";
 import SimpleButton from "./SimpleButton";
+import { mdBlue700 } from "../utils/colors";
 
 class NewQuestionView extends React.Component {
 	static navigationOptions = ({ navigation }) => {
@@ -57,7 +58,12 @@ class NewQuestionView extends React.Component {
 						selectionColor={"black"}
 					/>
 				</View>
-				<SimpleButton buttonText="Submit" onPress={this.submitQuestion} />
+				<SimpleButton
+					buttonText="Submit"
+					onPress={this.submitQuestion}
+					style={{ backgroundColor: mdBlue700 }}
+					textColor={"white"}
+				/>
 			</View>
 		);
 	}

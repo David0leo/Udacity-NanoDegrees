@@ -4,6 +4,7 @@ import {
 	View,
 	Text,
 	TextInput,
+	ScrollView,
 	Platform,
 	Animated,
 	Easing
@@ -11,6 +12,7 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import SimpleButton from "./SimpleButton";
+import { mdBlue700, mdRed700 } from '../utils/colors';
 
 // some flipping help from
 // https://github.com/aprct/react-native-swipe-flip/blob/master/index.js
@@ -20,10 +22,11 @@ function CardFace({
 	onFlip,
 	frontVisible,
 	onPressCorrect,
-	onPressIncorrect
+	onPressIncorrect,
+	isVisible
 }) {
 	return (
-		<View style={{ flex: 1 }}>
+		<View style={{ flex: 1}}>
 			<SimpleButton
 				style={styles.flipButton}
 				buttonText={frontVisible ? "Answer" : "Question"}
@@ -36,17 +39,18 @@ function CardFace({
 
 			<View style={styles.center}>
 				<Text style={styles.headerText}>{header}</Text>
-				<Text style={styles.titleText}> {title} </Text>
+				<ScrollView><Text style={styles.contentText}> {title} </Text></ScrollView>
+				
 			</View>
 			<SimpleButton
-				onPress={onPressCorrect}
-				style={[styles.button, { backgroundColor: "green" }]}
+				onPress={isVisible ? onPressCorrect : undefined}
+				style={[styles.button, { backgroundColor: mdBlue700 }]}
 				buttonText={"Correct"}
 				textColor={"white"}
 			/>
 			<SimpleButton
-				onPress={onPressIncorrect}
-				style={[styles.button, { backgroundColor: "red" }]}
+				onPress={isVisible ? onPressIncorrect : undefined}
+				style={[styles.button, { backgroundColor: mdRed700 }]}
 				buttonText={"Incorrect"}
 				textColor={"white"}
 			/>
@@ -203,7 +207,9 @@ class QuizView extends React.Component {
 			currentCard,
 			quizFinished,
 			numCorrect,
-			hasQuestions
+			hasQuestions,
+			frontVisible,
+			perspective
 		} = this.state;
 
 		const scoreColor = (numCorrect, numberCards) => {
@@ -243,9 +249,10 @@ class QuizView extends React.Component {
 						style={[
 							styles.card,
 							styles.flipView,
+							{zIndex: frontVisible ? 1:0},
 							{
 								transform: [
-									{ perspective: this.state.perspective },
+									{ perspective: perspective },
 									{ rotateY: frontRotation }
 								]
 							}
@@ -255,9 +262,10 @@ class QuizView extends React.Component {
 							title={currentCard.question}
 							header="Q:"
 							onFlip={this.flipCard}
-							frontVisible={this.state.frontVisible}
+							frontVisible={frontVisible}
 							onPressCorrect={this.markCorrect}
 							onPressIncorrect={this.markIncorrect}
+							isVisible={frontVisible}
 						/>
 					</Animated.View>
 					{/* Back */}
@@ -267,7 +275,7 @@ class QuizView extends React.Component {
 							styles.flipView,
 							{
 								transform: [
-									{ perspective: this.state.perspective },
+									{ perspective: perspective },
 									{ rotateY: backRotation }
 								]
 							}
@@ -277,9 +285,10 @@ class QuizView extends React.Component {
 							title={currentCard.answer}
 							header="A:"
 							onFlip={this.flipCard}
-							frontVisible={this.state.frontVisible}
+							frontVisible={frontVisible}
 							onPressCorrect={this.markCorrect}
 							onPressIncorrect={this.markIncorrect}
+							isVisible={!frontVisible}
 						/>
 					</Animated.View>
 				</View>
@@ -333,7 +342,7 @@ const styles = StyleSheet.create({
 		alignSelf: "center",
 		color: "gray"
 	},
-	titleText: {
+	contentText: {
 		marginBottom: 10,
 		marginTop: 10,
 		fontSize: 32,
@@ -354,9 +363,8 @@ const styles = StyleSheet.create({
 	},
 	flipButton: {
 		backgroundColor: "white",
-		borderWidth: 0,
 		padding: 10,
-		marginBottom: 100
+		marginBottom: 50
 		// alignSelf: "flex-end"
 	},
 	noCardsText: {

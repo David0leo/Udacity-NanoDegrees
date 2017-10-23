@@ -86,7 +86,7 @@ const MainNavigator = StackNavigator({
 		navigationOptions: {
 			headerTintColor: "white",
 			headerStyle: {
-				backgroundColor: "purple"
+				backgroundColor: primaryColor
 			}
 		}
 	},
@@ -95,9 +95,7 @@ const MainNavigator = StackNavigator({
 		navigationOptions: {
 			headerTintColor: "white",
 			headerStyle: {
-				backgroundColor: "green",
-				paddingTop: 20,
-				paddingBottom: 20
+				backgroundColor: primaryColor,
 			},
 			headerTitleStyle: {
 				// alignSelf: 'flex-start',
@@ -111,9 +109,7 @@ const MainNavigator = StackNavigator({
 		navigationOptions: {
 			headerTintColor: "white",
 			headerStyle: {
-				backgroundColor: "purple",
-				paddingTop: 20,
-				paddingBottom: 20
+				backgroundColor: primaryColor,
 			},
 			headerTitleStyle: {
 				// alignSelf: 'flex-start',

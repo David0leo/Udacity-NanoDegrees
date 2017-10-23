@@ -1,9 +1,11 @@
 import React from "react";
 import { StyleSheet, View, Text, TextInput, Platform } from "react-native";
 import { connect } from "react-redux";
+
 import SimpleButton from "./SimpleButton";
 import { saveDeckTitle } from "../utils/api";
 import { addDeck } from "../actions";
+import { mdBlue700 } from '../utils/colors';
 
 class NewDeckView extends React.Component {
 	state = {
@@ -41,6 +43,7 @@ class NewDeckView extends React.Component {
 					style={styles.simpleButton}
 					buttonText="Submit"
 					onPress={this.submitDeck}
+					textColor={'white'}
 				/>
 			</View>
 		);
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
 		textAlign: "center"
 	},
 	simpleButton: {
-		// flex: 1
+		backgroundColor: mdBlue700,
 	}
 });
 
