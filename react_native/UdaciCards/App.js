@@ -20,6 +20,7 @@ import NewDeckView from "./components/NewDeckView";
 import NewQuestionView from "./components/NewQuestionView";
 import QuizView from "./components/QuizView";
 import reducer from "./reducers";
+import { setLocalNotification } from './utils/helpers';
 
 import { primaryColor, secondaryColor } from "./utils/colors";
 
@@ -121,6 +122,10 @@ const MainNavigator = StackNavigator({
 });
 
 export default class App extends React.Component {
+	componentDidMount() {
+		setLocalNotification();
+	}
+
 	render() {
 		return (
 			<Provider store={createStore(reducer)}>

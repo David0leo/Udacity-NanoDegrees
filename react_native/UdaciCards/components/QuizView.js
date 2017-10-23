@@ -12,6 +12,7 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import SimpleButton from "./SimpleButton";
+import { clearLocalNotification, setLocalNotification } from "../utils/helpers";
 import { mdBlue700, mdRed700, mdOrange700 } from "../utils/colors";
 
 // some flipping help from
@@ -163,6 +164,10 @@ class QuizView extends React.Component {
 					};
 				});
 			} else {
+				// finished a quiz, so they studied at least once a day
+				// clear the notification for today, and set notification for tomorrow
+				clearLocalNotification().then(setLocalNotification);
+				
 				this.setState({
 					quizFinished: true
 				});
