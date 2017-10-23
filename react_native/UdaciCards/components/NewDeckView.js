@@ -75,14 +75,4 @@ const styles = StyleSheet.create({
 	}
 });
 
-function mapStateToProps(decks) {
-	return {};
-}
-
-function mapDispatchToProps(dispatch) {
-	return {
-		addDeck: title => dispatch(addDeck(title))
-	};
-}
-
 export default connect()(NewDeckView);

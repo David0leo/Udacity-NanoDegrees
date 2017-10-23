@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
 	}
 });
 
-function mapStateToProps(decks, { navigation }) {
+function mapStateToProps({ decks }, { navigation }) {
 	const { deck } = navigation.state.params;
 	return {
 		deck: decks[deck.title]

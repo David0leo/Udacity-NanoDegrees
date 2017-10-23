@@ -1,4 +1,39 @@
-import { RECIEVE_DECKS, ADD_DECK, ADD_CARD } from "../actions";
+import { combineReducers } from 'redux';
+import {
+	RECIEVE_DECKS,
+	ADD_DECK,
+	ADD_CARD,
+	INCREMENT_NUMBER_CORRECT,
+	SET_NUMBER_OF_QUESTIONS,
+	RESET_QUIZ
+} from "../actions";
+
+const quizInitialState = {
+	numberCorrect: 0,
+	numberOfQuestions: 0
+};
+
+function quiz(state = quizInitialState, action) {
+	switch (action.type) {
+		case INCREMENT_NUMBER_CORRECT:
+			return {
+				...state,
+				numberCorrect: state.numberCorrect + 1
+			};
+		case SET_NUMBER_OF_QUESTIONS:
+			return {
+				...state,
+				numberOfQuestions: action.numberOfQuestions
+			};
+		case RESET_QUIZ:
+			return {
+				...state,
+				numberCorrect: 0
+			};
+		default:
+			return state;
+	}
+}
 
 function decks(state = {}, action) {
 	switch (action.type) {
@@ -25,4 +60,7 @@ function decks(state = {}, action) {
 	}
 }
 
-export default decks;
+export default combineReducers({
+	quiz,
+	decks
+});

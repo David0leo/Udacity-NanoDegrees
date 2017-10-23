@@ -1,13 +1,13 @@
 import React from "react";
 import { TouchableOpacity, Text, StyleSheet } from "react-native";
 
-export default function SimpleButton({
+let SimpleButton = ({
 	buttonText,
 	onPress,
 	style,
 	icon,
 	textColor
-}) {
+}) => {
 	return (
 		<TouchableOpacity onPress={onPress} style={[styles.button, style]}>
 			{icon}
@@ -28,3 +28,5 @@ const styles = StyleSheet.create({
 		alignSelf: "center"
 	}
 });
+
+export default SimpleButton;
