@@ -42,7 +42,8 @@ export function addCardToDeck({ title, card }) {
 		const decks = JSON.parse(response);
 		let questions = decks[title].questions;
 		questions.push(card);
-		AsyncStorage.mergeItem(API_STORAGE_KEY,
+		AsyncStorage.mergeItem(
+			API_STORAGE_KEY,
 			JSON.stringify({
 				[title]: {
 					title,

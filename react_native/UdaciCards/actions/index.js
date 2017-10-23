@@ -6,7 +6,7 @@ export function recieveDecks(decks) {
 	return {
 		type: RECIEVE_DECKS,
 		decks
-	}
+	};
 }
 
 export function addDeck(title) {

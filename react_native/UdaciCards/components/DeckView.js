@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import Deck from "./Deck";
 import SimpleButton from "./SimpleButton";
 import { getDeck } from "../utils/api";
-import { mdOrange700, mdBlue700 } from '../utils/colors';
+import { mdOrange700, mdBlue700 } from "../utils/colors";
 
 class DeckView extends React.Component {
 	static navigationOptions = ({ navigation }) => {
@@ -40,13 +40,13 @@ class DeckView extends React.Component {
 					onPress={this.addCard}
 					buttonText={"Add Card"}
 					style={[styles.button, { backgroundColor: mdBlue700 }]}
-					textColor={'white'}
+					textColor={"white"}
 				/>
 				<SimpleButton
 					onPress={this.startQuiz}
 					buttonText={"Start Quiz"}
 					style={[styles.button, { backgroundColor: mdOrange700 }]}
-					textColor={'white'}
+					textColor={"white"}
 				/>
 			</View>
 		);
@@ -55,10 +55,10 @@ class DeckView extends React.Component {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
+		flex: 1
 	},
 	button: {
-		flex: 1, 
+		flex: 1,
 		marginBottom: 20
 	}
 });

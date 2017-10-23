@@ -12,7 +12,7 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import SimpleButton from "./SimpleButton";
-import { mdBlue700, mdRed700 } from '../utils/colors';
+import { mdBlue700, mdRed700, mdOrange700 } from "../utils/colors";
 
 // some flipping help from
 // https://github.com/aprct/react-native-swipe-flip/blob/master/index.js
@@ -26,7 +26,7 @@ function CardFace({
 	isVisible
 }) {
 	return (
-		<View style={{ flex: 1}}>
+		<View style={{ flex: 1 }}>
 			<SimpleButton
 				style={styles.flipButton}
 				buttonText={frontVisible ? "Answer" : "Question"}
@@ -39,8 +39,9 @@ function CardFace({
 
 			<View style={styles.center}>
 				<Text style={styles.headerText}>{header}</Text>
-				<ScrollView><Text style={styles.contentText}> {title} </Text></ScrollView>
-				
+				<ScrollView>
+					<Text style={styles.contentText}> {title} </Text>
+				</ScrollView>
 			</View>
 			<SimpleButton
 				onPress={isVisible ? onPressCorrect : undefined}
@@ -238,7 +239,12 @@ class QuizView extends React.Component {
 						</Text>
 						<Text style={{ fontSize: 30 }}>/{numberCards}</Text>
 					</View>
-					<SimpleButton buttonText={"Restart Quiz"} onPress={this.restart} />
+					<SimpleButton
+						buttonText={"Restart Quiz"}
+						onPress={this.restart}
+						style={{ backgroundColor: mdOrange700 }}
+						textColor={"white"}
+					/>
 				</View>
 			) : (
 				<View style={styles.container}>
@@ -249,7 +255,7 @@ class QuizView extends React.Component {
 						style={[
 							styles.card,
 							styles.flipView,
-							{zIndex: frontVisible ? 1:0},
+							{ zIndex: frontVisible ? 1 : 0 },
 							{
 								transform: [
 									{ perspective: perspective },
