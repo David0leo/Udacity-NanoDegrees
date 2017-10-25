@@ -15,6 +15,8 @@ export default function Deck({ deck, style }) {
      ]
    }
    */
+
+	//TODO: Swipe to delete
 	const { title, questions } = deck;
 
 	return (
