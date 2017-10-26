@@ -6,6 +6,10 @@ With Yarn installed run the following commands from the UdaciCards directory:
 $ yarn install
 $ yarn start
 
+Download the expo app from the app store and run the app from within the expo app!
+Expo Docks:
+https://docs.expo.io/versions/latest/index.html
+
 #Testing
 The application has been tested on an iPhone8 plus device running iOS 11.
 
